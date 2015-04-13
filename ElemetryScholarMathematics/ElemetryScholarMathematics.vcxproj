@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConvexHull.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{256B0137-CDFC-4632-990C-2B01D74E7250}</ProjectGuid>
     <RootNamespace>ElemetryScholarMathematics</RootNamespace>
