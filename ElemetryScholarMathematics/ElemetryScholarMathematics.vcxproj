@@ -11,11 +11,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BMPloader.cpp" />
     <ClCompile Include="ConvexHull.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="PolygonArea.cpp" />
+    <ClCompile Include="SimpleArea.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BMPloader.h" />
     <ClInclude Include="ConvexHull.h" />
+    <ClInclude Include="Operation.h" />
+    <ClInclude Include="PolygonArea.h" />
+    <ClInclude Include="SimpleArea.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{256B0137-CDFC-4632-990C-2B01D74E7250}</ProjectGuid>

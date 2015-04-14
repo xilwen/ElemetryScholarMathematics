@@ -1,0 +1,1 @@
+#include "SimpleArea.h"

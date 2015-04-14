@@ -1,6 +1,7 @@
-//written by qqwerfdsa930 and GODKING
+//written by qqwerfdsa930
 
-#pragma once
+#ifndef CONVEXHULL_H
+#define CONVEXHULL_H
 #include <vector>
 #include <iostream>
 #include <string>
@@ -8,7 +9,7 @@
 class ConvexHull
 {
 public:
-	ConvexHull(){}
+	ConvexHull() = delete;
 	ConvexHull(const std::vector<short>, const std::vector<short>); // (x , y)
 
 	//short getx(short a);	// Get ConvexHull x, y
@@ -28,5 +29,6 @@ private:
 
 // defination
 
+#endif
 
 
