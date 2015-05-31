@@ -1,14 +1,7 @@
-#include <iostream>
 #include "SimpleArea.h"
-
-using std::cout;
-using std::cin;
-using std::endl;
 
 SimpleArea::SimpleArea(){}
 SimpleArea::~SimpleArea(){}
-
-
 
 void SimpleArea::ShowGraph()
 {
@@ -48,39 +41,39 @@ void SimpleArea::ShowGraph()
 		//Picture1 Triangle
 
 
-		Print_WhiteSpace(0, width);// width can control front white-space
+		SimpleArea::Print_WhiteSpace(0, width);// width can control front white-space
 
 		int j = RowNum - i;
 
-		Print_WhiteSpace(0, j);
-		ShowTriangleLine(count);
+		SimpleArea::Print_WhiteSpace(0, j);
+		SimpleArea::ShowTriangleLine(count);
 
-		Print_WhiteSpace(0, j);
+		SimpleArea::Print_WhiteSpace(0, j);
 
 
 
 		//  picture2 Rectangle
-		Print_WhiteSpace(0, width);
+		SimpleArea::Print_WhiteSpace(0, width);
 
 		// If it is the top or the end,print ******  else *    *
 		if (judge == 1 || (i == RowNum - 1))
 		{
-			Print_Star(0, width);       //I use width to be the length of Rectangle
+			SimpleArea::Print_Star(0, width);       //I use width to be the length of Rectangle
 			judge = 0;
 		}
 		else
 		{
 			cout << "*";
-			Print_WhiteSpace(1, width - 1);
+			SimpleArea::Print_WhiteSpace(1, width - 1);
 			cout << "*";
 
 		}
 
 		//  picture3 Parallelogram
 
-		Print_WhiteSpace(0, width + 4); //+4 is for Typesetting
+		SimpleArea::Print_WhiteSpace(0, width + 4); //+4 is for Typesetting
 
-		Print_WhiteSpace(0, length);
+		SimpleArea::Print_WhiteSpace(0, length);
 		cout << "*";
 		// First print "      *"  then because JudgeTo3 =1 at first   print ***** or "     "  then add the final * then Padded the white -space
 
@@ -88,24 +81,24 @@ void SimpleArea::ShowGraph()
 			JudgeTo3 = 1;
 		if (JudgeTo3)
 		{
-			Print_Star(0, ParallelogramLength - 1);
+			SimpleArea::Print_Star(0, ParallelogramLength - 1);
 			JudgeTo3 = 0;
 
 		}
 		else
 		{
-			Print_WhiteSpace(0, ParallelogramLength - 1);
+			SimpleArea::Print_WhiteSpace(0, ParallelogramLength - 1);
 
 		}
 
 		cout << "*";
-		Print_WhiteSpace(0, i);
+		SimpleArea::Print_WhiteSpace(0, i);
 
 
 
 		//picture 4 Diamond
 
-		Print_WhiteSpace(0, width);
+		SimpleArea::Print_WhiteSpace(0, width);
 
 		if ((RowNum & 1) && JudgeTo4)
 		{
@@ -121,8 +114,8 @@ void SimpleArea::ShowGraph()
 
 		if (i < Row)
 		{
-			Print_WhiteSpace(0, Row - i);
-			ShowTriangleLine(count4);
+			SimpleArea::Print_WhiteSpace(0, Row - i);
+			SimpleArea::ShowTriangleLine(count4);
 			cout << endl;
 			count4 += 2;
 		}
@@ -135,9 +128,9 @@ void SimpleArea::ShowGraph()
 				JudgeTo5 = 0;
 			}
 
-			Print_WhiteSpace(0, onecount);
+			SimpleArea::Print_WhiteSpace(0, onecount);
 
-			ShowTriangleLine(count4);
+			SimpleArea::ShowTriangleLine(count4);
 
 			cout << endl;
 			count4 -= 2;
@@ -154,7 +147,7 @@ void SimpleArea::ShowGraph()
 	while (PrintNum != 5)
 	{
 		cout << " ";
-		Print_WhiteSpace(0, 2 * width);
+		SimpleArea::Print_WhiteSpace(0, 2 * width);
 		cout << PrintNum << "  ";
 		PrintNum++;
 	}
@@ -164,7 +157,58 @@ void SimpleArea::ShowGraph()
 
 
 
+void SimpleArea::ShowChristmasTree()
+{
 
+	int RowNum = 0;
+	int i;
+	int width; //from left to the graph
+
+	int count = 1;
+	int count2 = 9;
+
+	cin >> RowNum;
+	cin >> width;
+
+
+	for (i = 0; i < RowNum; i++)
+	{
+		SimpleArea::Print_WhiteSpace(0, width+2);
+
+		int j = RowNum - i;
+
+		SimpleArea::Print_WhiteSpace(0, j);
+		SimpleArea::ShowTriangleLine(count);
+
+		SimpleArea::Print_WhiteSpace(0, j);
+
+		cout << endl;
+		count += 2;
+
+	} //The first triangle of the Christmas Tree
+	for (i = 0; i < RowNum-1; i++){
+
+
+		SimpleArea::Print_WhiteSpace(0, width/2);
+		int k = RowNum - i;
+		SimpleArea::Print_WhiteSpace(0, k);
+		SimpleArea::ShowTriangleLine(count2);
+
+		SimpleArea::Print_WhiteSpace(0, k);
+
+
+		cout << endl;
+		count2 += 2;
+	}
+	//The second triangle of the Christmas Tree
+
+	for (i = 0; i < RowNum-2 ; i++){
+		SimpleArea::Print_WhiteSpace(0, width+6);
+		int temp = 5;
+		SimpleArea::ShowTriangleLine(temp);
+		cout<<endl;
+	}//The rectangleof the Christmas Tree
+}
 
 
 void SimpleArea::AreaCalculating()
@@ -242,7 +286,7 @@ void SimpleArea::AreaCalculating()
 }
 
 
-void ShowTriangleLine(int& count)
+void SimpleArea::ShowTriangleLine(int& count)
 {
 	int Judge = 1;
 	int temp = count;
@@ -264,15 +308,17 @@ void ShowTriangleLine(int& count)
 }
 
 
-void Print_WhiteSpace(int front, int back)
+void SimpleArea::Print_WhiteSpace(int front, int back)
 {
 	for (int z = front; z < back; z++)
 		cout << " ";
 
 }
-void Print_Star(int front, int back)
+void SimpleArea::Print_Star(int front, int back)
 {
 	for (int z = front; z < back; z++)
 		cout << "*";
 
 }
+
+
