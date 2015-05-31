@@ -16,6 +16,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="PolygonArea.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="SimpleArea.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -24,6 +25,7 @@
     <ClInclude Include="ConvexHull.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="PolygonArea.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="SimpleArea.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
