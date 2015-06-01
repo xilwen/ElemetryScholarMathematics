@@ -5,12 +5,12 @@ SimpleArea::~SimpleArea(){}
 
 void SimpleArea::ShowGraph()
 {
-	int RowNum = 0;
-	cin >> RowNum;
+	int RowNum = 5;
+	//cin >> RowNum;
 	int i;
 
-	int width;
-	cin >> width;
+	int width = 5;
+	//cin >> width;
 	// width can control front white-space
 
 
@@ -22,9 +22,9 @@ void SimpleArea::ShowGraph()
 	int judge = 1;
 
 	//for 3
-	int  ParallelogramLength;
+	int  ParallelogramLength = 5;
 	int JudgeTo3 = 1;
-	cin >> ParallelogramLength;
+	//cin >> ParallelogramLength;
 	int length = width;
 
 	//for 4
@@ -34,7 +34,7 @@ void SimpleArea::ShowGraph()
 	int JudgeTo4 = 1;
 	int JudgeTo5 = 1;
 
-	cout << "The Mode You Choose:" << endl;
+	cout << "選擇一種圖案" << endl;
 
 	for (i = 0; i < RowNum; i++)
 	{

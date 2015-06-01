@@ -1,4 +1,5 @@
 #include "Script.h"
+#include "SimpleArea.h"
 
 
 Script::Script()
@@ -8,6 +9,9 @@ Script::Script()
 
 void Script::runScripts()
 {
+	/*debug*/
+	
+	
 	ui->init();
 
 	//demo code
@@ -19,18 +23,22 @@ void Script::runScripts()
 	ui->fullScreenDialog("..");
 
 
-	ui->showDialog("謎之音", "你終於來了。");
-	ui->showDialog("謎之音", "我等你很久了ㄏㄏ");
+	ui->showDialog("謎之音", "你終於來了。", 0, true, 1, false);
+	ui->showDialog("謎之音", "我等你很久了ㄏㄏ", 0, true, 1, false);
 
 	/*開始命名*/
 	ui->chooseNamae();
-	ui->showDialog("謎之音", "哼哈哈哈，叫做" + ui->getName() + "是嗎。真是個好名字。");
+	ui->showDialog("謎之音", "哼哈哈哈，叫做" + ui->getName() + "是嗎。真是個好名字。", 0, true, 1, false);
 
-	ui->showDialog(ui->getName(), "出來吧！我知道你在那裡！");
-	ui->showDialog("交趾國東征先鋒大將", "不應該阿～～");
-	ui->showDialog(ui->getName(), "哼哼，廢話少說，有什麼本事就出招吧！");
+	ui->showDialog(ui->getName(), "出來吧！我知道你在那裡！", 0, true, 1, false);
+	ui->showDialog("交趾國東征先鋒大將", "不應該阿～～", 0, true, 1, false);
+	ui->showDialog(ui->getName(), "哼哼，廢話少說，有什麼本事就出招吧！", 0, true, 1, false);
 
 	/*I part*/
+	int a, b;
+	a = (rand() % 10);
+	b = (rand() % 10);
+	ui->showDialog("交趾國東征先鋒大將", std::to_string(a) + "+" + std::to_string(b) + "等於幾?", 0, true, 1, false);
 
 	//加個凌娜鑰匙產生器吧
 
@@ -48,19 +56,24 @@ void Script::runScripts()
 
 	/*II part*/
 
-	ui->showDialog("凌娜", "怎麼又是逆～～～");
-	ui->showDialog(ui->getName(), "我又跳出去啦！我又跳進來啦！打..");
-	ui->showDialog("凌娜", "(呼巴掌)");
-	ui->showDialog(ui->getName(), "咳咳...換我出題！");
+	ui->showDialog("凌娜", "怎麼又是逆～～～", 0, true, 3, false);
+	ui->showDialog(ui->getName(), "我又跳出去啦！我又跳進來啦！打..", 0, true, 3, false);
+	ui->showDialog("凌娜", "(呼巴掌)", 0, true, 3, false);
+	ui->showDialog(ui->getName(), "咳咳...換我出題！", 0, true, 3, false);
 
 	//答題
+	//ui->clearScreen();
+	SimpleArea fromUser;	//給user輸入 mode 及 底邊和高
+	fromUser.ShowGraph();
+	fromUser.AreaCalculating();
+	
 	if (ui->getName() == "大中天")
 	{
-		ui->showDialog("凌娜", "你媽怎麼給你取這種名字阿，大中天。");
+		ui->showDialog("凌娜", "你媽怎麼給你取這種名字阿，大中天。", 0, true, 3, false);
 	}
 	else
 	{
-		ui->showDialog(ui->getName(), "那...比較的大門多大？");
+		ui->showDialog(ui->getName(), "那...比較的大門多大？", 0, true, 3, false);
 	}
 
 }
