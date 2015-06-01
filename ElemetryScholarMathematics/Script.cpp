@@ -10,7 +10,14 @@ void Script::runScripts()
 {
 	ui->init();
 
-	ui->showDialog("", "");
+	//demo code
+	ui->fullScreenDialog("生命是什麼呢...");
+	ui->fullScreenDialog("或許....", "我一直不以為意的東西...");
+	ui->fullScreenDialog("才是真正的東西。");
+	ui->fullScreenDialog("但我覺得我必須知道....","就算必須付出很大的代價。" );
+	ui->fullScreenDialog("......", "....");
+	ui->fullScreenDialog("..");
+
 
 	ui->showDialog("謎之音", "你終於來了。");
 	ui->showDialog("謎之音", "我等你很久了ㄏㄏ");

@@ -10,13 +10,17 @@ UI::UI()
 	chars = { "龍", "中", "大", "比", "巫", "凌", "卡", "倒退",
 		"天", "傲", "暗", "黑", "瘋", "娜", "皓", "清除",
 		"葉", "覺", "張", "子", "渣", "利", "不", "好了" };
+	//初始化變數
 	twoLinesInDialog = false;
 	showBearsinDialog = false;
+	//預產生亂數種子
+	srand(unsigned(time(NULL)));
+	//非Big5編碼系統相容性調整
+	SetConsoleOutputCP(950);
 }
 
 UI::~UI()
 {
-
 
 }
 
@@ -440,57 +444,75 @@ std::string UI::getName()
 
 void UI::printBear(int bear, bool place)
 {
-	clearScreen();
 	getxy();
 	switch (place)
 	{
 	case true:
-		gotoxy(3, 3);
+		bearx = 3;
+		beary = 3;
 		break;
 	case false:
-		gotoxy(40, 3);
+		bearx = 40;
+		beary = 3;
 		break;
 	}
 	switch (bear)
 	{
 	case 0:
-		println("　　       　　　  ∩＿＿＿＿＿∩　");
-		println("　　       　　　 ｜　︿ 　︿ˋ　科　");
-		println("　　  　　　　　　／（Ｏ）（Ｏ）　科｜＼");
-		println("　  　　　　　　　｜　（＿０＿）＝　｜　＼");
-		println("　　　　＿＿＿＿＿＝　　｜Ｕ｜‵　　　｜加油＼");
-		println("　　　　　＿＿＿＿＿　＼　　　　＼　｜　　／");
-		println("　　　　　　　　　／　　　　／（（（｜＿／");
-		println("　　　　　　　　／　　　　／　　　　｜");
-		println("（ｍａｔｈ）　／　　　＿／　　　　　｜");
-		println("　　　　　　（＿　　　／　　　　　　｜");
-		println("　　　　　　｜／　＼　｝　　　　　　｜");
-		println("　　　　　　Ｕ　　　））");
+		printlnb("　　　　　　∩＿＿＿＿＿∩　");
+		printlnb("　　        ｜　︿ 　︿ˋ｜");
+		printlnb("　　  　　　／（Ｏ）（Ｏ）\\");
+		printlnb("　  　　　　｜（＿０＿）＝/");
+		printlnb("＿＿＿＿＿＝　　｜Ｕ｜　｜");
+		printlnb("　　＿＿＿＿＿　＼　　／、＼");
+		printlnb("　　　　　　　　／　　　　／\_<");
+		printlnb("　　　　　　　／　　　　／");
+		printlnb("           ／　　　＿／");
+		printlnb("　　　　　（＿　　　／");
+		printlnb("　　　　　｜／　＼　｝");
+		printlnb("          ∪      ∪");
 		break;
 	case 1:
-		println("　　　∩＿＿＿＿∩　");
-		println("　　科︿ 　　︿ˋ｜");
-		println("　科　＞　（Ｏ）　’");
-		println("＝　（＿０＿）　　｜");
-		println("　　　｜Ｕ｜　　　＝＿＿＿＿／＼");
-		println("　　／＼　　　　　＿＿＿＿＿＿＿＼");
-		println("　／　／＼　　　　＼");
-		println("）　ｖ　　＼　　　　＼");
-		println("    　　　　＼　　　　＼");
-		println("　　　　　　　　　　　＿）　（做完送你一個吻！）");
-		println("　　　　　　｛　／　＼｜");
-		println("　　　　　　（（　　　Ｕ");
+		printlnb("　　　∩＿＿＿＿∩");
+		printlnb("   　｜︿     ︿ˋ｜");
+		printlnb("　　／　＞　（Ｏ）　\’");
+		printlnb("　　＝　（＿０＿）　｜");
+		printlnb("　　　　　 ｜Ｕ｜　　＝＿＿＿／＼");
+		printlnb("　　　／＼　　　　　＿＿＿＿＿＿ ＼");
+		printlnb("　　／　／＼　　　　＼");
+		printlnb("　）　ｖ　　＼　　　　＼");
+		printlnb("　　　　　　　＼　　　　＼");
+		printlnb("　　　　　　　　　＿）");
+		printlnb("　　　　　　　　｛　／　＼｜");
+		printlnb("　　　　　　　　（（　　　Ｕ");
 		break;
 	case 2:
-
+		printlnb("　　　∩＿＿＿＿∩");
+		printlnb("　　／︿ 　　︿ˋ｜");
+		printlnb("　　（０）（０）＼");
+		printlnb("　　（＿０＿）　｜");
+		printlnb("　　　｜Ｕ｜　＼");
+		printlnb("　　／　　　　　／／／／｝");
+		printlnb("　／　／＼　　　＼");
+		printlnb("｛　／　　＼　　　＼");
+		printlnb("　　　　　　＼　　　＼");
+		printlnb("　　　　　　／　／＼　＼");
+		printlnb("　　　　　／　／　　＼　＼");
+		printlnb("　　　　（　／　　　　＼　）");
 		break;
 	case 3:
-		println("　　　∩＿＿＿＿∩");
-		println("　　科︿ 　　︿ˋ｜");
-		println("　科（０）（０）＼");
-		println("＝　（＿０＿）　｜");
-		println("　　　｜Ｕ｜　　＝");
-		println("　　／＼　　　（ｈｏｌｙ　ｓｈｉｔ　ｙｏｕ　ｄｉｄ　ｉｔ！　ｇｏｄ　ｏｆ　ｍａｔｈ！）");
+		printlnb("");
+		printlnb("");
+		printlnb("");
+		printlnb("　　　∩＿＿＿＿＿∩");
+		printlnb("　　　＼　０　０　／");
+		printlnb("　　　　＼（０）／");
+		printlnb("　　　　　＼︶／");
+		printlnb("　　　　／　　　＼");
+		printlnb("　　　／／／　＼＼＼");
+		printlnb("　　／／／　　　＼＼＼");
+		printlnb("　　︸　｜　　　｜　︸");
+		printlnb("　　　　／＼－／＼");
 		break;
 	default:
 #if _DEBUG
@@ -504,14 +526,16 @@ void UI::printBear(int bear, bool place)
 
 void UI::showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1)
 {
+	clearScreen();
 	showBearsinDialog = true;
 	printBear(bear0, place0);
 	printBear(bear1, place1);
-	showDialog(name,text);
+	showDialog(name, text);
 	showBearsinDialog = false;
 }
 void UI::showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1)
 {
+	clearScreen();
 	showBearsinDialog = true;
 	printBear(bear0, place0);
 	printBear(bear1, place1);
@@ -544,3 +568,25 @@ void UI::undoxy()
 	gotoxy(nowx, nowy);
 }
 
+void UI::fullScreenDialog(std::string text, std::string text0)
+{
+	clearScreen();
+	print(text, 8, 8);
+	getchar();
+	print(text0, 8, 11);
+	getchar();
+}
+
+void UI::fullScreenDialog(std::string text)
+{
+	clearScreen();
+	print(text, 8, 9);
+	getchar();
+}
+
+void UI::printlnb(std::string text)
+{
+	gotoxy(bearx, beary);
+	print(text);
+	beary++;
+}

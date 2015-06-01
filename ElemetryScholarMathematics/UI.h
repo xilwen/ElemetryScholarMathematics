@@ -8,6 +8,8 @@
 #include <conio.h>
 #include <string>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 
 class UI
@@ -28,6 +30,8 @@ public:
 	void showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1);
 	//全螢幕無邊框對話框。雙行、位置固定。不需要第二行請用空字串。
 	void fullScreenDialog(std::string text, std::string text0);
+	//全螢幕無邊框對話框。雙行、位置固定。
+	void fullScreenDialog(std::string text);
 	//(!未測試)死亡畫面。
 	void dead();
 	//莫裝逼(龍傲天專屬)
@@ -55,7 +59,8 @@ private:
 
 	//輸出文字並換行。
 	void println(std::string);
-
+	//輸出熊圖專用換行。
+	void printlnb(std::string);
 
 	//畫框框，左上x點, y點, 長(橫向), 高(直向)
 	void drawFrame(int lux, int luy, int length, int height);
@@ -76,7 +81,9 @@ private:
 	bool twoLinesInDialog;
 	//對話框是否有要輸出熊，若有則不清畫面。用於showdialog。
 	bool showBearsinDialog;
-
+	//要畫熊現在的位置
+	int bearx;
+	int beary;
 };
 
 #endif
