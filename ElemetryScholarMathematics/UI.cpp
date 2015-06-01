@@ -456,6 +456,21 @@ void UI::printBear(int bear, bool place)
 		beary = 3;
 		break;
 	}
+	printBearbackend(bear);
+	undoxy();
+}
+
+void UI::printBear(int bear)
+{
+	getxy();
+	bearx = 25;
+	beary = 3;
+	printBearbackend(bear);
+	undoxy();
+}
+
+void UI::printBearbackend(int bear)
+{
 	switch (bear)
 	{
 	case 0:
@@ -520,7 +535,7 @@ void UI::printBear(int bear, bool place)
 #endif
 		break;
 	}
-	undoxy();
+
 }
 
 
@@ -547,8 +562,26 @@ void UI::dead()
 {
 	clearScreen();
 	getxy();
-	print("勝敗乃兵家常事也", 33, 11);
-	print("大俠請重新來過吧", 33, 13);
+	println("　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　＿＿　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　＿＿＿｜　　｜＿＿＿　　　　　　　　");
+	println("　　　　　　　　｜　　　　　　　　　　｜　　　　勝敗乃兵家常事也");
+	println("　　　　　　　　｜＿＿＿　　　　＿＿＿｜　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　大俠請重新來過吧");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　　　　");
+	println("　　　　　　　　　　　　｜　　｜　　　　　　　　　");
+	println("　　　　　　　　　　　　｜＿＿｜　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　");
 	undoxy();
 	getchar();
 }
@@ -557,10 +590,31 @@ void UI::dontB()
 {
 	clearScreen();
 	getxy();
-	print("莫裝逼，裝逼遭雷劈", 32, 12);
+	gotoxy(0, 1);
+	println("　　　　　　　　　　︷︷︷︷︷︷︷　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　｛　　　　　　　｝　　　　　　　　　");
+	println("　　　　　　　　　　︸︸︸︸︸︸︸　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　／／　　　　　︷︷︷　　　　　　");
+	println("　　　　　　　　　　　／／　　　　　｛　　　｝　　　 ");
+	println("　　　　　　　　　　／／　　　　　　　︸︸︸　　　　　　　");
+	println("　　　　　　　　　／／　　　　　　　　　＼　　　　　   莫裝逼");
+	println("　　　　　　　　　＼＼　　　　　︷︷　　　＼　　　　　");
+	println("　　　　　　　　　　＼＼　　　｛　　｝　　　＼　　　   ");
+	println("　　　　　　　　　　　＼＼　　　︸︸　　　　／　　     裝逼遭雷劈");
+	println("　　　　　　　　　　　／／　　　／　　　　／　　");
+	println("　　　　　　　　　　／／　　　／　　　　／　　　");
+	println("　　　　　　　　　／／　　　　＼　　　　＼　　　　");
+	println("　　　　　　　　／／　　／＼　／　　　　／　　　　　　　　");
+	println("　　　　　　　／／－－－｜｜／－－－－／－　　　　　　");
+	println("　　　　　　　　　　　　　　　　　　　／＼　　　　　　");
+	println("　　　　　　　　／＼　　　　　　　　　｜｜　　　　　　　　");
+	println("　　　　　　　　｜｜　　　　　　　／＼　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　｜｜　　　　　　　　　");
+	println("　　　　　　　　　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　／＼　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　｜｜　　　　　　　　　　　　　");
 	undoxy();
 	getchar();
-
 }
 
 void UI::undoxy()
@@ -590,3 +644,23 @@ void UI::printlnb(std::string text)
 	print(text);
 	beary++;
 }
+
+void UI::showDialog(std::string name, std::string text, int bear0)
+{
+	clearScreen();
+	showBearsinDialog = true;
+	printBear(bear0);
+	showDialog(name, text);
+	showBearsinDialog = false;
+}
+
+void UI::showDialog(std::string name, std::string text, std::string text0, int bear0)
+{
+	clearScreen();
+	showBearsinDialog = true;
+	printBear(bear0);
+	showDialog(name, text,text0);
+	showBearsinDialog = false;
+
+}
+

@@ -24,24 +24,35 @@ public:
 	void showDialog(std::string name, std::string text);
 	//對話框，35字兩行。
 	void showDialog(std::string name, std::string text, std::string text0);
-	//(!未測試)含熊的對話框。單行雙熊。不需要雙熊的話打超過可提供的熊數即可。
+	//含熊的對話框。單行雙熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1);
-	//(!未測試)含熊的對話框。雙行雙熊。不需要雙熊的話打超過可提供的熊數即可。
+	//含熊的對話框。雙行雙熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1);
+	//含熊的對話框。單行單熊。不需要雙熊的話打超過可提供的熊數即可。
+	void showDialog(std::string name, std::string text, int bear0);
+	//含熊的對話框。雙行單熊。不需要雙熊的話打超過可提供的熊數即可。
+	void showDialog(std::string name, std::string text, std::string text0, int bear0);
+
 	//全螢幕無邊框對話框。雙行、位置固定。不需要第二行請用空字串。
 	void fullScreenDialog(std::string text, std::string text0);
 	//全螢幕無邊框對話框。雙行、位置固定。
 	void fullScreenDialog(std::string text);
+
 	//(!未測試)死亡畫面。
 	void dead();
 	//莫裝逼(龍傲天專屬)
 	void dontB();
+
 	//(X不建議)在畫面的指定座標印出文字。
 	void print(std::string in, int x, int y);
 	//(X不建議)在畫面的指定座標印出指定顏色的文字。
 	void print(std::string in, int x, int y, int color);
 	//在畫面上顯示四種熊。true = 左, false = 右
 	void printBear(int bear, bool place);
+	//在畫面上顯示四種熊置中。true = 左, false = 右
+	void printBear(int bear);
+
+
 	//啟動選名字介面。
 	void chooseNamae();
 	//清除整個螢幕
@@ -55,7 +66,8 @@ private:
 	void print(std::string in);
 	//輸出指定色彩的文字。
 	void print(std::string in, int color);
-
+	//印熊後台
+	void printBearbackend(int bear);
 
 	//輸出文字並換行。
 	void println(std::string);
