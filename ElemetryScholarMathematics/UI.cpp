@@ -64,12 +64,6 @@ void UI::showDialog(std::string name, std::string text)
 	{
 		clearScreen();
 	}
-#if _DEBUG
-	if (text.size() == 0 || name.size() == 0)
-	{
-		print("[警告]這行是不是少打了什麼？沒有字耶？", 0, 0);
-	}
-#endif
 	if (text.size() > 70)
 	{
 		text.resize(70);
@@ -659,8 +653,94 @@ void UI::showDialog(std::string name, std::string text, std::string text0, int b
 	clearScreen();
 	showBearsinDialog = true;
 	printBear(bear0);
-	showDialog(name, text,text0);
+	showDialog(name, text, text0);
 	showBearsinDialog = false;
 
 }
 
+int UI::userChoice(std::string name, std::string option0, std::string option1, std::string option2, std::string option3, int bear)
+{
+	clearScreen();
+	printBear(bear);
+	drawFrame(0, 15, 78, 7);
+	print(name, 3, 16);
+	print("：");
+	//TODO PROTECT
+	print("＊", 2, 18);
+	print("1) " + option0, 5, 18);
+	print("2) " + option1, 43, 18);
+	print("3) " + option2, 5, 19);
+	print("4) " + option3, 43, 19);
+
+	int option = 0;
+	while (1)
+	{
+		while (!_kbhit())
+			;
+		int firstinput = _getch();//Arrow Key get two input
+		if (firstinput == 224)
+		{
+			print("  ", 2, 18);
+			print("  ", 40, 18);
+			print("  ", 2, 19);
+			print("  ", 40, 19);
+
+			char arrKey = _getch();
+			getxy();
+			switch (arrKey)
+			{
+			case 72://GOING UP
+				if (option > 1)
+					option -= 2;
+				else
+					option += 2;
+				break;
+			case 80://GOING DOWN
+				if (option > 1)
+					option -= 2;
+				else
+					option += 2;
+				break;
+			case 75://GOING LEFT
+				if (option == 1 || option == 3)
+					option -= 1;
+				else if (option == 0)
+					option = 3;
+				else
+					option = 1;
+				break;
+			case 77://GOING RIGHT
+				if (option == 0 || option == 2)
+					option += 1;
+				else if (option == 3)
+					option = 0;
+				else
+					option = 2;
+				break;
+			}
+			switch (option)
+			{
+			case 0:
+				print("＊", 2, 18);
+				break;
+			case 1:
+				print("＊", 40, 18);
+				break;
+			case 2:
+				print("＊", 2, 19);
+				break;
+			case 3:
+				print("＊", 40, 19);
+				break;
+			}
+		}
+		else
+		{
+			if (firstinput == 13) //ENTER
+			{
+				return option;
+			}
+		}
+	}
+
+}

@@ -33,12 +33,15 @@ public:
 	//含熊的對話框。雙行單熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, std::string text0, int bear0);
 
+	//讓使用者選擇答案。
+	int userChoice(std::string name, std::string option0, std::string option1, std::string option2, std::string option3, int bear);
+
 	//全螢幕無邊框對話框。雙行、位置固定。不需要第二行請用空字串。
 	void fullScreenDialog(std::string text, std::string text0);
 	//全螢幕無邊框對話框。雙行、位置固定。
 	void fullScreenDialog(std::string text);
 
-	//(!未測試)死亡畫面。
+	//死亡畫面。
 	void dead();
 	//莫裝逼(龍傲天專屬)
 	void dontB();
