@@ -214,73 +214,75 @@ void SimpleArea::ShowChristmasTree()
 void SimpleArea::AreaCalculating()
 {
 	int mode;
-	cout << "Choose your mode!" << endl;
+	cout << "選擇你要的圖案!" << endl;
 	cin >> mode;
+	cout << endl;
 	if (mode == 1)
 	{
-		cout << "You Choose Triangle" << endl;
+		cout << "選擇三角形" << endl;
 		double BottomEdge;
 		double Height;
-		cout << "Please Enter the BottomEdge  (m)" << endl;
+		
+		cout << endl << "請輸入底邊  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << "Please Enter the Height  (m)" << endl;
+		cout << endl << "請輸入高  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height / 2;
 
-		cout << "The Area :  " << area << " (m^2)" << endl;
+		cout << endl << "面積 :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 2)
 	{
-		cout << "You Choose Rectangle" << endl;
+		cout << "選擇矩形" << endl << endl;
 		double Length;
 		double Width;
-		cout << "Please Enter the Length  (m)" << endl;
+		cout << endl << "請輸入長  (m)" << endl << endl;
 		cin >> Length;
-		cout << "Please Enter the Width  (m)" << endl;
+		cout << endl << "請輸入寬  (m)" << endl << endl;
 		cin >> Width;
 		double area = Length*Width;
 
-		cout << "The Area :  " << area << " (m^2)" << endl;
+		cout << endl << "面積 :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 3)
 	{
-		cout << "You Choose Parallelogram" << endl;
+		cout << "選擇平行四邊形" << endl << endl;
 		double BottomEdge;
 		double Height;
-		cout << "Please Enter the BottomEdge  (m)" << endl;
+		cout << endl << "請輸入底邊  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << "Please Enter the Height  (m)" << endl;
+		cout << endl << "請輸入高  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height;
 
-		cout << "The Area :  " << area << " (m^2)" << endl;
+		cout << endl << "面積 :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 4)
 	{
 
-		cout << "You Choose Diamond" << endl;
+		cout << "選擇菱形" << endl << endl;
 		double LevelLength;
 		double VerticalLength;
-		cout << "Please Enter the LevelLength  (m)" << endl;
+		cout << endl << "請輸入水平長度  (m)" << endl << endl;
 		cin >> LevelLength;
-		cout << "Please Enter the VerticalLength  (m)" << endl;
+		cout << endl << "請輸入垂直長度  (m)" << endl << endl;
 		cin >> VerticalLength;
 		double area = LevelLength*VerticalLength;
 
-		cout << "The Area :  " << area << " (m^2)" << endl;
+		cout << endl << "面積 :  " << area << " (m^2)" << endl << endl;
 
 
 
 	}
 	else
 	{
-		cout << "You enter the wrong mode!";
+		cout << "輸入錯摟!";
 		exit(1);
 	}
 }
