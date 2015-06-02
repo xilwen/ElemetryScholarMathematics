@@ -1,4 +1,4 @@
-#ifndef SIMPLEAREA_H
+﻿#ifndef SIMPLEAREA_H
 #define SIMPLEAREA_H
 
 #include <iostream>

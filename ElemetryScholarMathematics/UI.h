@@ -1,4 +1,4 @@
-//written by xilwen, qqwerfdsa930 and GODKING
+ï»¿//written by xilwen, qqwerfdsa930 and GODKING
 
 #ifndef UI_H
 #define UI_H
@@ -17,86 +17,86 @@ class UI
 public:
 	UI();
 
-	//©I¥s¹CÀ¸¶}©lµe­±
+	//å‘¼å«éŠæˆ²é–‹å§‹ç•«é¢
 	void init();
 
-	//Åã¥Ü¹ï¸Ü®Ø¡A35¦r¤@¦æ¡C
+	//é¡¯ç¤ºå°è©±æ¡†ï¼Œ35å­—ä¸€è¡Œã€‚
 	void showDialog(std::string name, std::string text);
-	//¹ï¸Ü®Ø¡A35¦r¨â¦æ¡C
+	//å°è©±æ¡†ï¼Œ35å­—å…©è¡Œã€‚
 	void showDialog(std::string name, std::string text, std::string text0);
-	//§tºµªº¹ï¸Ü®Ø¡C³æ¦æÂùºµ¡C¤£»İ­nÂùºµªº¸Ü¥´¶W¹L¥i´£¨Ñªººµ¼Æ§Y¥i¡C
+	//å«ç†Šçš„å°è©±æ¡†ã€‚å–®è¡Œé›™ç†Šã€‚ä¸éœ€è¦é›™ç†Šçš„è©±æ‰“è¶…éå¯æä¾›çš„ç†Šæ•¸å³å¯ã€‚
 	void showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1);
-	//§tºµªº¹ï¸Ü®Ø¡CÂù¦æÂùºµ¡C¤£»İ­nÂùºµªº¸Ü¥´¶W¹L¥i´£¨Ñªººµ¼Æ§Y¥i¡C
+	//å«ç†Šçš„å°è©±æ¡†ã€‚é›™è¡Œé›™ç†Šã€‚ä¸éœ€è¦é›™ç†Šçš„è©±æ‰“è¶…éå¯æä¾›çš„ç†Šæ•¸å³å¯ã€‚
 	void showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1);
-	//§tºµªº¹ï¸Ü®Ø¡C³æ¦æ³æºµ¡C¤£»İ­nÂùºµªº¸Ü¥´¶W¹L¥i´£¨Ñªººµ¼Æ§Y¥i¡C
+	//å«ç†Šçš„å°è©±æ¡†ã€‚å–®è¡Œå–®ç†Šã€‚ä¸éœ€è¦é›™ç†Šçš„è©±æ‰“è¶…éå¯æä¾›çš„ç†Šæ•¸å³å¯ã€‚
 	void showDialog(std::string name, std::string text, int bear0);
-	//§tºµªº¹ï¸Ü®Ø¡CÂù¦æ³æºµ¡C¤£»İ­nÂùºµªº¸Ü¥´¶W¹L¥i´£¨Ñªººµ¼Æ§Y¥i¡C
+	//å«ç†Šçš„å°è©±æ¡†ã€‚é›™è¡Œå–®ç†Šã€‚ä¸éœ€è¦é›™ç†Šçš„è©±æ‰“è¶…éå¯æä¾›çš„ç†Šæ•¸å³å¯ã€‚
 	void showDialog(std::string name, std::string text, std::string text0, int bear0);
 
-	//Åı¨Ï¥ÎªÌ¿ï¾Üµª®×¡C
+	//è®“ä½¿ç”¨è€…é¸æ“‡ç­”æ¡ˆã€‚
 	int userChoice(std::string name, std::string option0, std::string option1, std::string option2, std::string option3, int bear);
 
-	//¥ş¿Ã¹õµLÃä®Ø¹ï¸Ü®Ø¡CÂù¦æ¡B¦ì¸m©T©w¡C¤£»İ­n²Ä¤G¦æ½Ğ¥ÎªÅ¦r¦ê¡C
+	//å…¨è¢å¹•ç„¡é‚Šæ¡†å°è©±æ¡†ã€‚é›™è¡Œã€ä½ç½®å›ºå®šã€‚ä¸éœ€è¦ç¬¬äºŒè¡Œè«‹ç”¨ç©ºå­—ä¸²ã€‚
 	void fullScreenDialog(std::string text, std::string text0);
-	//¥ş¿Ã¹õµLÃä®Ø¹ï¸Ü®Ø¡CÂù¦æ¡B¦ì¸m©T©w¡C
+	//å…¨è¢å¹•ç„¡é‚Šæ¡†å°è©±æ¡†ã€‚é›™è¡Œã€ä½ç½®å›ºå®šã€‚
 	void fullScreenDialog(std::string text);
 
-	//¦º¤`µe­±¡C
+	//æ­»äº¡ç•«é¢ã€‚
 	void dead();
-	//²ö¸Ë¹G(Às¶Æ¤Ñ±MÄİ)
+	//è«è£é€¼(é¾å‚²å¤©å°ˆå±¬)
 	void dontB();
 
-	//(X¤£«ØÄ³)¦bµe­±ªº«ü©w®y¼Ğ¦L¥X¤å¦r¡C
+	//(Xä¸å»ºè­°)åœ¨ç•«é¢çš„æŒ‡å®šåº§æ¨™å°å‡ºæ–‡å­—ã€‚
 	void print(std::string in, int x, int y);
-	//(X¤£«ØÄ³)¦bµe­±ªº«ü©w®y¼Ğ¦L¥X«ü©wÃC¦âªº¤å¦r¡C
+	//(Xä¸å»ºè­°)åœ¨ç•«é¢çš„æŒ‡å®šåº§æ¨™å°å‡ºæŒ‡å®šé¡è‰²çš„æ–‡å­—ã€‚
 	void print(std::string in, int x, int y, int color);
-	//¦bµe­±¤WÅã¥Ü¥|ºØºµ¡Ctrue = ¥ª, false = ¥k
+	//åœ¨ç•«é¢ä¸Šé¡¯ç¤ºå››ç¨®ç†Šã€‚true = å·¦, false = å³
 	void printBear(int bear, bool place);
-	//¦bµe­±¤WÅã¥Ü¥|ºØºµ¸m¤¤¡Ctrue = ¥ª, false = ¥k
+	//åœ¨ç•«é¢ä¸Šé¡¯ç¤ºå››ç¨®ç†Šç½®ä¸­ã€‚true = å·¦, false = å³
 	void printBear(int bear);
 
 
-	//±Ò°Ê¿ï¦W¦r¤¶­±¡C
+	//å•Ÿå‹•é¸åå­—ä»‹é¢ã€‚
 	void chooseNamae();
-	//²M°£¾ã­Ó¿Ã¹õ
+	//æ¸…é™¤æ•´å€‹è¢å¹•
 	void clearScreen();
 	~UI();
 
-	//¦^¶Ç¥D¨¤¦W¦r(Accessor to name)
+	//å›å‚³ä¸»è§’åå­—(Accessor to name)
 	std::string getName();
 private:
-	//®Ñ¥X¤å¦r¡C
+	//æ›¸å‡ºæ–‡å­—ã€‚
 	void print(std::string in);
-	//¿é¥X«ü©w¦â±mªº¤å¦r¡C
+	//è¼¸å‡ºæŒ‡å®šè‰²å½©çš„æ–‡å­—ã€‚
 	void print(std::string in, int color);
-	//¦Lºµ«á¥x
+	//å°ç†Šå¾Œå°
 	void printBearbackend(int bear);
 
-	//¿é¥X¤å¦r¨Ã´«¦æ¡C
+	//è¼¸å‡ºæ–‡å­—ä¸¦æ›è¡Œã€‚
 	void println(std::string);
-	//¿é¥Xºµ¹Ï±M¥Î´«¦æ¡C
+	//è¼¸å‡ºç†Šåœ–å°ˆç”¨æ›è¡Œã€‚
 	void printlnb(std::string);
 
-	//µe®Ø®Ø¡A¥ª¤WxÂI, yÂI, ªø(¾î¦V), °ª(ª½¦V)
+	//ç•«æ¡†æ¡†ï¼Œå·¦ä¸Šxé», yé», é•·(æ©«å‘), é«˜(ç›´å‘)
 	void drawFrame(int lux, int luy, int length, int height);
-	//²¾°Ê´å¼Ğ¨ì«ü©wªº¦ì¸m¡C
+	//ç§»å‹•æ¸¸æ¨™åˆ°æŒ‡å®šçš„ä½ç½®ã€‚
 	void gotoxy(int x, int y);
-	//¨ú±o²{¦b´å¼Ğ¦ì¸m¡C
+	//å–å¾—ç¾åœ¨æ¸¸æ¨™ä½ç½®ã€‚
 	void getxy();
-	//¦^¨ì¬ö¿ıªº´å¼Ğ¦ì¸m
+	//å›åˆ°ç´€éŒ„çš„æ¸¸æ¨™ä½ç½®
 	void undoxy();
-	//¦s©ñ¥Ñgetxy¨ç¼Æ¨ú±oªºX,Y¶b¸ê°T¡C
+	//å­˜æ”¾ç”±getxyå‡½æ•¸å–å¾—çš„X,Yè»¸è³‡è¨Šã€‚
 	int nowx;
 	int nowy;
-	//Àx¦s¥D¨¤ªº¦W¦r¡C
+	//å„²å­˜ä¸»è§’çš„åå­—ã€‚
 	std::string name;
-	//Àx¦s¦b¦W¦r¿ï¾Ü¤¶­±¤¤¥i¿ï¦W¦rªº²M³æ¡C
+	//å„²å­˜åœ¨åå­—é¸æ“‡ä»‹é¢ä¸­å¯é¸åå­—çš„æ¸…å–®ã€‚
 	std::vector<std::string> chars;
-	//¹ï¸Ü®Ø¬O§_±NÅã¥Ü¨â¦æ(Á×§K­«½Æ¼È°±)¡C¥Î©óshowdialog¡C
+	//å°è©±æ¡†æ˜¯å¦å°‡é¡¯ç¤ºå…©è¡Œ(é¿å…é‡è¤‡æš«åœ)ã€‚ç”¨æ–¼showdialogã€‚
 	bool twoLinesInDialog;
-	//¹ï¸Ü®Ø¬O§_¦³­n¿é¥Xºµ¡A­Y¦³«h¤£²Mµe­±¡C¥Î©óshowdialog¡C
+	//å°è©±æ¡†æ˜¯å¦æœ‰è¦è¼¸å‡ºç†Šï¼Œè‹¥æœ‰å‰‡ä¸æ¸…ç•«é¢ã€‚ç”¨æ–¼showdialogã€‚
 	bool showBearsinDialog;
-	//­nµeºµ²{¦bªº¦ì¸m
+	//è¦ç•«ç†Šç¾åœ¨çš„ä½ç½®
 	int bearx;
 	int beary;
 };

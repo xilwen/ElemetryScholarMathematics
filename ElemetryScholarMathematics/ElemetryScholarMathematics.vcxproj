@@ -13,11 +13,11 @@
   <ItemGroup>
     <ClCompile Include="BMPloader.cpp" />
     <ClCompile Include="ConvexHull.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="PolygonArea.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="SimpleArea.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -38,7 +38,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>

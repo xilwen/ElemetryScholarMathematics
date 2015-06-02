@@ -1,4 +1,4 @@
-//written by xilwen
+ï»¿//written by xilwen
 
 #ifndef BMPLOADER_H
 #define BMPLOADER_H
@@ -11,12 +11,12 @@ class BMPloader
 {
 public:
 	BMPloader() = delete;
-	//¶}ÀÉ®×
+	//é–‹æª”æ¡ˆ
 	BMPloader(std::string);
 	void findDots();
 	void toConvexHull();
 
-	//ÃöÀÉ®×
+	//é—œæª”æ¡ˆ
 	~BMPloader();
 private:
 	std::fstream file;

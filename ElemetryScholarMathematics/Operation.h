@@ -1,4 +1,4 @@
-//written by 
+﻿//written by 
 
 #ifndef OPERATION_H
 #define OPERATION_H

@@ -1,17 +1,17 @@
-#include "ConvexHull.h"
+ï»¿#include "ConvexHull.h"
 
 ConvexHull::ConvexHull(const std::vector<short> a, const std::vector<short> b){}
 
 //short ConvexHull::getx(short a){ return x[a]; }
 //short ConvexHull::gety(short a){ return y[a]; }
 
-// §ä³Ì¥ª¡B³Ì§CªºÂI
+// æ‰¾æœ€å·¦ã€æœ€ä½çš„é»
 bool ConvexHull::compare(short a, short b)
 {
 	return (y[a] < y[b]) || (y[a] == y[a] && x[a] == x[b]);
 }
 
-// cross oa & ob, ¤j©ó¹sªí¥Ü oa ¨ì ob ¬°¶¶®É°w±ÛÂà
+// cross oa & ob, å¤§æ–¼é›¶è¡¨ç¤º oa åˆ° ob ç‚ºé †æ™‚é‡æ—‹è½‰
 double ConvexHull::cross(short o, short a, short b)
 {
 	return (x[a] - x[o]) * (y[b] - y[o]) - (y[a] - y[o]) * (x[b] - x[o]);
@@ -19,32 +19,32 @@ double ConvexHull::cross(short o, short a, short b)
 
 std::vector<short> ConvexHull::findConvexHull(std::vector<short> a)
 {
-	/* ¥Î ConvexHull ¤W¥ô¤@ÂI·í°_ÂI¡A³o¸Ì¥Î³Ì§C¡B³Ì¥ªÃäªºÂI·í°_ÂI */
+	/* ç”¨ ConvexHull ä¸Šä»»ä¸€é»ç•¶èµ·é»ï¼Œé€™è£¡ç”¨æœ€ä½ã€æœ€å·¦é‚Šçš„é»ç•¶èµ·é» */
 
 	int s = 0;
 	for (unsigned int i = 0; i < a.size(); ++i)
 		if (compare(a[i], a[s]))
 			s = i;
 
-	/* ¥H°f®É°w¤è¦Vµe¹Ï§Î*/
+	/* ä»¥é€†æ™‚é‡æ–¹å‘ç•«åœ–å½¢*/
 
 	std::vector<short> ch;
-	ch[0] = a[s];			// ¬ö¿ı°_ÂI
+	ch[0] = a[s];			// ç´€éŒ„èµ·é»
 
-	for (int m = 1; true; ++m)	// m ¬° ConvexHull ªº³»ÂI­Ó¼Æ
+	for (int m = 1; true; ++m)	// m ç‚º ConvexHull çš„é ‚é»å€‹æ•¸
 	{
-		/* ½aÁ|©Ò¦³ªºÂI¡A§ä¥X³Ì¥~Ãäªº¤@ÂI */
+		/* çª®èˆ‰æ‰€æœ‰çš„é»ï¼Œæ‰¾å‡ºæœ€å¤–é‚Šçš„ä¸€é» */
 
 		int next = s;
-		if (m == 1) next = !s;	/* ²Ä¤@¦¸ next ¹w³]¬°°_ÂI¥H¥~ªºÂI
-									§_«h cross ·|¤@ª½¬°¹s */
+		if (m == 1) next = !s;	/* ç¬¬ä¸€æ¬¡ next é è¨­ç‚ºèµ·é»ä»¥å¤–çš„é»
+									å¦å‰‡ cross æœƒä¸€ç›´ç‚ºé›¶ */
 
 		for (int i = 0; i<100; ++i)
 			if (cross(ch[m], a[i], a[next]) < 0)
 				next = i;
 
-		if (next == s) break;	// ¦^¨ì°_ÂI
-		ch[m] = a[next];		// ¬ö¿ı­è­è§ä¨ìªºÂI
+		if (next == s) break;	// å›åˆ°èµ·é»
+		ch[m] = a[next];		// ç´€éŒ„å‰›å‰›æ‰¾åˆ°çš„é»
 	}
 
 	return ch;

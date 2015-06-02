@@ -1,4 +1,4 @@
-#include "SimpleArea.h"
+ï»¿#include "SimpleArea.h"
 
 SimpleArea::SimpleArea(){}
 SimpleArea::~SimpleArea(){}
@@ -34,7 +34,7 @@ void SimpleArea::ShowGraph()
 	int JudgeTo4 = 1;
 	int JudgeTo5 = 1;
 
-	cout << "¿ï¾Ü¤@ºØ¹Ï®×" << endl;
+	cout << "é¸æ“‡ä¸€ç¨®åœ–æ¡ˆ" << endl;
 
 	for (i = 0; i < RowNum; i++)
 	{
@@ -214,75 +214,75 @@ void SimpleArea::ShowChristmasTree()
 void SimpleArea::AreaCalculating()
 {
 	int mode;
-	cout << "¿ï¾Ü§A­nªº¹Ï®×!" << endl;
+	cout << "é¸æ“‡ä½ è¦çš„åœ–æ¡ˆ!" << endl;
 	cin >> mode;
 	cout << endl;
 	if (mode == 1)
 	{
-		cout << "¿ï¾Ü¤T¨¤§Î" << endl;
+		cout << "é¸æ“‡ä¸‰è§’å½¢" << endl;
 		double BottomEdge;
 		double Height;
 		
-		cout << endl << "½Ð¿é¤J©³Ãä  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥åº•é‚Š  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << endl << "½Ð¿é¤J°ª  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥é«˜  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height / 2;
 
-		cout << endl << "­±¿n :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 2)
 	{
-		cout << "¿ï¾Ü¯x§Î" << endl << endl;
+		cout << "é¸æ“‡çŸ©å½¢" << endl << endl;
 		double Length;
 		double Width;
-		cout << endl << "½Ð¿é¤Jªø  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥é•·  (m)" << endl << endl;
 		cin >> Length;
-		cout << endl << "½Ð¿é¤J¼e  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥å¯¬  (m)" << endl << endl;
 		cin >> Width;
 		double area = Length*Width;
 
-		cout << endl << "­±¿n :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 3)
 	{
-		cout << "¿ï¾Ü¥­¦æ¥|Ãä§Î" << endl << endl;
+		cout << "é¸æ“‡å¹³è¡Œå››é‚Šå½¢" << endl << endl;
 		double BottomEdge;
 		double Height;
-		cout << endl << "½Ð¿é¤J©³Ãä  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥åº•é‚Š  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << endl << "½Ð¿é¤J°ª  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥é«˜  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height;
 
-		cout << endl << "­±¿n :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 4)
 	{
 
-		cout << "¿ï¾ÜµÙ§Î" << endl << endl;
+		cout << "é¸æ“‡è±å½¢" << endl << endl;
 		double LevelLength;
 		double VerticalLength;
-		cout << endl << "½Ð¿é¤J¤ô¥­ªø«×  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥æ°´å¹³é•·åº¦  (m)" << endl << endl;
 		cin >> LevelLength;
-		cout << endl << "½Ð¿é¤J««ª½ªø«×  (m)" << endl << endl;
+		cout << endl << "è«‹è¼¸å…¥åž‚ç›´é•·åº¦  (m)" << endl << endl;
 		cin >> VerticalLength;
 		double area = LevelLength*VerticalLength;
 
-		cout << endl << "­±¿n :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
 
 
 
 	}
 	else
 	{
-		cout << "¿é¤J¿ùºO!";
+		cout << "è¼¸å…¥éŒ¯æ‘Ÿ!";
 		exit(1);
 	}
 }

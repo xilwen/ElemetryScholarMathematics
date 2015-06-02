@@ -1,4 +1,4 @@
-//written by GODKING 
+﻿//written by GODKING 
 
 #ifndef POLYGONAREA_H
 #define POLYGONAREA_H

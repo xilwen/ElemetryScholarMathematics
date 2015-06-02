@@ -1,4 +1,4 @@
-//written by qqwerfdsa930
+﻿//written by qqwerfdsa930
 
 #ifndef CONVEXHULL_H
 #define CONVEXHULL_H
