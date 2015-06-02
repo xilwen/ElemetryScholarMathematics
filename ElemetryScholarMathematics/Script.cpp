@@ -35,23 +35,32 @@ void Script::runScripts()
 	ui->showDialog(ui->getName(), "哼哼，廢話少說，有什麼本事就出招吧！", 0, true, 1, false);
 
 	/*I part*/
-	int a, b;
-	a = (rand() % 10);
-	b = (rand() % 10);
+	int a, b, answer;
+	a = (rand() % 10 + 1);
+	b = (rand() % 10 + 1);
 	ui->showDialog("交趾國東征先鋒大將", std::to_string(a) + "+" + std::to_string(b) + "等於幾?", 0, true, 1, false);
-
+	
 	//加個凌娜鑰匙產生器吧
 
 	//答題
-	if (ui->getName() == "龍傲天")
+	answer = ui->userChoice(ui->getName(), std::to_string(a + b), std::to_string(a*b), std::to_string(a - b), std::to_string(b-a), 0);
+	if (answer == 0)
 	{
-		ui->showDialog("交趾國東征先鋒大將", "想取代戰神，先學會仰望我！");
-		ui->dontB();
+		ui->showDialog("交趾國東征先鋒大將", "居然對了，阿不就好棒棒。", 0, true, 1, false);
 	}
 	else
 	{
-		ui->showDialog("交趾國東征先鋒大將", "順我者生，逆我者亡!哇哈哈~~");
-		ui->dead();
+		ui->showDialog("交趾國東征先鋒大將", "尼錯了，答案是" + std::to_string(a + b), 0, true, 1, false);
+		if (ui->getName() == "龍傲天")
+		{
+			ui->showDialog("交趾國東征先鋒大將", "想取代戰神，先學會仰望我！");
+			ui->dontB();
+		}
+		else
+		{
+			ui->showDialog("交趾國東征先鋒大將", "順我者生，逆我者亡!哇哈哈~~");
+			ui->dead();
+		}
 	}
 
 	/*II part*/
@@ -62,20 +71,22 @@ void Script::runScripts()
 	ui->showDialog(ui->getName(), "咳咳...換我出題！", 0, true, 3, false);
 
 	//答題
-	//ui->clearScreen();
+	ui->clearScreen();
 	SimpleArea fromUser;	//給user輸入 mode 及 底邊和高
 	fromUser.ShowGraph();
 	fromUser.AreaCalculating();
+	getchar();
+	getchar();
 	
 	if (ui->getName() == "大中天")
 	{
 		ui->showDialog("凌娜", "你媽怎麼給你取這種名字阿，大中天。", 0, true, 3, false);
 	}
-	else
-	{
-		ui->showDialog(ui->getName(), "那...比較的大門多大？", 0, true, 3, false);
-	}
-
+	
+	ui->showDialog(ui->getName, "我好像心中有個東西突然不見的感覺...");
+	ui->showDialog(ui->getName, "感覺好像...", "我的人生改變了..");
+	ui->showDialog("凌娜", "我也覺得我的人生，就在這裡", "寫下了汙點");
+	ui->showDialog("凌娜", "ㄍㄋㄇㄉ看醫生遊戲");
 }
 
 Script::~Script()
