@@ -3,6 +3,9 @@
 #ifndef UI_H
 #define UI_H
 
+#define ConsoleWidth 80
+#define ConsoleHeight 24
+
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
@@ -62,6 +65,9 @@ public:
 	void clearScreen();
 	~UI();
 
+	//顯示座標畫面
+	void showCOORD(std::string in, std::vector<short> x, std::vector<short> y);
+
 	//回傳主角名字(Accessor to name)
 	std::string getName();
 private:
@@ -99,6 +105,8 @@ private:
 	//要畫熊現在的位置
 	int bearx;
 	int beary;
+	//除了ENTER之外都不會讓你繼續的!代替getchar
+	void waitEnter();
 };
 
 #endif

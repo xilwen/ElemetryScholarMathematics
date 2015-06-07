@@ -3,27 +3,37 @@
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 UI::UI()
 {
-	//Get Screen resolution
+	//Get Screen resolution and set position
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
 	GetWindowRect(hDesktop, &desktop);
 	unsigned int horizontal = desktop.right;
 	unsigned int vertical = desktop.bottom;
+	HWND thisConsole = GetConsoleWindow();
+	SetWindowPos(thisConsole, HWND_TOP, 10, 10, 100, 100, SWP_NOSIZE);
 
 	//For Windows 10 Compability and appearance
-	SMALL_RECT windowSize = { 0, 0, 80, 23 };
+	SMALL_RECT windowSize = { 0, 0, ConsoleWidth, ConsoleHeight };
 	SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
-	_CONSOLE_FONT_INFOEX Font = { sizeof(Font) };
+	CONSOLE_FONT_INFOEX Font;// = { sizeof(CONSOLE_FONT_INFOEX) };
 	GetCurrentConsoleFontEx(hConsole, FALSE, &Font);
-	if (horizontal > 1024 && vertical > 768)
-		Font.dwFontSize = { 24, 24 };
+	CONSOLE_FONT_INFOEX cfi;
+	cfi.cbSize = sizeof cfi;
+	cfi.nFont = 0;
+	if (horizontal >= 1900 && vertical >= 1000)
+		cfi.dwFontSize = { 30, 30 };
+	else if(horizontal >= 1000 && vertical >= 900)
+		cfi.dwFontSize = { 26, 26 };
+	else if (horizontal >= 1000 && vertical >= 700)
+		cfi.dwFontSize = { 22, 22 };
 	else
-		Font.dwFontSize = { 16, 16 };
-
-	SetCurrentConsoleFontEx(hConsole, false, &Font);
-
+		cfi.dwFontSize = { 16, 16 };
+	cfi.FontFamily = FF_DONTCARE;
+	cfi.FontWeight = FW_NORMAL;
+	wcscpy_s(cfi.FaceName, L"細明體");
+	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 	SetConsoleTitle(L"小學生的算數！");
-	//TODO Check Command Prompt Window Size
+
 	//Init nameChars
 	chars = { "龍", "中", "大", "比", "巫", "凌", "卡", "倒退",
 		"天", "傲", "暗", "黑", "瘋", "娜", "皓", "清除",
@@ -33,8 +43,6 @@ UI::UI()
 	showBearsinDialog = false;
 	//預產生亂數種子
 	srand(unsigned(time(NULL)));
-	//非Big5編碼系統相容性調整
-	//SetConsoleOutputCP(950);
 }
 
 UI::~UI()
@@ -73,7 +81,7 @@ void UI::init()
 	println("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　      |                                         ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼　　　　                                                ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　　　　　　　　　　                                                ");
-	getchar();
+	waitEnter();
 }
 
 void UI::showDialog(std::string name, std::string text)
@@ -95,9 +103,9 @@ void UI::showDialog(std::string name, std::string text)
 	print(text, 5, 18);
 	if (twoLinesInDialog == false)
 	{
-		getchar();
+		waitEnter();
 	}
-}
+	}
 
 void UI::showDialog(std::string name, std::string text, std::string text0)
 {
@@ -117,7 +125,7 @@ void UI::showDialog(std::string name, std::string text, std::string text0)
 #endif
 	}
 	print(text0, 5, 19);
-	getchar();
+	waitEnter();
 	twoLinesInDialog = false;
 }
 
@@ -130,7 +138,7 @@ void UI::drawFrame(int lux, int luy, int length, int height)
 	print("╰", lux, luy + height);
 	print("╯", lux + length, luy + height);
 	for (int i = 1; i < (length - 1); i += 2)
-		print("─", (lux + i + 1), luy);
+		print("─", (lux + i + 1), luy); //─
 	for (int i = 1; i < (length - 1); i += 2)
 		print("─", (lux + i + 1), luy + height);
 	for (int i = 1; i < height; i++)
@@ -263,7 +271,7 @@ void UI::chooseNamae()
 						blockCount = blockCount + 1;
 						print(chars[blockCount], 12);
 						gotoxy(16, nowy + 3);
-					}
+			}
 					else
 					{
 						print(chars[blockCount], 15);
@@ -273,10 +281,10 @@ void UI::chooseNamae()
 						gotoxy(nowx - 42, nowy - 6);
 
 					}
-				}
-				break;
-			}
 		}
+				break;
+	}
+}
 		else
 		{
 #if _DEBUG
@@ -344,7 +352,7 @@ void UI::chooseNamae()
 				print(name, 20, 0);
 				undoxy();
 #endif
-			}
+					}
 			if (firstinput == 8)
 			{
 				if (name.size() > 1)
@@ -356,7 +364,7 @@ void UI::chooseNamae()
 				}
 
 			}
-		}
+				}
 
 #if _DEBUG
 		getxy();
@@ -364,8 +372,8 @@ void UI::chooseNamae()
 		print(std::to_string(blockCount), 0, 0);
 		undoxy();
 #endif
-	}
-}
+			}
+		}
 
 void UI::print(std::string in)
 {
@@ -492,7 +500,7 @@ void UI::printBearbackend(int bear)
 		printlnb("　  　　　　｜（＿０＿）＝/");
 		printlnb("＿＿＿＿＿＝　　｜Ｕ｜　｜");
 		printlnb("　　＿＿＿＿＿　＼　　／、＼");
-		printlnb("　　　　　　　　／　　　　／\_<");
+		printlnb("　　　　　　　　／　　　　／＼_<");
 		printlnb("　　　　　　　／　　　　／");
 		printlnb("           ／　　　＿／");
 		printlnb("　　　　　（＿　　　／");
@@ -502,7 +510,7 @@ void UI::printBearbackend(int bear)
 	case 1:
 		printlnb("　　　∩＿＿＿＿∩");
 		printlnb("   　｜︿     ︿ˋ｜");
-		printlnb("　　／　＞　（Ｏ）　\’");
+		printlnb("　　／　＞　（Ｏ）　\\");
 		printlnb("　　＝　（＿０＿）　｜");
 		printlnb("　　　　　 ｜Ｕ｜　　＝＿＿＿／＼");
 		printlnb("　　　／＼　　　　　＿＿＿＿＿＿ ＼");
@@ -595,7 +603,7 @@ void UI::dead()
 	println("　　　　　　　　　　　　　　　　　");
 	println("　　　　　　　　　　　　　　　　　");
 	undoxy();
-	getchar();
+	waitEnter();
 }
 
 void UI::dontB()
@@ -626,7 +634,7 @@ void UI::dontB()
 	println("　　　　　　　　　　　／＼　　　　　　　　　　　　　　");
 	println("　　　　　　　　　　　｜｜　　　　　　　　　　　　　");
 	undoxy();
-	getchar();
+	waitEnter();
 }
 
 void UI::undoxy()
@@ -638,16 +646,16 @@ void UI::fullScreenDialog(std::string text, std::string text0)
 {
 	clearScreen();
 	print(text, 8, 8);
-	getchar();
+	waitEnter();
 	print(text0, 8, 11);
-	getchar();
+	waitEnter();
 }
 
 void UI::fullScreenDialog(std::string text)
 {
 	clearScreen();
 	print(text, 8, 9);
-	getchar();
+	waitEnter();
 }
 
 void UI::printlnb(std::string text)
@@ -760,5 +768,35 @@ int UI::userChoice(std::string name, std::string option0, std::string option1, s
 			}
 		}
 	}
+
+}
+
+void UI::waitEnter()
+{
+	while (1)
+	{
+		while (!_kbhit());
+		int firstinput = _getch();//Arrow Key get two input
+		if (firstinput == 13) //ENTER
+		{
+			return;
+		}
+		else
+		{
+			std::string* tmp = new std::string;
+			std::cin >> *tmp;
+			delete tmp;
+			break;
+		}
+	}
+}
+
+void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
+{
+	clearScreen();
+	drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+	print(in + "：", 3, 1);
+
+
 
 }
