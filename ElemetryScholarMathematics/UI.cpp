@@ -1,11 +1,27 @@
 ﻿#include "UI.h"
 
-
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 UI::UI()
 {
-	HANDLE hConsole;
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	//LPCWSTR title = L"小學生的算數！";
+	//Get Screen resolution
+	RECT desktop;
+	const HWND hDesktop = GetDesktopWindow();
+	GetWindowRect(hDesktop, &desktop);
+	unsigned int horizontal = desktop.right;
+	unsigned int vertical = desktop.bottom;
+
+	//For Windows 10 Compability and appearance
+	SMALL_RECT windowSize = { 0, 0, 80, 23 };
+	SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
+	_CONSOLE_FONT_INFOEX Font = { sizeof(Font) };
+	GetCurrentConsoleFontEx(hConsole, FALSE, &Font);
+	if (horizontal > 1024 && vertical > 768)
+		Font.dwFontSize = { 24, 24 };
+	else
+		Font.dwFontSize = { 16, 16 };
+
+	SetCurrentConsoleFontEx(hConsole, false, &Font);
+
 	SetConsoleTitle(L"小學生的算數！");
 	//TODO Check Command Prompt Window Size
 	//Init nameChars
