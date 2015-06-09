@@ -56,7 +56,7 @@ void BMPloader::findDots()
 			}
 		}
 	}
-	
+
 }
 
 void BMPloader::toConvexHull()

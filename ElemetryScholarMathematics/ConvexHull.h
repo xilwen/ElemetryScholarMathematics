@@ -7,7 +7,7 @@ using std::vector;
 class ConvexHull
 {
 public:
-	ConvexHull();
+	ConvexHull() = delete;
 	ConvexHull(vector<short> x1, vector<short> y1);
 	
 	void sort();

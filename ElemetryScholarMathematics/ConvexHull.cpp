@@ -1,6 +1,5 @@
 #include "ConvexHull.h"
 
-ConvexHull::ConvexHull(){}
 ConvexHull::ConvexHull(vector<short> x1, vector<short> y1) : x0(x1), y0(y1){}
 
 
@@ -48,7 +47,7 @@ bool ConvexHull::compare(int a, int b)
 	return (x0[a] < x0[b]) || ((x0[a] == x0[b] )&& (y0[a] < y0[b]));
 }
 
-int   ConvexHull::Andrew_monotone_chain()
+int ConvexHull::Andrew_monotone_chain()
 {
 	ConvexHull::sort();
 	int  m = 0;
@@ -56,17 +55,35 @@ int   ConvexHull::Andrew_monotone_chain()
 	for (int i = 0; i<count; ++i)
 	{
 		while (m >= 2 && cross(m - 2,m - 1,i) <= 0)   m--;
+		if (m < x.size() -1 )
+		{
+			x.push_back(x0[i]);
+			y.push_back(y0[i]);
+		}
+		else
+		{
+			x[m] = x0[i];
+			y[m] = y0[i];
 
-		x.push_back(x0[i]);
-		y.push_back(y0[i]);
+		}
 		m++;
 	}
 	for (int i = count - 2, t = m + 1; i >= 0; --i)
 	{
 	
 		while (m >= t && cross( m - 2, m - 1, i) <= 0)   m--;
-		x.push_back(x0[i]);
-		y.push_back(y0[i]);
+
+		if (m < x.size() - 1)
+		{
+			x.push_back(x0[i]);
+			y.push_back(y0[i]);
+		}
+		else
+		{
+			x[m] = x0[i];
+			y[m] = y0[i];
+
+		}
 		m++;
 	}
 
