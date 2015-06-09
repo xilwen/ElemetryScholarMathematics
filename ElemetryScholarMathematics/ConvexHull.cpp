@@ -56,19 +56,39 @@ void  ConvexHull::Andrew_monotone_chain()
 	for (int i = 0; i<count; ++i)
 	{
 		while (m >= 2 && cross(m - 2,m - 1,i) <= 0)   m--;
+		int num = x.size() - 1;
+		if (m > num)
+		{
+			x.push_back(x0[i]);
+			y.push_back(y0[i]);
 
-		x.push_back(x0[i]);
-		y.push_back(y0[i]);
+		}
+		else
+		{
+			x[m]= x0[i];
+			y[m]= y0[i];
+		}
 		m++;
 	}
 	for (int i = count - 2, t = m + 1; i >= 0; --i)
 	{
 	
 		while (m >= t && cross( m - 2, m - 1, i) <= 0)   m--;
-		x.push_back(x0[i]);
-		y.push_back(y0[i]);
+		int num = x.size() - 1 ;
+		if (m > num )
+		{
+			x.push_back(x0[i]);
+			y.push_back(y0[i]);
+
+		}
+		else
+		{
+			x[m] = x0[i];
+			y[m] = y0[i];
+		}
 		m++;
 	}
-
+	x.pop_back();
+	y.pop_back();
 	m--;
 }
