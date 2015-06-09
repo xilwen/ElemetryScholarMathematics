@@ -20,7 +20,7 @@ BMPloader::BMPloader(std::string fileLocation)
 	{
 		fileStorage.push_back(tmp);
 	}
-	file.close();
+	in.close();
 	findDots();
 }
 
@@ -31,27 +31,34 @@ BMPloader::~BMPloader()
 
 void BMPloader::findDots()
 {
-	char temp;
+	unsigned char temp;
 	unsigned int row = 0, column = 0;
+	unsigned char stackalign = 0;
 	for (int i = 62; i < fileStorage.size(); i++)
 	{
 		temp = fileStorage[i];
 		for (int j = 0; j < 8; j++)
 		{
-			row++;
-
+			
 			if (temp % 2 == 0)
 			{
 #if _DEBUG
 				std::cout << "(" << row << "," << column << ") has a dot!" << std::endl;
 #endif
-				x.push_back(row);
+				x.push_back(row + (7 - stackalign));
 				y.push_back(column);
 			}
+			;
 			temp = temp >> 1;
-			if (row == 512)
+			++stackalign;
+			if (stackalign > 7)
 			{
-				column++;
+				stackalign = 0;
+				row += 8;
+			}
+			if (row == 512)
+			{				
+				++column;
 				row = 0;
 			}
 		}

@@ -13,7 +13,7 @@ public:
 	BMPloader() = delete;
 	//開檔案
 	BMPloader(std::string);
-	void findDots();
+	
 	void toConvexHull();
 
 	std::vector<short> getX(){ return x; }
@@ -21,12 +21,15 @@ public:
 
 	//關檔案
 	~BMPloader();
+
+
+
 private:
-	std::fstream file;
+	void findDots();
+	//std::fstream file;
 	std::vector<char> fileStorage;
 	std::vector<short> x;
 	std::vector<short> y;
-
 
 };
 
