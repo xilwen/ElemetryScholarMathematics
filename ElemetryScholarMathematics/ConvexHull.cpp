@@ -48,7 +48,7 @@ bool ConvexHull::compare(int a, int b)
 	return (x0[a] < x0[b]) || ((x0[a] == x0[b] )&& (y0[a] < y0[b]));
 }
 
-int   ConvexHull::Andrew_monotone_chain()
+void  ConvexHull::Andrew_monotone_chain()
 {
 	ConvexHull::sort();
 	int  m = 0;
@@ -71,6 +71,4 @@ int   ConvexHull::Andrew_monotone_chain()
 	}
 
 	m--;
-
-	return m;
 }
