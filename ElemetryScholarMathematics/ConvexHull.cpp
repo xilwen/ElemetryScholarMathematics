@@ -66,6 +66,7 @@ int   ConvexHull::Andrew_monotone_chain()
 		while (m >= 2 && cross(m - 2,m - 1,i) <= 0)   m--;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if (m < x.size() -1 )
 		{
 			x.push_back(x0[i]);
@@ -96,12 +97,18 @@ int   ConvexHull::Andrew_monotone_chain()
 		x.push_back(x0[i]);
 		y.push_back(y0[i]);
 >>>>>>> parent of eabb470... Synv 201506092337
+=======
+
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+>>>>>>> parent of 3546c46... Modify ConvexHull
 		m++;
 	}
 	for (int i = count - 2, t = m + 1; i >= 0; --i)
 	{
 	
 		while (m >= t && cross( m - 2, m - 1, i) <= 0)   m--;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -131,9 +138,12 @@ int   ConvexHull::Andrew_monotone_chain()
 		x.push_back(x0[i]);
 		y.push_back(y0[i]);
 >>>>>>> parent of eabb470... Synv 201506092337
+=======
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+>>>>>>> parent of 3546c46... Modify ConvexHull
 		m++;
 	}
-	x.pop_back();
-	y.pop_back();
+
 	m--;
 }
