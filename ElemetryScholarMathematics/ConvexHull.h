@@ -8,7 +8,11 @@ class ConvexHull
 {
 public:
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ConvexHull() = delete;
+=======
+	ConvexHull();
+>>>>>>> parent of eabb470... Synv 201506092337
 	ConvexHull(vector<short> x1, vector<short> y1);
 =======
 	ConvexHull();

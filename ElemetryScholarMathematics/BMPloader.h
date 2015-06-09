@@ -15,8 +15,6 @@ public:
 	BMPloader(std::string);
 	void findDots();
 	void toConvexHull();
-	std::vector<short> getX(){ return x; }
-	std::vector<short> getY(){ return y; }
 
 	//關檔案
 	~BMPloader();

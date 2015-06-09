@@ -1,5 +1,6 @@
 #include "ConvexHull.h"
 
+ConvexHull::ConvexHull(){}
 ConvexHull::ConvexHull(vector<short> x1, vector<short> y1) : x0(x1), y0(y1){}
 
 
@@ -48,10 +49,14 @@ bool ConvexHull::compare(int a, int b)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int ConvexHull::Andrew_monotone_chain()
 =======
 void  ConvexHull::Andrew_monotone_chain()
 >>>>>>> origin/master
+=======
+int   ConvexHull::Andrew_monotone_chain()
+>>>>>>> parent of eabb470... Synv 201506092337
 {
 	ConvexHull::sort();
 	int  m = 0;
@@ -59,6 +64,7 @@ void  ConvexHull::Andrew_monotone_chain()
 	for (int i = 0; i<count; ++i)
 	{
 		while (m >= 2 && cross(m - 2,m - 1,i) <= 0)   m--;
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (m < x.size() -1 )
 		{
@@ -85,12 +91,18 @@ void  ConvexHull::Andrew_monotone_chain()
 			y[m]= y0[i];
 		}
 >>>>>>> origin/master
+=======
+
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+>>>>>>> parent of eabb470... Synv 201506092337
 		m++;
 	}
 	for (int i = count - 2, t = m + 1; i >= 0; --i)
 	{
 	
 		while (m >= t && cross( m - 2, m - 1, i) <= 0)   m--;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		if (m < x.size() - 1)
@@ -115,6 +127,10 @@ void  ConvexHull::Andrew_monotone_chain()
 =======
 >>>>>>> origin/master
 		}
+=======
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+>>>>>>> parent of eabb470... Synv 201506092337
 		m++;
 	}
 	x.pop_back();

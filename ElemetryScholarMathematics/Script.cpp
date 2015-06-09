@@ -1,4 +1,6 @@
 ﻿#include "Script.h"
+#include "SimpleArea.h"
+
 
 Script::Script()
 {
