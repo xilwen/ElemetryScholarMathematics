@@ -16,6 +16,9 @@ public:
 	void findDots();
 	void toConvexHull();
 
+	std::vector<short> getX(){ return x; }
+	std::vector<short> getY(){ return y; }
+
 	//關檔案
 	~BMPloader();
 private:
@@ -23,6 +26,8 @@ private:
 	std::vector<char> fileStorage;
 	std::vector<short> x;
 	std::vector<short> y;
+
+
 };
 
 #endif

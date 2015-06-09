@@ -7,19 +7,10 @@ using std::vector;
 class ConvexHull
 {
 public:
-<<<<<<< HEAD
-<<<<<<< HEAD
-	ConvexHull() = delete;
-=======
-	ConvexHull();
->>>>>>> parent of eabb470... Synv 201506092337
-	ConvexHull(vector<short> x1, vector<short> y1);
-=======
 	ConvexHull();
 	ConvexHull(vector<short> x1, vector<short> y1);//send the original points to vector x0, vector y0
 	
 	void  Andrew_monotone_chain();// use this function to do Convex-Hull and save data to vector x, vector y
->>>>>>> origin/master
 	
 
 	// The following functions are to help ---- Andrew_monotone_chain()
