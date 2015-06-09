@@ -1,34 +1,34 @@
-﻿//written by qqwerfdsa930
-
 #ifndef CONVEXHULL_H
 #define CONVEXHULL_H
-#include <vector>
-#include <iostream>
-#include <string>
 
+#include <iostream>
+#include <vector>
+using std::vector;
 class ConvexHull
 {
 public:
-	ConvexHull() = delete;
-	ConvexHull(const std::vector<short>, const std::vector<short>); // (x , y)
-
-	//short getx(short a);	// Get ConvexHull x, y
-	//short gety(short a);
-
-	bool compare(short a, short b);
-	double cross(short o, short a, short b);
-	std::vector<short> findConvexHull(std::vector<short> a);
+	ConvexHull();
+	ConvexHull(vector<short> x1, vector<short> y1);
 	
-	int toUI(int line, std::string[]); //(How many lines to print, texts to print) for DEBUG
+	void sort();
+	void swap(int i,int j);
 
-	~ConvexHull(){}
+
+
+	int  Andrew_monotone_chain();
+	double cross(int o, int a, int b);
+	bool compare(int a, int b);
+
+	inline vector<short> getX(){ return x; }
+	inline vector<short> getY(){ return y; }
+
 private:
-	std::vector<short> x;
-	std::vector<short> y;
+	vector<short> x;
+	vector<short> y;
+
+	vector<short> x0;
+	vector<short> y0;
+
 };
 
-// defination
-
 #endif
-
-

@@ -1,51 +1,76 @@
-﻿#include "ConvexHull.h"
+#include "ConvexHull.h"
 
-ConvexHull::ConvexHull(const std::vector<short> a, const std::vector<short> b){}
+ConvexHull::ConvexHull(){}
+ConvexHull::ConvexHull(vector<short> x1, vector<short> y1) : x0(x1), y0(y1){}
 
-//short ConvexHull::getx(short a){ return x[a]; }
-//short ConvexHull::gety(short a){ return y[a]; }
 
-// 找最左、最低的點
-bool ConvexHull::compare(short a, short b)
+void ConvexHull::sort()
 {
-	return (y[a] < y[b]) || (y[a] == y[a] && x[a] == x[b]);
-}
+	int i, j;
+	int count = x0.size();
 
-// cross oa & ob, 大於零表示 oa 到 ob 為順時針旋轉
-double ConvexHull::cross(short o, short a, short b)
-{
-	return (x[a] - x[o]) * (y[b] - y[o]) - (y[a] - y[o]) * (x[b] - x[o]);
-}
-
-std::vector<short> ConvexHull::findConvexHull(std::vector<short> a)
-{
-	/* 用 ConvexHull 上任一點當起點，這裡用最低、最左邊的點當起點 */
-
-	int s = 0;
-	for (unsigned int i = 0; i < a.size(); ++i)
-		if (compare(a[i], a[s]))
-			s = i;
-
-	/* 以逆時針方向畫圖形*/
-
-	std::vector<short> ch;
-	ch[0] = a[s];			// 紀錄起點
-
-	for (int m = 1; true; ++m)	// m 為 ConvexHull 的頂點個數
+	for (i = 0; i < count; i++)
 	{
-		/* 窮舉所有的點，找出最外邊的一點 */
-
-		int next = s;
-		if (m == 1) next = !s;	/* 第一次 next 預設為起點以外的點
-									否則 cross 會一直為零 */
-
-		for (int i = 0; i<100; ++i)
-			if (cross(ch[m], a[i], a[next]) < 0)
-				next = i;
-
-		if (next == s) break;	// 回到起點
-		ch[m] = a[next];		// 紀錄剛剛找到的點
+ 
+		for (j = i + 1 ; j < count ; j++)
+		{	
+			if (ConvexHull::compare(i, j))
+			{
+				ConvexHull::swap(i, j);
+			}
+		}
 	}
 
-	return ch;
+}
+
+void ConvexHull::swap(int i, int j)
+{
+
+	short temp;
+	temp = x0[i];
+	x0[i] = x0[j];
+	x0[j] = temp;
+
+	temp = y0[i];
+	y0[i] = y0[j];
+	y0[j] = temp;
+
+}
+
+double ConvexHull::cross(int o, int a, int b)
+{
+	return (x[a] - x[o]) * (y0[b] - y[o]) - (y[a] - y[o]) * (x0[b] - x[o]);
+}
+
+
+bool ConvexHull::compare(int a, int b)
+{
+	return (x0[a] < x0[b]) || ((x0[a] == x0[b] )&& (y0[a] < y0[b]));
+}
+
+int   ConvexHull::Andrew_monotone_chain()
+{
+	ConvexHull::sort();
+	int  m = 0;
+	int count = x0.size();
+	for (int i = 0; i<count; ++i)
+	{
+		while (m >= 2 && cross(m - 2,m - 1,i) <= 0)   m--;
+
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+		m++;
+	}
+	for (int i = count - 2, t = m + 1; i >= 0; --i)
+	{
+	
+		while (m >= t && cross( m - 2, m - 1, i) <= 0)   m--;
+		x.push_back(x0[i]);
+		y.push_back(y0[i]);
+		m++;
+	}
+
+	m--;
+
+	return m;
 }
