@@ -22,7 +22,7 @@ UI::UI()
 	cfi.nFont = 0;
 	if (horizontal >= 1900 && vertical >= 1000)
 		cfi.dwFontSize = { 30, 30 };
-	else if(horizontal >= 1000 && vertical >= 900)
+	else if (horizontal >= 1000 && vertical >= 900)
 		cfi.dwFontSize = { 26, 26 };
 	else if (horizontal >= 1000 && vertical >= 700)
 		cfi.dwFontSize = { 22, 22 };
@@ -105,7 +105,7 @@ void UI::showDialog(std::string name, std::string text)
 	{
 		waitEnter();
 	}
-	}
+}
 
 void UI::showDialog(std::string name, std::string text, std::string text0)
 {
@@ -271,7 +271,7 @@ void UI::chooseNamae()
 						blockCount = blockCount + 1;
 						print(chars[blockCount], 12);
 						gotoxy(16, nowy + 3);
-			}
+					}
 					else
 					{
 						print(chars[blockCount], 15);
@@ -281,10 +281,10 @@ void UI::chooseNamae()
 						gotoxy(nowx - 42, nowy - 6);
 
 					}
-		}
+				}
 				break;
-	}
-}
+			}
+		}
 		else
 		{
 #if _DEBUG
@@ -352,7 +352,7 @@ void UI::chooseNamae()
 				print(name, 20, 0);
 				undoxy();
 #endif
-					}
+			}
 			if (firstinput == 8)
 			{
 				if (name.size() > 1)
@@ -364,7 +364,7 @@ void UI::chooseNamae()
 				}
 
 			}
-				}
+		}
 
 #if _DEBUG
 		getxy();
@@ -372,8 +372,8 @@ void UI::chooseNamae()
 		print(std::to_string(blockCount), 0, 0);
 		undoxy();
 #endif
-			}
-		}
+	}
+}
 
 void UI::print(std::string in)
 {
@@ -796,6 +796,25 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 	clearScreen();
 	drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
 	print(in + "：", 3, 1);
+	int column = 0, row = 0;
+	for (int i = 0; i < x.size(); i++)
+	{
+		if (row > 4)
+		{
+			++column;
+			if (column > 11)
+			{
+				column = 0;
+				print("按任意鍵下一頁OwO", 2, 23);
+			}
+			row = 0;
+		}
+
+		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"),(5 + row * 14), (3+column));
+		
+		++row;
+	}
+
 
 
 
