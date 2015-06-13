@@ -1,4 +1,4 @@
-﻿#ifndef SIMPLEAREA_H
+#ifndef SIMPLEAREA_H
 #define SIMPLEAREA_H
 
 #include <iostream>
@@ -12,6 +12,13 @@ class SimpleArea
 public:
 	SimpleArea();
 	~SimpleArea();
+
+	void Show_Triangle(int Bottom, int Height);
+	void Show_Rectangle(int Bottom, int Height);
+	void Show_Parallelogram(int Bottom, int Height);
+	void Show_Diamond(int Height);
+
+
 
 	void ShowGraph();
 	void AreaCalculating();

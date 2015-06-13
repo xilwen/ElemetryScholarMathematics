@@ -1,4 +1,4 @@
-ï»¿#include "SimpleArea.h"
+#include "SimpleArea.h"
 
 SimpleArea::SimpleArea(){}
 SimpleArea::~SimpleArea(){}
@@ -34,7 +34,7 @@ void SimpleArea::ShowGraph()
 	int JudgeTo4 = 1;
 	int JudgeTo5 = 1;
 
-	cout << "é¸æ“‡ä¸€ç¨®åœ–æ¡ˆ" << endl;
+	cout << "ßx“ñÒ»·NˆD°¸" << endl;
 
 	for (i = 0; i < RowNum; i++)
 	{
@@ -173,7 +173,7 @@ void SimpleArea::ShowChristmasTree()
 
 	for (i = 0; i < RowNum; i++)
 	{
-		SimpleArea::Print_WhiteSpace(0, width+2);
+		SimpleArea::Print_WhiteSpace(0, width + 2);
 
 		int j = RowNum - i;
 
@@ -186,10 +186,10 @@ void SimpleArea::ShowChristmasTree()
 		count += 2;
 
 	} //The first triangle of the Christmas Tree
-	for (i = 0; i < RowNum-1; i++){
+	for (i = 0; i < RowNum - 1; i++){
 
 
-		SimpleArea::Print_WhiteSpace(0, width/2);
+		SimpleArea::Print_WhiteSpace(0, width / 2);
 		int k = RowNum - i;
 		SimpleArea::Print_WhiteSpace(0, k);
 		SimpleArea::ShowTriangleLine(count2);
@@ -202,11 +202,11 @@ void SimpleArea::ShowChristmasTree()
 	}
 	//The second triangle of the Christmas Tree
 
-	for (i = 0; i < RowNum-2 ; i++){
-		SimpleArea::Print_WhiteSpace(0, width+6);
+	for (i = 0; i < RowNum - 2; i++){
+		SimpleArea::Print_WhiteSpace(0, width + 6);
 		int temp = 5;
 		SimpleArea::ShowTriangleLine(temp);
-		cout<<endl;
+		cout << endl;
 	}//The rectangleof the Christmas Tree
 }
 
@@ -214,75 +214,75 @@ void SimpleArea::ShowChristmasTree()
 void SimpleArea::AreaCalculating()
 {
 	int mode;
-	cout << "é¸æ“‡ä½ è¦çš„åœ–æ¡ˆ!" << endl;
+	cout << "ßx“ñÄãÒªµÄˆD°¸!" << endl;
 	cin >> mode;
 	cout << endl;
 	if (mode == 1)
 	{
-		cout << "é¸æ“‡ä¸‰è§’å½¢" << endl;
+		cout << "ßx“ñÈý½ÇÐÎ" << endl;
 		double BottomEdge;
 		double Height;
-		
-		cout << endl << "è«‹è¼¸å…¥åº•é‚Š  (m)" << endl << endl;
+
+		cout << endl << "ÕˆÝ”Èëµ×ß…  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << endl << "è«‹è¼¸å…¥é«˜  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”Èë¸ß  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height / 2;
 
-		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "Ãæ·e :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 2)
 	{
-		cout << "é¸æ“‡çŸ©å½¢" << endl << endl;
+		cout << "ßx“ñ¾ØÐÎ" << endl << endl;
 		double Length;
 		double Width;
-		cout << endl << "è«‹è¼¸å…¥é•·  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”ÈëéL  (m)" << endl << endl;
 		cin >> Length;
-		cout << endl << "è«‹è¼¸å…¥å¯¬  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”ÈëŒ’  (m)" << endl << endl;
 		cin >> Width;
 		double area = Length*Width;
 
-		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "Ãæ·e :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 3)
 	{
-		cout << "é¸æ“‡å¹³è¡Œå››é‚Šå½¢" << endl << endl;
+		cout << "ßx“ñÆ½ÐÐËÄß…ÐÎ" << endl << endl;
 		double BottomEdge;
 		double Height;
-		cout << endl << "è«‹è¼¸å…¥åº•é‚Š  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”Èëµ×ß…  (m)" << endl << endl;
 		cin >> BottomEdge;
-		cout << endl << "è«‹è¼¸å…¥é«˜  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”Èë¸ß  (m)" << endl << endl;
 		cin >> Height;
 		double area = BottomEdge*Height;
 
-		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "Ãæ·e :  " << area << " (m^2)" << endl << endl;
 
 
 	}
 	else if (mode == 4)
 	{
 
-		cout << "é¸æ“‡è±å½¢" << endl << endl;
+		cout << "ßx“ñÁâÐÎ" << endl << endl;
 		double LevelLength;
 		double VerticalLength;
-		cout << endl << "è«‹è¼¸å…¥æ°´å¹³é•·åº¦  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”ÈëË®Æ½éL¶È  (m)" << endl << endl;
 		cin >> LevelLength;
-		cout << endl << "è«‹è¼¸å…¥åž‚ç›´é•·åº¦  (m)" << endl << endl;
+		cout << endl << "ÕˆÝ”Èë´¹Ö±éL¶È  (m)" << endl << endl;
 		cin >> VerticalLength;
 		double area = LevelLength*VerticalLength;
 
-		cout << endl << "é¢ç© :  " << area << " (m^2)" << endl << endl;
+		cout << endl << "Ãæ·e :  " << area << " (m^2)" << endl << endl;
 
 
 
 	}
 	else
 	{
-		cout << "è¼¸å…¥éŒ¯æ‘Ÿ!";
+		cout << "Ý”Èëåe“§!";
 		exit(1);
 	}
 }
@@ -324,3 +324,120 @@ void SimpleArea::Print_Star(int front, int back)
 }
 
 
+void SimpleArea::Show_Triangle(int Bottom, int Height)
+{
+	
+	int i;
+	int whitespace = Height;
+	int addition = (Bottom - 1) / Height+1;
+	SimpleArea::Print_WhiteSpace(0,whitespace);
+	cout << "*" << endl;
+	int count = 2;
+
+
+	for (i = 0; i < Height-1; i++)
+	{
+		whitespace -= 1;
+		SimpleArea::Print_WhiteSpace(0, whitespace);
+		if (i == Height - 2)
+		{
+			SimpleArea::Print_Star(0, Bottom);
+			break;
+		}
+		else if ((Height-Bottom)>=3 && i == Height/2)
+		{
+			addition++;
+		
+		}
+		// These are to make the shape irregular
+		SimpleArea::Print_Star(0, count);
+
+		cout << endl;
+		count += addition;
+		
+	}
+
+	cout << endl;
+}
+
+void SimpleArea::Show_Rectangle(int Bottom, int Height)
+{
+	int i;
+	int judge = 1;
+	for (i = 0; i < Height; i++)
+	{
+
+		if (judge == 1 || (i == Height - 1))
+		{
+			SimpleArea::Print_Star(0, Bottom);       //I use width to be the length of Rectangle
+			judge = 0;
+		}
+		else
+		{
+			cout << "*";
+			SimpleArea::Print_WhiteSpace(1, Bottom - 1);
+			cout << "*";
+
+		}
+		cout << endl;
+	}
+
+
+}
+void SimpleArea::Show_Parallelogram(int Bottom, int Height)
+{
+	int i,Judge=1;
+	int length = Height;
+	for (i = 0; i < Height; i++)
+	{
+		SimpleArea::Print_WhiteSpace(0, length);
+		cout << "*";
+		// First print "      *"  then because JudgeTo3 =1 at first   print ***** or "     "  then add the final * then Padded the white -space
+
+		if (i == Height - 1)
+			Judge = 1;
+		if (Judge)
+		{
+			SimpleArea::Print_Star(0, Bottom - 1);
+			Judge = 0;
+
+		}
+		else
+		{
+			SimpleArea::Print_WhiteSpace(0, Bottom - 1);
+
+		}
+
+		cout << "*";
+		SimpleArea::Print_WhiteSpace(0, i);
+		cout << endl;
+
+		length--;
+	}
+
+
+}
+void SimpleArea::Show_Diamond(int Height){
+	//Height is to control the up part of the diamond
+
+	int i, j;
+	for (i = 1; i <= Height; i++)
+	{
+		for (j = Height; j >= i; j--)
+			cout << " ";
+		SimpleArea::Print_Star(1, 2 * i );
+			cout << endl;
+
+	}
+
+	for (i = Height - 1; i >= 1; i--)
+	{
+		for (j = Height; j >= i; j--)
+			cout << " ";
+		SimpleArea::Print_Star(1, 2 * i);
+		cout << endl;
+	}
+
+
+
+}
