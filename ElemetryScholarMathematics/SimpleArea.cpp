@@ -332,8 +332,11 @@ void SimpleArea::Show_Triangle(int Bottom, int Height)
 	int addition = (Bottom - 1) / Height+1;
 	SimpleArea::Print_WhiteSpace(0,whitespace);
 	cout << "*" << endl;
-	int count = 2;
 
+		
+	int count = 3;
+	if (Bottom == Height)
+		count = 2;
 
 	for (i = 0; i < Height-1; i++)
 	{
