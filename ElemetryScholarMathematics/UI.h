@@ -107,6 +107,8 @@ private:
 	int beary;
 	//除了ENTER之外都不會讓你繼續的!代替getchar
 	void waitEnter();
+	//捲動軸
+	void scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArrow);
 };
 
 #endif

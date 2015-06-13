@@ -1,8 +1,11 @@
 ﻿#include "UI.h"
+#include <io.h>
+#include <fcntl.h>
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 UI::UI()
 {
+	SetConsoleOutputCP(950);
 	//Get Screen resolution and set position
 	RECT desktop;
 	const HWND hDesktop = GetDesktopWindow();
@@ -43,6 +46,10 @@ UI::UI()
 	showBearsinDialog = false;
 	//預產生亂數種子
 	srand(unsigned(time(NULL)));
+
+	
+	//_setmode(_fileno(stdout), _O_U8TEXT);
+	_setmode(_fileno(stdout), _O_TEXT);
 }
 
 UI::~UI()
@@ -797,25 +804,100 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 	drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
 	print(in + "：", 3, 1);
 	int column = 0, row = 0;
+	int pages = x.size() / 17 / 5;
+	int nowPage = 1;
+	scrollBar(pages, 1, true);
 	for (int i = 0; i < x.size(); i++)
 	{
 		if (row > 4)
 		{
 			++column;
-			if (column > 11)
+			if (column > 17)
 			{
+				
+				//scrollBar(pages, nowPage, true);
 				column = 0;
-				print("按任意鍵下一頁OwO", 2, 23);
+				print("[ENTER]下一頁  [Tab]跳過", 2, 23);
+
+				while (1)
+				{
+					while (!_kbhit());
+					int firstinput = _getch();//Arrow Key get two input
+					if (firstinput == 13) //ENTER
+					{
+						++nowPage;
+						clearScreen();
+						drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+						print(in + "：", 3, 1);
+						scrollBar(pages, nowPage, true);
+						break;
+					}
+					else if (firstinput == 9)
+					{
+						return;
+					}
+					else if (firstinput == 224)
+					{
+						char arrKey = _getch();
+						if (arrKey == 72)//GOING UP
+						{
+							if (nowPage > 1)
+							{
+								--nowPage;
+
+								if (i > 90)
+								{
+									i = i - (18 * 5 * 2);
+									/*if (i <= 0)
+										i = 0;*/
+									clearScreen();
+									drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+									print(in + "：", 3, 1);
+								}
+								
+								//column = 0;
+								scrollBar(pages, nowPage, true);
+							}
+							else
+								i = 0;
+							break;
+						}
+						else if (arrKey == 80)//GOING DOWN
+						{
+							++nowPage;
+							clearScreen();
+							drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+							print(in + "：", 3, 1);
+							if (nowPage < pages)
+								scrollBar(pages, nowPage, true);
+							break;
+						}
+					}
+				}
 			}
 			row = 0;
 		}
 
-		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"),(5 + row * 14), (3+column));
-		
+		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"), (5 + row * 14), (3 + column));
 		++row;
 	}
 
 
+}
 
 
+void UI::scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArrow)
+{
+	int nowPlace(totalPages);
+	if (showArrow = true)
+	{
+		print("↑", 76, 2);
+		print("↓", 76, 21);
+	}
+	double boxPlace = ((double)nowPages / (double)totalPages) * 19;
+	if (boxPlace > 1)
+		print(" ", 76, 3 + (int)boxPlace - 1);
+	if (boxPlace < 19)
+		print(" ", 76, 3 + (int)boxPlace + 1);
+	print("■", 76, 3 + (int)boxPlace);
 }
