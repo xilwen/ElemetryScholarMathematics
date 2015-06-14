@@ -14,6 +14,12 @@ public:
 	~Script();
 private:
 	UI* ui;
+	SimpleArea SA;
+	BMPloader* bmpl;
+
+	PolygonArea* pa;
+	std::vector<short> x;
+	std::vector<short> y;
 };
 
 #endif
