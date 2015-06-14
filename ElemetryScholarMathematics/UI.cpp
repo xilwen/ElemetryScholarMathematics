@@ -975,7 +975,7 @@ void UI::routineRunner()
 
 std::string UI::loadBMP(std::string name, std::string text, int bear0)
 {
-	std::string fileLocation;
+	//std::string fileLocation;
 	clearScreen();
 	showBearsinDialog = true;
 	twoLinesInDialog = true;
@@ -983,7 +983,23 @@ std::string UI::loadBMP(std::string name, std::string text, int bear0)
 	showDialog(name, text);
 	showBearsinDialog = false;
 	twoLinesInDialog = false;
-	gotoxy(0, 23);
-	std::cin >> fileLocation;
-	return fileLocation;
+
+	OPENFILENAME ofn;
+	wchar_t* szFile[1000];
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFile = *szFile;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrFilter = L"BMP file\0*.BMP";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	GetOpenFileName(&ofn);
+	std::wstring ws(*szFile);
+	std::string str(ws.begin(), ws.end());
+	return str;
 }
