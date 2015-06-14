@@ -985,11 +985,11 @@ std::string UI::loadBMP(std::string name, std::string text, int bear0)
 	twoLinesInDialog = false;
 
 	OPENFILENAME ofn;
-	wchar_t* szFile[1000];
+	wchar_t szFile[1000];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
-	ofn.lpstrFile = *szFile;
+	ofn.lpstrFile = szFile;
 	ofn.lpstrFile[0] = '\0';
 	ofn.nMaxFile = sizeof(szFile);
 	ofn.lpstrFilter = L"BMP file\0*.BMP";
@@ -999,7 +999,7 @@ std::string UI::loadBMP(std::string name, std::string text, int bear0)
 	ofn.lpstrInitialDir = NULL;
 	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 	GetOpenFileName(&ofn);
-	std::wstring ws(*szFile);
+	std::wstring ws(szFile);
 	std::string str(ws.begin(), ws.end());
 	return str;
 }
