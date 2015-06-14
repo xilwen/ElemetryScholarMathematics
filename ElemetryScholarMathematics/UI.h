@@ -12,8 +12,10 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
-#include <ctime>
-
+#include <ctime>    //for srand
+#include <io.h>	    //for _setmode
+#include <fcntl.h>	//for _setmode
+#include <thread>   //for animations
 
 class UI
 {
@@ -61,12 +63,18 @@ public:
 
 	//啟動選名字介面。
 	void chooseNamae();
+	//載入BMP畫面
+	void loadBMP();
+
 	//清除整個螢幕
 	void clearScreen();
 	~UI();
 
 	//顯示座標畫面
 	void showCOORD(std::string in, std::vector<short> x, std::vector<short> y);
+
+	//熊移動動畫
+	void aniBear();
 
 	//回傳主角名字(Accessor to name)
 	std::string getName();
@@ -109,6 +117,27 @@ private:
 	void waitEnter();
 	//捲動軸
 	void scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArrow);
+	//動畫是否結束。用於感知thread結束。
+	bool aniEnd;
+	//Blink PRESS START
+	void blinkStart();
+	//跟著UI執行的checker
+	void routineRunner();
+	//是否執行checker
+	bool runRoutine;
+	//獨立變數，以便destructor停止
+	std::thread routineBuster;
+	//Console Handler
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	//Predefined for Performance
+	unsigned int horizontal;
+	unsigned int vertical;
+	unsigned int horizontalt;
+	unsigned int verticalt;
+	
+
+
+
 };
 
 #endif

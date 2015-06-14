@@ -1,42 +1,13 @@
 ﻿#include "UI.h"
-#include <io.h>
-#include <fcntl.h>
 
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+
 UI::UI()
 {
-	SetConsoleOutputCP(950);
-	//Get Screen resolution and set position
-	RECT desktop;
-	const HWND hDesktop = GetDesktopWindow();
-	GetWindowRect(hDesktop, &desktop);
-	unsigned int horizontal = desktop.right;
-	unsigned int vertical = desktop.bottom;
-	HWND thisConsole = GetConsoleWindow();
-	SetWindowPos(thisConsole, HWND_TOP, 10, 10, 100, 100, SWP_NOSIZE);
-
-	//For Windows 10 Compability and appearance
-	SMALL_RECT windowSize = { 0, 0, ConsoleWidth, ConsoleHeight };
-	SetConsoleWindowInfo(hConsole, TRUE, &windowSize);
-	CONSOLE_FONT_INFOEX Font;// = { sizeof(CONSOLE_FONT_INFOEX) };
-	GetCurrentConsoleFontEx(hConsole, FALSE, &Font);
-	CONSOLE_FONT_INFOEX cfi;
-	cfi.cbSize = sizeof cfi;
-	cfi.nFont = 0;
-	if (horizontal >= 1900 && vertical >= 1000)
-		cfi.dwFontSize = { 30, 30 };
-	else if (horizontal >= 1000 && vertical >= 900)
-		cfi.dwFontSize = { 26, 26 };
-	else if (horizontal >= 1000 && vertical >= 700)
-		cfi.dwFontSize = { 22, 22 };
-	else
-		cfi.dwFontSize = { 16, 16 };
-	cfi.FontFamily = FF_DONTCARE;
-	cfi.FontWeight = FW_NORMAL;
-	wcscpy_s(cfi.FaceName, L"細明體");
-	SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+	
+	runRoutine = true;
+	routineBuster = std::thread(&UI::routineRunner, this);
 	SetConsoleTitle(L"小學生的算數！");
-
 	//Init nameChars
 	chars = { "龍", "中", "大", "比", "巫", "凌", "卡", "倒退",
 		"天", "傲", "暗", "黑", "瘋", "娜", "皓", "清除",
@@ -44,16 +15,37 @@ UI::UI()
 	//初始化變數
 	twoLinesInDialog = false;
 	showBearsinDialog = false;
+	aniEnd = false;
+	horizontal = 0;
+	vertical = 0;
 	//預產生亂數種子
 	srand(unsigned(time(NULL)));
 
-	
+
 	//_setmode(_fileno(stdout), _O_U8TEXT);
-	_setmode(_fileno(stdout), _O_TEXT);
+	//_setmode(_fileno(stdout), _O_TEXT);
+#if _DEBUG
+	SetConsoleOutputCP(950);
+#endif
 }
 
 UI::~UI()
 {
+	runRoutine = false;
+	routineBuster.join();
+}
+
+void UI::blinkStart()
+{
+	while (aniEnd == false)
+	{
+		print("                                      　　　　＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 0, 13, 13);
+		//print("                                                                               ", 0, 14, 13);
+		Sleep(500);
+		print("                                                                               ", 0, 13, 13);
+		Sleep(500);
+	}
+
 
 }
 
@@ -78,17 +70,22 @@ void UI::init()
 	println("   （＿＿                        ｜                                              ");
 	println("    ｜ ／ ＼ ｝               ＼ ｜                                              ");
 	println("     ∪    ))                  ＼｜                                             ");
-	print("                                      　　　　＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜\n", 13);
+
+	println("");
 	println("");
 	println("　　　　　　　｜　　　　　　　　　　　　　　　　　　　　　　　                                                ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／　　                                                ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |                                   ");
 	println("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿　　　　　　　　                                                ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　　　／＼　　　　　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　      |                                         ");
+	println("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |                                          ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼　　　　                                                ");
 	println("　　　　　　　｜　　　　　　　　　　　　　　　　　　　　　　　                                                ");
+	std::thread blink(&UI::blinkStart, this);
 	waitEnter();
+	aniEnd = true;
+	blink.join();
+	aniEnd = false;
 }
 
 void UI::showDialog(std::string name, std::string text)
@@ -814,7 +811,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 			++column;
 			if (column > 17)
 			{
-				
+
 				//scrollBar(pages, nowPage, true);
 				column = 0;
 				print("[ENTER]下一頁  [Tab]跳過", 2, 23);
@@ -854,7 +851,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 									drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
 									print(in + "：", 3, 1);
 								}
-								
+
 								//column = 0;
 								scrollBar(pages, nowPage, true);
 							}
@@ -900,4 +897,50 @@ void UI::scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArro
 	if (boxPlace < 19)
 		print(" ", 76, 3 + (int)boxPlace + 1);
 	print("■", 76, 3 + (int)boxPlace);
+}
+
+
+void UI::routineRunner()
+{
+	while (runRoutine == true)
+	{
+		//Get Screen resolution and set position
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		GetWindowRect(hDesktop, &desktop);
+		horizontalt = desktop.right;
+		verticalt = desktop.bottom;
+
+		//For Windows 10 Compability and appearance
+		if (horizontal != horizontalt || vertical != verticalt)
+		{
+			HWND thisConsole = GetConsoleWindow();
+			RECT currentSize;
+			CONSOLE_FONT_INFOEX Font;// = { sizeof(CONSOLE_FONT_INFOEX) };
+			GetCurrentConsoleFontEx(hConsole, FALSE, &Font);
+			CONSOLE_FONT_INFOEX cfi;
+			cfi.cbSize = sizeof cfi;
+			cfi.nFont = 0;
+			if (horizontalt >= 1900 && verticalt >= 1000)
+				cfi.dwFontSize = { 30, 30 };
+			else if (horizontalt >= 1000 && verticalt >= 900)
+				cfi.dwFontSize = { 26, 26 };
+			else if (horizontalt >= 1000 && verticalt >= 700)
+				cfi.dwFontSize = { 22, 22 };
+			else
+				cfi.dwFontSize = { 16, 16 };
+			cfi.FontFamily = FF_DONTCARE;
+			cfi.FontWeight = FW_NORMAL;
+			wcscpy_s(cfi.FaceName, L"細明體");
+			SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+			Sleep(500);
+			GetWindowRect(thisConsole, &currentSize);
+			bool testt = SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom-currentSize.top), SWP_SHOWWINDOW);
+			horizontal = horizontalt;
+			vertical = verticalt;
+		}
+
+		Sleep(2000);
+		
+	}
 }

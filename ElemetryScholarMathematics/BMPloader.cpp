@@ -21,6 +21,7 @@ int BMPloader::init()
 		}
 		in.close();
 
+//		std::cout << fileStorage.size();
 		if (fileStorage.size() < 29)
 			throw 4;
 		if (fileStorage[18] != 0 || fileStorage[19] != 2 || fileStorage[20] != 0 || fileStorage[21] != 0 ||
@@ -37,10 +38,7 @@ int BMPloader::init()
 	{
 		return e;
 	}
-	catch (...)
-	{
-		return 999;
-	}
+
 }
 
 int BMPloader::init(std::string _fileLocation)
