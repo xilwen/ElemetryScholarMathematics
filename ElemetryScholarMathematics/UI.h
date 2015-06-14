@@ -64,7 +64,7 @@ public:
 	//啟動選名字介面。
 	void chooseNamae();
 	//載入BMP畫面
-	void loadBMP();
+	std::string loadBMP(std::string name, std::string text, int bear0);
 
 	//清除整個螢幕
 	void clearScreen();

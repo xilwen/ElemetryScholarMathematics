@@ -4,7 +4,7 @@
 
 UI::UI()
 {
-	
+
 	runRoutine = true;
 	routineBuster = std::thread(&UI::routineRunner, this);
 	SetConsoleTitle(L"小學生的算數！");
@@ -24,9 +24,6 @@ UI::UI()
 
 	//_setmode(_fileno(stdout), _O_U8TEXT);
 	//_setmode(_fileno(stdout), _O_TEXT);
-#if _DEBUG
-	SetConsoleOutputCP(950);
-#endif
 }
 
 UI::~UI()
@@ -804,7 +801,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 	int pages = x.size() / 17 / 5;
 	int nowPage = 1;
 	scrollBar(pages, 1, true);
-	for (int i = 0; i < x.size(); i++)
+	for (unsigned int i = 0; i < x.size(); i++)
 	{
 		if (row > 4)
 		{
@@ -931,16 +928,38 @@ void UI::routineRunner()
 				cfi.dwFontSize = { 16, 16 };
 			cfi.FontFamily = FF_DONTCARE;
 			cfi.FontWeight = FW_NORMAL;
-			wcscpy_s(cfi.FaceName, L"細明體");
+
+			if (GetConsoleOutputCP() == 950)
+				wcscpy_s(cfi.FaceName, L"細明體");
+			else
+				wcscpy_s(cfi.FaceName, L"新宋体");
+			
+			
 			SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
+
 			Sleep(500);
 			GetWindowRect(thisConsole, &currentSize);
-			bool testt = SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom-currentSize.top), SWP_SHOWWINDOW);
+			SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom - currentSize.top), SWP_SHOWWINDOW);
 			horizontal = horizontalt;
 			vertical = verticalt;
 		}
 
 		Sleep(2000);
-		
+
 	}
+}
+
+std::string UI::loadBMP(std::string name, std::string text, int bear0)
+{
+	std::string fileLocation;
+	clearScreen();
+	showBearsinDialog = true;
+	twoLinesInDialog = true;
+	printBear(bear0);
+	showDialog(name, text);
+	showBearsinDialog = false;
+	twoLinesInDialog = false;
+	gotoxy(0, 23);
+	std::cin >> fileLocation;
+	return fileLocation;
 }
