@@ -60,6 +60,8 @@ public:
 	//在畫面上顯示四種熊置中。true = 左, false = 右
 	void printBear(int bear);
 
+	//移動游標到指定的位置。
+	void gotoxy(int x, int y);
 
 	//啟動選名字介面。
 	void chooseNamae();
@@ -93,8 +95,7 @@ private:
 
 	//畫框框，左上x點, y點, 長(橫向), 高(直向)
 	void drawFrame(int lux, int luy, int length, int height);
-	//移動游標到指定的位置。
-	void gotoxy(int x, int y);
+	
 	//取得現在游標位置。
 	void getxy();
 	//回到紀錄的游標位置

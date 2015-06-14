@@ -36,12 +36,33 @@ void UI::blinkStart()
 {
 	while (aniEnd == false)
 	{
-		print("                                      　　　　＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 0, 13, 13);
-		//print("                                                                               ", 0, 14, 13);
-		Sleep(500);
-		print("                                                                               ", 0, 13, 13);
-		Sleep(500);
+		for (int i = 12; i < 16; i++)
+		{
+			SetConsoleTextAttribute(hConsole, i);
+			gotoxy(0, 14);
+			print("　　　　　　　｜\n");
+			print("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／\n");
+			print("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |\n");
+			print("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿\n");
+			print("　　　　　　　｜　　　　　　　　　　　　　　　　／＼\n");
+			print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |\n");
+			print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n");
+			print("　　　　　　　｜\n");			
+			print("＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 45, 12);
+			if (aniEnd == true)
+				break;
+			Sleep(500);
+			print("                                ", 45, 12, 15);
+			if (aniEnd == true)
+				break;
+			Sleep(500);
+			if (i == 15)
+				i = 1;
+			if (aniEnd == true)
+				break;
+		}
 	}
+	SetConsoleTextAttribute(hConsole, 15);
 
 
 }
@@ -68,16 +89,9 @@ void UI::init()
 	println("    ｜ ／ ＼ ｝               ＼ ｜                                              ");
 	println("     ∪    ))                  ＼｜                                             ");
 
-	println("");
-	println("");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　　　　　　　　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |                                   ");
-	println("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿　　　　　　　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　　／＼　　　　　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |                                          ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼　　　　                                                ");
-	println("　　　　　　　｜　　　　　　　　　　　　　　　　　　　　　　　                                                ");
+	//println("");
+	//println("");
+
 	std::thread blink(&UI::blinkStart, this);
 	waitEnter();
 	aniEnd = true;
@@ -101,6 +115,8 @@ void UI::showDialog(std::string name, std::string text)
 	drawFrame(0, 15, 78, 7);
 	print(name, 3, 16);
 	print("：");
+	print(text, 5, 18, 8);
+	Sleep(100);
 	print(text, 5, 18);
 	if (twoLinesInDialog == false)
 	{
@@ -125,6 +141,8 @@ void UI::showDialog(std::string name, std::string text, std::string text0)
 		print("[警告]字太多了。", 0, 0);
 #endif
 	}
+	print(text0, 5, 19, 8);
+	Sleep(100);
 	print(text0, 5, 19);
 	waitEnter();
 	twoLinesInDialog = false;
@@ -646,8 +664,12 @@ void UI::undoxy()
 void UI::fullScreenDialog(std::string text, std::string text0)
 {
 	clearScreen();
+	print(text, 8, 8, 8);
+	Sleep(100);
 	print(text, 8, 8);
 	waitEnter();
+	print(text0, 8, 11, 8);
+	Sleep(100);
 	print(text0, 8, 11);
 	waitEnter();
 }
@@ -655,6 +677,8 @@ void UI::fullScreenDialog(std::string text, std::string text0)
 void UI::fullScreenDialog(std::string text)
 {
 	clearScreen();
+	print(text, 8, 9, 8);
+	Sleep(100);
 	print(text, 8, 9);
 	waitEnter();
 }
