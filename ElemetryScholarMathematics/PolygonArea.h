@@ -18,7 +18,7 @@ public:
 	~PolygonArea();
 	double cross(short x1,short y1,short x2,short y2);
 
-	void PolygonAreaCalculating(vector<short> x, vector<short> y);
+	double PolygonAreaCalculating(vector<short> x, vector<short> y);
 
 };
 
