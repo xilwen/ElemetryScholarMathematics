@@ -104,7 +104,11 @@ void Script::runScripts()
 			int botRec = 5, heiRec = 7;
 			
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Rectangle(botRec, heiRec);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是" + std::to_string(botRec) + " * " + std::to_string(heiRec), "面積為" + std::to_string(botRec * heiRec), 0, true, 3, false);
 		}
 		else if ((a % 3) == 1)
@@ -112,7 +116,11 @@ void Script::runScripts()
 			int botRec = 6, heiRec = 6;
 			
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Rectangle(botRec, heiRec);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是" + std::to_string(botRec) + " * " + std::to_string(heiRec), "面積為" + std::to_string(botRec * heiRec), 0, true, 3, false);
 		}
 		else if ((a % 3) == 2)
@@ -120,7 +128,11 @@ void Script::runScripts()
 			int botRec = 6, heiRec = 7;
 			
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Rectangle(botRec, heiRec);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是" + std::to_string(botRec) + " * " + std::to_string(heiRec), "面積為" + std::to_string(botRec * heiRec), 0, true, 3, false);	
 		}
 	}
@@ -135,7 +147,11 @@ void Script::runScripts()
 			int botTri = 18, heiTri = 5;
 			
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Triangle(botTri, heiTri);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是褲頭 " + std::to_string(botTri) + " ，長 " + std::to_string(heiTri) + " 的三角形",
 				"面積為" + std::to_string((botTri * heiTri)/2), 0, true, 3, false);
 		}
@@ -144,7 +160,11 @@ void Script::runScripts()
 			int botTri = 8, heiTri = 5;
 			
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Triangle(botTri, heiTri);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是褲頭 " + std::to_string(botTri) + " ，長 " + std::to_string(heiTri) + " 的三角形",
 				"面積為" + std::to_string((botTri * heiTri) / 2), 0, true, 3, false);
 		}
@@ -153,16 +173,23 @@ void Script::runScripts()
 			int botTri = 10, heiTri = 6;
 
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Triangle(botTri, heiTri);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是褲頭 " + std::to_string(botTri) + " ，長 " + std::to_string(heiTri) + " 的三角形",
 				"面積為" + std::to_string((botTri * heiTri) / 2), 0, true, 3, false);
 		}
 		else if ((a % 4) == 3)
 		{
 			int botTri = 9, heiTri = 4;
-			
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			//
 			SA.Show_Triangle(botTri, heiTri);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "這是褲頭 " + std::to_string(botTri) + " ，長 " + std::to_string(heiTri) + " 的三角形",
 				"面積為" + std::to_string((botTri * heiTri) / 2), 0, true, 3, false);
 		}
@@ -173,14 +200,22 @@ void Script::runScripts()
 		if (a > 7)
 		{
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Diamond(a);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "對阿，這是一個 " + std::to_string(a) + " * " + std::to_string(a) + " 的地毯",
 				"面積為 " + std::to_string(a*a), 0, true, 3, false);
 		}
 		else
 		{
 			//
+			ui->clearScreen();
+			ui->gotoxy(0, 0);
 			SA.Show_Diamond(b);
+			ui->print("[ENTER]繼續", 2, 21);
+			getchar();
 			ui->showDialog("魯凱", "對阿，這是一個 " + std::to_string(b) + " * " + std::to_string(b) + " 的地毯",
 				"面積為 " + std::to_string(b*b), 0, true, 3, false);
 		}
@@ -189,7 +224,11 @@ void Script::runScripts()
 	{
 		ui->showDialog(ui->getName(), "好...好奇特的形狀！？", 0, true, 3, false);
 		//
-		SA.Show_Parallelogram(a, b);
+		ui->clearScreen();
+		ui->gotoxy(0, 0);
+		SA.Show_Parallelogram(a, b);;
+		ui->print("[ENTER]繼續", 2, 21);
+		getchar();
 		ui->showDialog("魯凱", "會嗎？就是一個 " + std::to_string(a) + " * " + std::to_string(b) + " 的地毯",
 			"面積為 " + std::to_string(a*b), 0, true, 3, false);
 	}
@@ -235,7 +274,7 @@ void Script::runScripts()
 	{
 		ui->showDialog(ui->getName(), "好像是錯覺的樣子。可以不要亂撿地上的東西嗎?(請重開檔案)", 0);
 		std::string fileLocation = ui->loadBMP("石板", "找出面積最大的凸多邊形", 0);
-		int rcode = bmpl->init(fileLocation);
+		rcode = bmpl->init(fileLocation);
 	}
 		
 
@@ -246,9 +285,14 @@ void Script::runScripts()
 
 
 	ConvexHull ch(x, y);
+	ch.Andrew_monotone_chain();
+	x = ch.getX();
+	y = ch.getY();
+	ui->showCOORD("凸包", x, y);
+	double parea(pa->PolygonAreaCalculating(x, y));
+	ui->showDialog("謎之音", "面積" + std::to_string(parea));
 	
 
-	         
 	ui->showDialog(ui->getName(), "我好像心中有個東西突然不見的感覺...");
 	ui->showDialog(ui->getName(), "感覺好像...", "我的人生改變了..");
 	ui->showDialog("凌娜", "我也覺得我的人生，就在這裡", "寫下了汙點");
