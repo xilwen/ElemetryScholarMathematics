@@ -899,6 +899,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"), (5 + row * 14), (3 + column));
 		++row;
 	}
+	waitEnter();
 
 
 }
