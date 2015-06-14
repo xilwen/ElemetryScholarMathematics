@@ -43,8 +43,10 @@ int BMPloader::init()
 
 int BMPloader::init(std::string _fileLocation)
 {
+	fileStorage.resize(0);
 	fileLocation = _fileLocation;
-	return init();
+	int initreturn = init();
+	return initreturn;
 }
 
 

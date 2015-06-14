@@ -900,8 +900,6 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 		++row;
 	}
 	waitEnter();
-
-
 }
 
 
