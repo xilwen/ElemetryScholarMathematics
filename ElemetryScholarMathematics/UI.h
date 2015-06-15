@@ -135,9 +135,12 @@ private:
 	unsigned int vertical;
 	unsigned int horizontalt;
 	unsigned int verticalt;
-	
-
-
+	//blinkWaitEnter
+	void blinkWaitEnter(int x, int y);
+	//blinkWaitEnterController
+	bool waitingEnter;
+	//blinkWaitEnterThread
+	std::thread enterWaitBuster;
 
 };
 

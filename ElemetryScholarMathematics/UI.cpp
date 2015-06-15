@@ -1,10 +1,7 @@
 ﻿#include "UI.h"
 
-
-
 UI::UI()
 {
-
 	runRoutine = true;
 	routineBuster = std::thread(&UI::routineRunner, this);
 	SetConsoleTitle(L"小學生的算數！");
@@ -20,10 +17,6 @@ UI::UI()
 	vertical = 0;
 	//預產生亂數種子
 	srand(unsigned(time(NULL)));
-
-
-	//_setmode(_fileno(stdout), _O_U8TEXT);
-	//_setmode(_fileno(stdout), _O_TEXT);
 }
 
 UI::~UI()
@@ -34,37 +27,35 @@ UI::~UI()
 
 void UI::blinkStart()
 {
-	while (aniEnd == false)
-	{
 		for (int i = 12; i < 16; i++)
 		{
 			SetConsoleTextAttribute(hConsole, i);
-			gotoxy(0, 14);
-			print("　　　　　　　｜\n");
-			print("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／\n");
-			print("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |\n");
-			print("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿\n");
-			print("　　　　　　　｜　　　　　　　　　　　　　　　　／＼\n");
-			print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |\n");
-			print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n");
-			print("　　　　　　　｜\n");			
 			print("＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 45, 12);
-			if (aniEnd == true)
-				break;
-			Sleep(500);
+			print("　　　　　　　｜", 0, 14);
+			print("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／",0, 15);
+			print("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |",0,16);
+			print("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿\n",0,17);
+			print("　　　　　　　｜　　　　　　　　　　　　　　　　／＼\n",0,18);
+			print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |",0,19);
+			print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n",0,20);
+			print("　　　　　　　｜",0,21);			
+			for (int i = 0; i < 10; i++)
+			{
+				Sleep(50);
+				if (aniEnd == true) return;
+			}
 			print("                                ", 45, 12, 15);
-			if (aniEnd == true)
-				break;
-			Sleep(500);
+			for (int i = 0; i < 10; i++)
+			{
+				Sleep(50);
+				if (aniEnd == true) return;
+			}
 			if (i == 15)
 				i = 1;
 			if (aniEnd == true)
 				break;
 		}
-	}
 	SetConsoleTextAttribute(hConsole, 15);
-
-
 }
 
 void UI::init()
@@ -88,9 +79,6 @@ void UI::init()
 	println("   （＿＿                        ｜                                              ");
 	println("    ｜ ／ ＼ ｝               ＼ ｜                                              ");
 	println("     ∪    ))                  ＼｜                                             ");
-
-	//println("");
-	//println("");
 
 	std::thread blink(&UI::blinkStart, this);
 	waitEnter();
@@ -120,7 +108,12 @@ void UI::showDialog(std::string name, std::string text)
 	print(text, 5, 18);
 	if (twoLinesInDialog == false)
 	{
+		waitingEnter = true;
+		enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 75, 21);
 		waitEnter();
+		waitingEnter = false;
+		enterWaitBuster.join();
+		print("  ", 75, 21);
 	}
 }
 
@@ -144,7 +137,12 @@ void UI::showDialog(std::string name, std::string text, std::string text0)
 	print(text0, 5, 19, 8);
 	Sleep(100);
 	print(text0, 5, 19);
+	waitingEnter = true;
+	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 75, 21);
 	waitEnter();
+	waitingEnter = false;
+	enterWaitBuster.join();
+	print("  ", 75, 21);
 	twoLinesInDialog = false;
 }
 
@@ -439,13 +437,6 @@ void UI::gotoxy(int x, int y)
 void UI::clearScreen()
 {
 	//http://edisonx.pixnet.net/blog/post/37742661-%5Bw%5D-console-%E8%A6%96%E7%AA%97%E6%8E%A7%E5%88%B6
-	//TODO [UNTEST PART]
-	/*gotoxy(0, 0);
-	for (int i = 0; i < 2000; i++)
-	print(" ");
-	gotoxy(0, 0);*/ //低效能　閃爍
-
-	//高效能低閃爍 可自訂性不明?
 	COORD coordScreen = { 0, 0 };
 	DWORD cCharsWritten;
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -510,6 +501,8 @@ void UI::printBear(int bear)
 
 void UI::printBearbackend(int bear)
 {
+	//Drew by GODKING
+	int tmpx;
 	switch (bear)
 	{
 	case 0:
@@ -567,6 +560,123 @@ void UI::printBearbackend(int bear)
 		printlnb("　　／／／　　　＼＼＼");
 		printlnb("　　︸　｜　　　｜　︸");
 		printlnb("　　　　／＼－／＼");
+		break;
+	case 4:
+		printlnb("　　　　　　　∩＿＿＿＿＿∩　");
+		printlnb("　　｜　　　　｜＿＿＿＿＿｜　　");
+		printlnb("　　｜     　／ ＼ 　／　＼");
+		printlnb("　　｜　　　｜（Ｏ）（Ｏ）｜　");
+		printlnb("　  ｜　　　｜（＿０＿）　/");
+		printlnb("＿＿｜＿＿　／　｜︿｜　　｜＼");
+		printlnb("　　｜＿＿／／＼　　　　　／＼｜");
+		printlnb("　　｜＿＿／　／＼＿＿＿／");
+		printlnb("　　　　　　／　｜　　　｜　");
+		printlnb("　　　　　／　　｜＿＿＿｜　　　");
+		printlnb("　　　　／　　　（＿　＿）　");
+		printlnb("　　　　／＼／＼｜／　＼｜　　");
+		printlnb("       　　　　 ∪ 　　∪　");
+		break;
+	case 5:
+		printlnb("　　　∩＿＿＿＿∩　");
+		printlnb("   　｜︿   　︿｜ ");
+		printlnb("    ／（！）（！）＼");
+		printlnb("　　｜　（＿０＿）｜");
+		printlnb("　　／＼　｜３｜　／＼　　＿＿＿＿＿");
+		printlnb("　／　　＼Ｕ　Ｕ／　　＼／");
+		printlnb("　　＼　　＼　／");
+		printlnb("　　　＼　／　＼");
+		printlnb("　　　　／　　　＼");
+		printlnb("　　　／＿＿＿＿＿＼");
+		printlnb("　　　　｜　　　｜");
+		printlnb("　　　　Ｖ　　　Ｖ");
+		break;
+	case 6:
+		printlnb("　　︿＿＿＿＿＿︿");
+		getxy();
+		tmpx = nowx;
+		println("");
+		getxy();
+		gotoxy(tmpx - 18, nowy);
+		runRoutine = false; //Safty Guard
+		_setmode(_fileno(stdout), _O_WTEXT);
+		wprintf(L"　　＼　❤　❤ 　／");
+		_setmode(_fileno(stdout), _O_TEXT);
+		runRoutine = true;
+		printlnb("");
+		printlnb("　　　＼　０　／");
+		printlnb("　　    ＼３／");
+		printlnb("  ＿＿　／　＼　＿＿");
+		printlnb("Ｔ＿＿｜＿｜＿｜＿＿Ｔ");
+		printlnb("　　　｜　｜　｜");
+		printlnb("　　　  ＼  ／");
+		printlnb("　　　　／／＼＼");
+		printlnb("　　　／／  ／／");
+		printlnb("　　　Ｖ　  Ｖ");
+		break;
+	case 7:
+		printlnb("　　︿＿＿＿＿＿︿");
+		printlnb("　　＼　0　 0　 ／");
+		printlnb("　　　＼　０　／");
+		printlnb("　　    ＼V／");
+		printlnb("      　／　＼");
+		printlnb("   ／ ｜＿｜＿｜＼");
+		printlnb("　Ｔ／｜　｜　｜＼Ｔ");
+		printlnb("　　　  ＼  ／ ");
+		printlnb("　　　　／／＼＼");
+		printlnb("　　　／／  ／／");
+		printlnb("　　　Ｖ　  Ｖ");
+		break;
+	case 8:
+		printlnb("　　　∩＿＿＿∩　");
+		printlnb("   　｜ ︿   ︿｜");
+		printlnb("    ／（x）（x）＼");
+		printlnb("　　｜（＿０＿）｜");
+		printlnb("　　＼　｜３｜　／");
+		printlnb("　    --------- ");
+		printlnb("　　／｜  ８  ｜＼ ");
+		printlnb("　／／｜　８　｜＼＼");
+		printlnb("　︸　｜　８　｜　︸");
+		printlnb("　　　／＿＿＿＼");
+		printlnb("　　  ｜｜  ｜｜");
+		printlnb("　　　 Ｖ    Ｖ ");
+		break;
+	case 9:
+		printlnb("　　　∩＿＿＿∩　");
+		printlnb("   　｜       ｜");
+		printlnb("    ／         ＼");
+		printlnb("　　｜         ｜");
+		printlnb("　　＼　       ／");
+		printlnb("　    --------- ");
+		printlnb("　　／｜      ｜＼ ");
+		printlnb("　／／｜　  　｜＼＼");
+		printlnb("　︸　｜　  　｜　︸");
+		printlnb("　　　／＿＿＿＼");
+		printlnb("　　  ｜｜  ｜｜");
+		printlnb("　　　 Ｖ    Ｖ ");
+		break;
+	case 10:
+		printlnb("　　　＿＿＿＿＿＿＿＿");
+		printlnb("比　　＼　       　 ／");
+		printlnb("較　　　＼　　Ｘ　／");
+		printlnb("大　　　　＼　　／");
+		printlnb("的　　　　　＼／");
+		printlnb("門　　　　　／＼");
+		printlnb("　　　　　／　　＼");
+		printlnb("　　　　／　Ｙ　　＼");
+		printlnb("　　　／＿＿＿＿＿＿＼");
+		break;
+	case 11:
+		printlnb("      ___________ ");
+		printlnb("      ｜   　　｜");
+		printlnb("      ｜Ｋｅｙ ｜");
+		printlnb("      ｜_______｜");
+		printlnb("           ｜");
+		printlnb("           ｜");
+		printlnb("           ｜");
+		printlnb("           ｜＿ ");
+		printlnb("           ｜＿｜");
+		printlnb("           ｜＿");
+		printlnb("           ｜＿｜");
 		break;
 	default:
 #if _DEBUG
@@ -667,11 +777,24 @@ void UI::fullScreenDialog(std::string text, std::string text0)
 	print(text, 8, 8, 8);
 	Sleep(100);
 	print(text, 8, 8);
+	
+	waitingEnter = true;
+	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 70, 11);
 	waitEnter();
+	waitingEnter = false;
+	enterWaitBuster.join();
+	print("  ", 70, 11);
+
 	print(text0, 8, 11, 8);
 	Sleep(100);
 	print(text0, 8, 11);
+	
+	waitingEnter = true;
+	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 70, 14);
 	waitEnter();
+	waitingEnter = false;
+	enterWaitBuster.join();
+	print("  ", 70, 14);
 }
 
 void UI::fullScreenDialog(std::string text)
@@ -680,7 +803,12 @@ void UI::fullScreenDialog(std::string text)
 	print(text, 8, 9, 8);
 	Sleep(100);
 	print(text, 8, 9);
+
+	waitingEnter = true;
+	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 70, 11);
 	waitEnter();
+	waitingEnter = false;
+	enterWaitBuster.join();
 }
 
 void UI::printlnb(std::string text)
@@ -806,13 +934,6 @@ void UI::waitEnter()
 		{
 			return;
 		}
-		else
-		{
-			std::string* tmp = new std::string;
-			std::cin >> *tmp;
-			delete tmp;
-			break;
-		}
 	}
 }
 
@@ -832,7 +953,6 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 			++column;
 			if (column > 17)
 			{
-
 				//scrollBar(pages, nowPage, true);
 				column = 0;
 				print("[ENTER]下一頁  [Tab]跳過", 2, 23);
@@ -850,11 +970,11 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 						scrollBar(pages, nowPage, true);
 						break;
 					}
-					else if (firstinput == 9)
+					if (firstinput == 9)
 					{
 						return;
 					}
-					else if (firstinput == 224)
+					if (firstinput == 224)
 					{
 						char arrKey = _getch();
 						if (arrKey == 72)//GOING UP
@@ -880,7 +1000,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 								i = 0;
 							break;
 						}
-						else if (arrKey == 80)//GOING DOWN
+						if (arrKey == 80)//GOING DOWN
 						{
 							++nowPage;
 							clearScreen();
@@ -899,7 +1019,9 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"), (5 + row * 14), (3 + column));
 		++row;
 	}
-	waitEnter();
+	print("[ENTER]繼續", 2, 23);
+	//getchar();
+		waitEnter();
 }
 
 
@@ -1001,4 +1123,23 @@ std::string UI::loadBMP(std::string name, std::string text, int bear0)
 	std::wstring ws(szFile);
 	std::string str(ws.begin(), ws.end());
 	return str;
+}
+
+void UI::blinkWaitEnter(int x, int y)
+{
+	while (waitingEnter == true)
+	{
+		print("▼", x, y);
+		for (int i = 0; i < 250; i++)
+		{
+			Sleep(2);
+			if (waitingEnter == false) return;
+		}
+		print(" ", x, y);
+		for (int i = 0; i < 250; i++)
+		{
+			Sleep(2);
+			if (waitingEnter == false) return;
+		}
+	}
 }

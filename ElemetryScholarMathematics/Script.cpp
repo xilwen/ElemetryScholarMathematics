@@ -105,7 +105,7 @@ void Script::runScripts()
 			
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Rectangle(botRec, heiRec);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -117,7 +117,7 @@ void Script::runScripts()
 			
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Rectangle(botRec, heiRec);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -129,7 +129,7 @@ void Script::runScripts()
 			
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Rectangle(botRec, heiRec);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -148,7 +148,7 @@ void Script::runScripts()
 			
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Triangle(botTri, heiTri);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -161,7 +161,7 @@ void Script::runScripts()
 			
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Triangle(botTri, heiTri);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -174,7 +174,7 @@ void Script::runScripts()
 
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Triangle(botTri, heiTri);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -185,7 +185,7 @@ void Script::runScripts()
 		{
 			int botTri = 9, heiTri = 4;
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			//
 			SA.Show_Triangle(botTri, heiTri);
 			ui->print("[ENTER]繼續", 2, 21);
@@ -201,7 +201,7 @@ void Script::runScripts()
 		{
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Diamond(a);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -212,7 +212,7 @@ void Script::runScripts()
 		{
 			//
 			ui->clearScreen();
-			ui->gotoxy(0, 0);
+			ui->gotoxy(0, 2);
 			SA.Show_Diamond(b);
 			ui->print("[ENTER]繼續", 2, 21);
 			getchar();
@@ -225,7 +225,7 @@ void Script::runScripts()
 		ui->showDialog(ui->getName(), "好...好奇特的形狀！？", 0, true, 3, false);
 		//
 		ui->clearScreen();
-		ui->gotoxy(0, 0);
+		ui->gotoxy(0, 2);
 		SA.Show_Parallelogram(a, b);;
 		ui->print("[ENTER]繼續", 2, 21);
 		getchar();
@@ -278,7 +278,6 @@ void Script::runScripts()
 	}
 		
 
-	
 	x = bmpl->getX();
 	y = bmpl->getY();
 	ui->showCOORD("石板上的點", x, y);
@@ -288,15 +287,22 @@ void Script::runScripts()
 	ch.Andrew_monotone_chain();
 	x = ch.getX();
 	y = ch.getY();
-	ui->showCOORD("凸包", x, y);
+	ui->showCOORD("好像從圖上看到了疑似凸多邊形的頂點", x, y);
 	double parea(pa->PolygonAreaCalculating(x, y));
-	ui->showDialog("謎之音", "面積" + std::to_string(parea));
+	ui->showDialog("謎之音", "把奇怪的頂點連起來後得到了面積" + std::to_string(parea));
 	
+	ui->fullScreenDialog("所以這究竟代表了什麼呢...");
+	ui->fullScreenDialog("答案已經觸手可及，","但彷彿遠在天邊。");
 
 	ui->showDialog(ui->getName(), "我好像心中有個東西突然不見的感覺...");
 	ui->showDialog(ui->getName(), "感覺好像...", "我的人生改變了..");
 	ui->showDialog("凌娜", "我也覺得我的人生，就在這裡", "寫下了汙點");
 	ui->showDialog("凌娜", "ㄍㄋㄇㄉ看醫生遊戲");
+
+	ui->fullScreenDialog("FIN 看醫生的遊戲");
+	ui->fullScreenDialog("Um!", "Un!");
+	ui->fullScreenDialog("UUm!", "OH!");
+
 }
 
 Script::~Script()
