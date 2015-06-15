@@ -1,5 +1,6 @@
 ﻿#include "UI.h"
 
+
 UI::UI()
 {
 	runRoutine = true;
@@ -60,6 +61,8 @@ void UI::blinkStart()
 
 void UI::init()
 {
+	PlaySound(L"Ring01.wav", NULL, SND_FILENAME | SND_NODEFAULT);
+	
 	gotoxy(0, 0);
 	println("　　　 ∩＿＿＿＿＿∩　");
 	println("       ｜＿＿＿＿＿｜                                                           　");
@@ -522,34 +525,49 @@ void UI::printBearbackend(int bear)
 		printlnb("       　　　　 ∪ 　　∪　");
 		break;
 	case 1:
-		printlnb("　　　∩＿＿＿＿∩");
-		printlnb("   　｜︿     ︿ˋ｜");
-		printlnb("　　／　＞　（Ｏ）　\\");
-		printlnb("　　＝　（＿０＿）　｜");
-		printlnb("　　　　　 ｜Ｕ｜　　＝＿＿＿／＼");
-		printlnb("　　　／＼　　　　　＿＿＿＿＿＿ ＼");
-		printlnb("　　／　／＼　　　　＼");
-		printlnb("　）　ｖ　　＼　　　　＼");
-		printlnb("　　　　　　　＼　　　　＼");
-		printlnb("　　　　　　　　　＿）");
-		printlnb("　　　　　　　　｛　／　＼｜");
-		printlnb("　　　　　　　　（（　　　Ｕ");
+		printlnb("　　　∩＿＿＿∩　");
+		printlnb("   　｜ ︿   ︿｜");
+		printlnb("    ／（x）（x）＼");
+		printlnb("　　｜（＿０＿）｜");
+		printlnb("　　＼　｜３｜　／");
+		printlnb("　    --------- ");
+		printlnb("　　／｜  ８  ｜＼ ");
+		printlnb("　／／｜　８　｜＼＼");
+		printlnb("　︸　｜　８　｜　︸");
+		printlnb("　　　／＿＿＿＼");
+		printlnb("　　  ｜｜  ｜｜");
+		printlnb("　　　 Ｖ    Ｖ ");
 		break;
 	case 2:
-		printlnb("　　　∩＿＿＿＿∩");
-		printlnb("　　／︿ 　　︿ˋ｜");
-		printlnb("　　（０）（０）＼");
-		printlnb("　　（＿０＿）　｜");
-		printlnb("　　　｜Ｕ｜　＼");
-		printlnb("　　／　　　　　／／／／｝");
-		printlnb("　／　／＼　　　＼");
-		printlnb("｛　／　　＼　　　＼");
-		printlnb("　　　　　　＼　　　＼");
-		printlnb("　　　　　　／　／＼　＼");
-		printlnb("　　　　　／　／　　＼　＼");
-		printlnb("　　　　（　／　　　　＼　）");
+		printlnb("　　︿＿＿＿＿＿︿");
+		printlnb("　　＼　0　 0　 ／");
+		printlnb("　　　＼　０　／");
+		printlnb("　　    ＼V／");
+		printlnb("      　／　＼");
+		printlnb("   ／ ｜＿｜＿｜＼");
+		printlnb("　Ｔ／｜　｜　｜＼Ｔ");
+		printlnb("　　　  ＼  ／ ");
+		printlnb("　　　　／／＼＼");
+		printlnb("　　　／／  ／／");
+		printlnb("　　　Ｖ　  Ｖ");
 		break;
+		
 	case 3:
+		printlnb("　　　∩＿＿＿＿∩　");
+		printlnb("   　｜︿   　︿｜ ");
+		printlnb("    ／（！）（！）＼");
+		printlnb("　　｜　（＿０＿）｜");
+		printlnb("　　／＼　｜３｜　／＼　　＿＿＿＿＿");
+		printlnb("　／　　＼Ｕ　Ｕ／　　＼／");
+		printlnb("　　＼　　＼　／");
+		printlnb("　　　＼　／　＼");
+		printlnb("　　　　／　　　＼");
+		printlnb("　　　／＿＿＿＿＿＼");
+		printlnb("　　　　｜　　　｜");
+		printlnb("　　　　Ｖ　　　Ｖ");
+		break;
+		
+	case 4:
 		printlnb("");
 		printlnb("");
 		printlnb("");
@@ -563,7 +581,7 @@ void UI::printBearbackend(int bear)
 		printlnb("　　︸　｜　　　｜　︸");
 		printlnb("　　　　／＼－／＼");
 		break;
-	case 4:
+	case 5:
 		printlnb("　　　　　　∩＿＿＿＿＿∩　");
 		printlnb("　　        ｜　︿ 　︿ˋ｜");
 		printlnb("　　  　　　／（Ｏ）（Ｏ）\\");
@@ -576,20 +594,6 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　　　（＿　　　／");
 		printlnb("　　　　　｜／　＼　｝");
 		printlnb("          ∪      ∪");
-		break;
-	case 5:
-		printlnb("　　　∩＿＿＿＿∩　");
-		printlnb("   　｜︿   　︿｜ ");
-		printlnb("    ／（！）（！）＼");
-		printlnb("　　｜　（＿０＿）｜");
-		printlnb("　　／＼　｜３｜　／＼　　＿＿＿＿＿");
-		printlnb("　／　　＼Ｕ　Ｕ／　　＼／");
-		printlnb("　　＼　　＼　／");
-		printlnb("　　　＼　／　＼");
-		printlnb("　　　　／　　　＼");
-		printlnb("　　　／＿＿＿＿＿＼");
-		printlnb("　　　　｜　　　｜");
-		printlnb("　　　　Ｖ　　　Ｖ");
 		break;
 	case 6:
 		printlnb("　　︿＿＿＿＿＿︿");
@@ -615,31 +619,32 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　Ｖ　  Ｖ");
 		break;
 	case 7:
-		printlnb("　　︿＿＿＿＿＿︿");
-		printlnb("　　＼　0　 0　 ／");
-		printlnb("　　　＼　０　／");
-		printlnb("　　    ＼V／");
-		printlnb("      　／　＼");
-		printlnb("   ／ ｜＿｜＿｜＼");
-		printlnb("　Ｔ／｜　｜　｜＼Ｔ");
-		printlnb("　　　  ＼  ／ ");
-		printlnb("　　　　／／＼＼");
-		printlnb("　　　／／  ／／");
-		printlnb("　　　Ｖ　  Ｖ");
+		printlnb("　　　∩＿＿＿＿∩");
+		printlnb("　　／︿ 　　︿ˋ｜");
+		printlnb("　　（０）（０）＼");
+		printlnb("　　（＿０＿）　｜");
+		printlnb("　　　｜Ｕ｜　＼");
+		printlnb("　　／　　　　　／／／／｝");
+		printlnb("　／　／＼　　　＼");
+		printlnb("｛　／　　＼　　　＼");
+		printlnb("　　　　　　＼　　　＼");
+		printlnb("　　　　　　／　／＼　＼");
+		printlnb("　　　　　／　／　　＼　＼");
+		printlnb("　　　　（　／　　　　＼　）");
 		break;
 	case 8:
-		printlnb("　　　∩＿＿＿∩　");
-		printlnb("   　｜ ︿   ︿｜");
-		printlnb("    ／（x）（x）＼");
-		printlnb("　　｜（＿０＿）｜");
-		printlnb("　　＼　｜３｜　／");
-		printlnb("　    --------- ");
-		printlnb("　　／｜  ８  ｜＼ ");
-		printlnb("　／／｜　８　｜＼＼");
-		printlnb("　︸　｜　８　｜　︸");
-		printlnb("　　　／＿＿＿＼");
-		printlnb("　　  ｜｜  ｜｜");
-		printlnb("　　　 Ｖ    Ｖ ");
+		printlnb("　　　∩＿＿＿＿∩");
+		printlnb("   　｜︿     ︿ˋ｜");
+		printlnb("　　／　＞　（Ｏ）　\\");
+		printlnb("　　＝　（＿０＿）　｜");
+		printlnb("　　　　　 ｜Ｕ｜　　＝＿＿＿／＼");
+		printlnb("　　　／＼　　　　　＿＿＿＿＿＿ ＼");
+		printlnb("　　／　／＼　　　　＼");
+		printlnb("　）　ｖ　　＼　　　　＼");
+		printlnb("　　　　　　　＼　　　　＼");
+		printlnb("　　　　　　　　　＿）");
+		printlnb("　　　　　　　　｛　／　＼｜");
+		printlnb("　　　　　　　　（（　　　Ｕ");
 		break;
 	case 9:
 		printlnb("　　　∩＿＿＿∩　");

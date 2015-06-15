@@ -6,6 +6,8 @@
 #define ConsoleWidth 80
 #define ConsoleHeight 24
 
+#pragma comment(lib, "winmm.lib")
+
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
@@ -84,6 +86,9 @@ public:
 
 	//回傳主角名字(Accessor to name)
 	std::string getName();
+
+	//小遊戲
+	void littleGame();
 private:
 	//書出文字。
 	void print(std::string in);
