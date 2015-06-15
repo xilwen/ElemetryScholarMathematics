@@ -27,45 +27,46 @@ UI::~UI()
 
 void UI::blinkStart()
 {
-		for (int i = 12; i < 16; i++)
+	for (int i = 12; i < 16; i++)
+	{
+		SetConsoleTextAttribute(hConsole, i);
+		print("＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 45, 12);
+		print("　　　　　　　｜", 0, 14);
+		print("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／", 0, 15);
+		print("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |", 0, 16);
+		print("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿\n", 0, 17);
+		print("　　　　　　　｜　　　　　　　　　　　　　　　　／＼\n", 0, 18);
+		print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |", 0, 19);
+		print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n", 0, 20);
+		print("　　　　　　　｜", 0, 21);
+		for (int i = 0; i < 10; i++)
 		{
-			SetConsoleTextAttribute(hConsole, i);
-			print("＞＞ＰＲＥＳＳ　ＳＴＡＲＴ＜＜", 45, 12);
-			print("　　　　　　　｜", 0, 14);
-			print("　　　　　　　｜　　　　　　　　　　　　　　＼　　　　／",0, 15);
-			print("　　　　　　　｜　　　　　　　　　　　　　　　＼　　／　　           |",0,16);
-			print("　　　　　＿＿｜＿＿　　　＿＿＿＿＿＿　　　　　＼／　　　　　　＿＿＿＿＿＿\n",0,17);
-			print("　　　　　　　｜　　　　　　　　　　　　　　　　／＼\n",0,18);
-			print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |",0,19);
-			print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n",0,20);
-			print("　　　　　　　｜",0,21);			
-			for (int i = 0; i < 10; i++)
-			{
-				Sleep(50);
-				if (aniEnd == true) return;
-			}
-			print("                                ", 45, 12, 15);
-			for (int i = 0; i < 10; i++)
-			{
-				Sleep(50);
-				if (aniEnd == true) return;
-			}
-			if (i == 15)
-				i = 1;
-			if (aniEnd == true)
-				break;
+			Sleep(50);
+			if (aniEnd == true) return;
 		}
+		print("                                ", 45, 12, 15);
+		for (int i = 0; i < 10; i++)
+		{
+			Sleep(50);
+			if (aniEnd == true) return;
+		}
+		if (i == 15)
+			i = 1;
+		if (aniEnd == true)
+			break;
+	}
 	SetConsoleTextAttribute(hConsole, 15);
 }
 
 void UI::init()
 {
 	gotoxy(0, 0);
-	println("         ∩_______∩                                                           　");
-	println("        |ˊ ︵ ︵ˋ 科　　　　　　　|              __＼__|__／__          |        ");
-	println("       ∕  (⊙)(⊙) 科　　　　　　｜　　　　　　／    ____    ／    ／　　|       ");
-	println("      |  （ ＿●＿ ）＝           ｜                    ／        ／____|____     ");
-	print("＿＿＿＝　   ｜Ｕ｜ ?          ");
+	println("　　　 ∩＿＿＿＿＿∩　");
+	println("       ｜＿＿＿＿＿｜                                                           　");
+	println("        |ˊ ＼ ／ˋ ＼　　　　　 　|              __＼__|__／__          |        ");
+	println("       ∕  (Ｏ)(Ｏ) 科　　　　　　｜　　　　　　／    ____    ／    ／　　|       ");
+	println("      |  （ ＿０＿ ）＝          ｜                    ／        ／____|____     ");
+	print("＿＿＿＝　   ｜︿｜ \          ");
 	print("／｜＼", 14);
 	println("                  ｜       ／     | ");
 	print("    ＿＿＿    ＼ ˊ  ＼        ");
@@ -506,18 +507,19 @@ void UI::printBearbackend(int bear)
 	switch (bear)
 	{
 	case 0:
-		printlnb("　　　　　　∩＿＿＿＿＿∩　");
-		printlnb("　　        ｜　︿ 　︿ˋ｜");
-		printlnb("　　  　　　／（Ｏ）（Ｏ）\\");
-		printlnb("　  　　　　｜（＿０＿）＝/");
-		printlnb("＿＿＿＿＿＝　　｜Ｕ｜　｜");
-		printlnb("　　＿＿＿＿＿　＼　　／、＼");
-		printlnb("　　　　　　　　／　　　　／＼_<");
-		printlnb("　　　　　　　／　　　　／");
-		printlnb("           ／　　　＿／");
-		printlnb("　　　　　（＿　　　／");
-		printlnb("　　　　　｜／　＼　｝");
-		printlnb("          ∪      ∪");
+		printlnb("　　　　　　　∩＿＿＿＿＿∩　");
+		printlnb("　　｜　　　　｜＿＿＿＿＿｜　　");
+		printlnb("　　｜     　／ ＼ 　／　＼");
+		printlnb("　　｜　　　｜（Ｏ）（Ｏ）｜　");
+		printlnb("　  ｜　　　｜（＿０＿）　/");
+		printlnb("＿＿｜＿＿　／　｜︿｜　　｜＼");
+		printlnb("　　｜＿＿／／＼　　　　　／＼｜");
+		printlnb("　　｜＿＿／　／＼＿＿＿／");
+		printlnb("　　　　　　／　｜　　　｜　");
+		printlnb("　　　　　／　　｜＿＿＿｜　　　");
+		printlnb("　　　　／　　　（＿　＿）　");
+		printlnb("　　　　／＼／＼｜／　＼｜　　");
+		printlnb("       　　　　 ∪ 　　∪　");
 		break;
 	case 1:
 		printlnb("　　　∩＿＿＿＿∩");
@@ -562,19 +564,18 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　　／＼－／＼");
 		break;
 	case 4:
-		printlnb("　　　　　　　∩＿＿＿＿＿∩　");
-		printlnb("　　｜　　　　｜＿＿＿＿＿｜　　");
-		printlnb("　　｜     　／ ＼ 　／　＼");
-		printlnb("　　｜　　　｜（Ｏ）（Ｏ）｜　");
-		printlnb("　  ｜　　　｜（＿０＿）　/");
-		printlnb("＿＿｜＿＿　／　｜︿｜　　｜＼");
-		printlnb("　　｜＿＿／／＼　　　　　／＼｜");
-		printlnb("　　｜＿＿／　／＼＿＿＿／");
-		printlnb("　　　　　　／　｜　　　｜　");
-		printlnb("　　　　　／　　｜＿＿＿｜　　　");
-		printlnb("　　　　／　　　（＿　＿）　");
-		printlnb("　　　　／＼／＼｜／　＼｜　　");
-		printlnb("       　　　　 ∪ 　　∪　");
+		printlnb("　　　　　　∩＿＿＿＿＿∩　");
+		printlnb("　　        ｜　︿ 　︿ˋ｜");
+		printlnb("　　  　　　／（Ｏ）（Ｏ）\\");
+		printlnb("　  　　　　｜（＿０＿）＝/");
+		printlnb("＿＿＿＿＿＝　　｜Ｕ｜　｜");
+		printlnb("　　＿＿＿＿＿　＼　　／、＼");
+		printlnb("　　　　　　　　／　　　　／＼_<");
+		printlnb("　　　　　　　／　　　　／");
+		printlnb("           ／　　　＿／");
+		printlnb("　　　　　（＿　　　／");
+		printlnb("　　　　　｜／　＼　｝");
+		printlnb("          ∪      ∪");
 		break;
 	case 5:
 		printlnb("　　　∩＿＿＿＿∩　");
@@ -658,8 +659,8 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　＿＿＿＿＿＿＿＿");
 		printlnb("比　　＼　       　 ／");
 		printlnb("較　　　＼　　Ｘ　／");
-		printlnb("大　　　　＼　　／");
-		printlnb("的　　　　　＼／");
+		printlnb("的　　　　＼　　／");
+		printlnb("大　　　　　＼／");
 		printlnb("門　　　　　／＼");
 		printlnb("　　　　　／　　＼");
 		printlnb("　　　　／　Ｙ　　＼");
@@ -697,12 +698,50 @@ void UI::showDialog(std::string name, std::string text, int bear0, bool place0, 
 	showDialog(name, text);
 	showBearsinDialog = false;
 }
+
 void UI::showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1)
 {
 	clearScreen();
 	showBearsinDialog = true;
 	printBear(bear0, place0);
 	printBear(bear1, place1);
+	showDialog(name, text, text0);
+	showBearsinDialog = false;
+}
+
+void UI::showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1, bool light)
+{
+	clearScreen();
+	showBearsinDialog = true;
+	if (light == true)
+		SetConsoleTextAttribute(hConsole, 8);
+	printBear(bear0, place0);
+	if (light == true)
+		SetConsoleTextAttribute(hConsole, 15);
+	else
+		SetConsoleTextAttribute(hConsole, 8);
+	printBear(bear1, place1);
+	if (light == false)
+		SetConsoleTextAttribute(hConsole, 15);
+	showDialog(name, text);
+	showBearsinDialog = false;
+
+}
+
+void UI::showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1, bool light)
+{
+	clearScreen();
+	showBearsinDialog = true;
+	if (light == true)
+		SetConsoleTextAttribute(hConsole, 8);
+	printBear(bear0, place0);
+	if (light == true)
+		SetConsoleTextAttribute(hConsole, 15);
+	else
+		SetConsoleTextAttribute(hConsole, 8);
+	printBear(bear1, place1);
+	if (light == false)
+		SetConsoleTextAttribute(hConsole, 15);
 	showDialog(name, text, text0);
 	showBearsinDialog = false;
 }
@@ -777,7 +816,7 @@ void UI::fullScreenDialog(std::string text, std::string text0)
 	print(text, 8, 8, 8);
 	Sleep(100);
 	print(text, 8, 8);
-	
+
 	waitingEnter = true;
 	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 70, 11);
 	waitEnter();
@@ -788,7 +827,7 @@ void UI::fullScreenDialog(std::string text, std::string text0)
 	print(text0, 8, 11, 8);
 	Sleep(100);
 	print(text0, 8, 11);
-	
+
 	waitingEnter = true;
 	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 70, 14);
 	waitEnter();
@@ -939,89 +978,120 @@ void UI::waitEnter()
 
 void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 {
-	clearScreen();
-	drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
-	print(in + "：", 3, 1);
-	int column = 0, row = 0;
-	int pages = x.size() / 17 / 5;
+	int column, row;
+	int pages = x.size() / 17 / 5 + ((x.size() % 17 > 0 || (x.size() / 17) % 5 > 0) ? 1 : 0);
 	int nowPage = 1;
-	scrollBar(pages, 1, true);
-	for (unsigned int i = 0; i < x.size(); i++)
+	int i = 0;
+	char arrKey = 0;
+	while (1)
 	{
-		if (row > 4)
+		scrollBar(x.size(), i + 1, true);
+		clearScreen();
+		drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+		print(in + "：", 3, 1);
+		column = row = 0;
+		scrollBar(x.size(), i + 1, true);
+		print(std::to_string(nowPage) + "/" + std::to_string(pages) + "      ", 65, 22);
+		for (; i < x.size(); i++)
 		{
-			++column;
-			if (column > 17)
+			if (row > 4)
 			{
-				//scrollBar(pages, nowPage, true);
-				column = 0;
-				print("[ENTER]下一頁  [Tab]跳過", 2, 23);
-
-				while (1)
+				++column;
+				if (column > 17)
 				{
-					while (!_kbhit());
-					int firstinput = _getch();//Arrow Key get two input
-					if (firstinput == 13) //ENTER
+					column = 0;
+
+					print(((nowPage == 1) ? "[↓]捲動卷軸  [Tab]繼續" : "[↑][↓]捲動卷軸  [Tab]繼續"), 2, 23);
+					print(std::to_string(i) + "/" + std::to_string(x.size()) + "       ", 60, 22);
+					while (1)
 					{
-						++nowPage;
+						while (!_kbhit());
+						int firstinput = _getch();//Arrow Key get two input
+						if (firstinput == 9)
+						{
+							return;
+						}
+						if (firstinput == 224)
+						{
+							arrKey = _getch();
+							if (arrKey == 72)//GOING UP
+							{
+								if (nowPage > 1)
+								{
+									--nowPage;
+									if (i >= 180)
+									{
+										i = i - (18 * 5 * 2);
+										clearScreen();
+										drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+										print(in + "：", 3, 1);
+									}
+								}
+								else
+									i = 0;
+								break;
+							}
+							if (arrKey == 80)//GOING DOWN
+							{
+								++nowPage;
+								clearScreen();
+								drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
+								print(in + "：", 3, 1);
+								break;
+							}
+						}
+					}
+					scrollBar(x.size(), i + 1, true);
+				}
+				row = 0;
+			}
+			print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"), (5 + row * 14), (3 + column));
+			++row;
+		}
+		print(std::to_string(i) + "/" + std::to_string(x.size()) + "       ", 60, 22);
+		if (x.size() / 90 > 0)
+		{
+			print("[↑]捲動卷軸  [Tab]繼續", 2, 23);
+			scrollBar(x.size(), i + 1, true);
+			while (arrKey != 72)
+			{
+				while (!_kbhit());
+				int firstinput = _getch();
+				if (firstinput == 9)
+				{
+					return;
+				}
+				if (firstinput == 224)
+				{
+					arrKey = _getch();
+					if (arrKey == 72)//GOING UP
+					{
+						--nowPage;
+						i = i - ((18 * 5) + (x.size() % 90));
 						clearScreen();
 						drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
 						print(in + "：", 3, 1);
-						scrollBar(pages, nowPage, true);
 						break;
-					}
-					if (firstinput == 9)
-					{
-						return;
-					}
-					if (firstinput == 224)
-					{
-						char arrKey = _getch();
-						if (arrKey == 72)//GOING UP
-						{
-							if (nowPage > 1)
-							{
-								--nowPage;
-
-								if (i > 90)
-								{
-									i = i - (18 * 5 * 2);
-									/*if (i <= 0)
-										i = 0;*/
-									clearScreen();
-									drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
-									print(in + "：", 3, 1);
-								}
-
-								//column = 0;
-								scrollBar(pages, nowPage, true);
-							}
-							else
-								i = 0;
-							break;
-						}
-						if (arrKey == 80)//GOING DOWN
-						{
-							++nowPage;
-							clearScreen();
-							drawFrame(0, 0, ConsoleWidth - 2, ConsoleHeight - 1);
-							print(in + "：", 3, 1);
-							if (nowPage < pages)
-								scrollBar(pages, nowPage, true);
-							break;
-						}
 					}
 				}
 			}
-			row = 0;
 		}
-
-		print(("(" + std::to_string(x[i]) + ", " + std::to_string(y[i]) + ")"), (5 + row * 14), (3 + column));
-		++row;
+		else
+		{
+			for (int j = 2; j < 23; j++)
+				print(" ", 76, j);
+			print("[Tab]繼續", 2, 23);
+			while (arrKey != 72)
+			{
+				while (!_kbhit());
+				int firstinput = _getch();
+				if (firstinput == 9)
+				{
+					return;
+				}
+			}
+		}
 	}
-	print("[ENTER]繼續", 2, 23);
-	//getchar();
-		waitEnter();
 }
 
 
@@ -1033,12 +1103,13 @@ void UI::scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArro
 		print("↑", 76, 2);
 		print("↓", 76, 21);
 	}
-	double boxPlace = ((double)nowPages / (double)totalPages) * 19;
+	int boxPlace = ceil((int)((double)nowPages/ ((double)totalPages / 17.0f)));
+
 	if (boxPlace > 1)
 		print(" ", 76, 3 + (int)boxPlace - 1);
-	if (boxPlace < 19)
+	if (boxPlace < 16)
 		print(" ", 76, 3 + (int)boxPlace + 1);
-	print("■", 76, 3 + (int)boxPlace);
+	print("■", 76, 3 + boxPlace);
 }
 
 
@@ -1078,8 +1149,8 @@ void UI::routineRunner()
 				wcscpy_s(cfi.FaceName, L"細明體");
 			else
 				wcscpy_s(cfi.FaceName, L"新宋体");
-			
-			
+
+
 			SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
 			Sleep(500);
@@ -1122,6 +1193,7 @@ std::string UI::loadBMP(std::string name, std::string text, int bear0)
 	GetOpenFileName(&ofn);
 	std::wstring ws(szFile);
 	std::string str(ws.begin(), ws.end());
+	rewind(stdin);
 	return str;
 }
 

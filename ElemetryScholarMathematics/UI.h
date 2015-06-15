@@ -33,6 +33,10 @@ public:
 	void showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1);
 	//含熊的對話框。雙行雙熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1);
+	//含熊的對話框。單行雙熊。不需要雙熊的話打超過可提供的熊數即可。可選主角(T=左)。
+	void showDialog(std::string name, std::string text, int bear0, bool place0, int bear1, bool place1,bool light);
+	//含熊的對話框。雙行雙熊。不需要雙熊的話打超過可提供的熊數即可。可選主角(T=左)。
+	void showDialog(std::string name, std::string text, std::string text0, int bear0, bool place0, int bear1, bool place1, bool light);
 	//含熊的對話框。單行單熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, int bear0);
 	//含熊的對話框。雙行單熊。不需要雙熊的話打超過可提供的熊數即可。
