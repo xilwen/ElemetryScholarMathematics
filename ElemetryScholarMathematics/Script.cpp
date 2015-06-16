@@ -72,7 +72,7 @@ void Script::runScripts()
 		}
 
 		/*穿過user身上*/
-		ui->showDialog(ui->getName(), "......", 0, true, 1, false, false);
+		ui->showDialog(ui->getName(), "......", 0);
 
 		/*II part*/
 
