@@ -30,12 +30,13 @@ void Script::runScripts()
 
 		/*開始命名*/
 		ui->chooseNamae();
-
+		ui->setWaveRepeat(false);
+		std::thread sp(&UI::playWave, ui, "Musics\\SouthPark.wav");
 		ui->showDialog("謎之音", "哼哈哈哈，叫做" + ui->getName() + "是嗎。真是個好名字。", 0, true, 4, false, true);
 		ui->print("ㄏㄏ", 5, 19);
-		ui->playWave("Musics\\SouthPark.wav");
-		ui->showDialog(ui->getName(), "...莫名其妙", 0);
 
+		ui->showDialog(ui->getName(), "...莫名其妙", 0);
+		
 		/*開門動畫*/
 		ui->showDialog(ui->getName(), "......", 10);
 		ui->showDialog(ui->getName(), "喔？", 12);
@@ -46,6 +47,7 @@ void Script::runScripts()
 		ui->showDialog(ui->getName(), "你說什麼！我說的都是真的阿！", 0, true, 1, false, false);
 		ui->showDialog("凌娜", "那好 ...", 0, true, 1, false, true);
 
+		sp.join();
 		/*掏鑰匙*/
 		ui->showDialog("凌娜", "你答對我的問題我就承認你說的是真的。", 1);
 

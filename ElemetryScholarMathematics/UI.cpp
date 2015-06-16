@@ -1448,3 +1448,9 @@ void UI::aniBear(int bear, bool direction)
 		Sleep(50);
 	}
 }
+
+void UI::setWaveRepeat(bool in)
+{
+	repeatWave = in;
+}
+

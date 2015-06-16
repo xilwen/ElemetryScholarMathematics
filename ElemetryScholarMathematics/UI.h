@@ -96,6 +96,9 @@ public:
 
 	//播放音效(危險!限定使用)
 	void playWave(std::string path);
+	
+	//設定音效是否重複
+	void setWaveRepeat(bool in);
 private:
 	//書出文字。
 	void print(std::string in);
