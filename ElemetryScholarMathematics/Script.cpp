@@ -37,6 +37,8 @@ void Script::runScripts()
 		ui->showDialog(ui->getName(), "...莫名其妙", 0);
 
 		/*開門動畫*/
+		ui->showDialog(ui->getName(), "......", 10);
+		ui->showDialog(ui->getName(), "喔？", 12);
 		ui->showDialog(ui->getName(), "是你阿，凌娜。", 0, true, 1, false, false);
 		ui->showDialog("凌娜", "...有找到什麼嗎？", 0, true, 1, false, true);
 		ui->showDialog(ui->getName(), "有...但是他們在一個恐怖的世界裡。", 0, true, 1, false, false);
@@ -61,10 +63,12 @@ void Script::runScripts()
 		if (answer == 0)
 		{
 			ui->showDialog("凌娜", "哼！", 0, true, 1, false, true);
+			ui->aniBear(1, true);
 		}
 		else
 		{
 			ui->showDialog("凌娜", "你還是吃屎吧！" + ui->getName() + "！答案是 " + std::to_string(a + b), 0, true, 1, false, true);
+			ui->aniBear(1, true);
 		}
 
 		/*穿過user身上*/
@@ -72,6 +76,8 @@ void Script::runScripts()
 
 		/*II part*/
 
+		ui->showDialog(ui->getName(), "......", 10);
+		ui->showDialog(ui->getName(), "喔？", 12);
 		ui->showDialog("魯凱", "...", 0, true, 2, false, true);
 		ui->showDialog("魯凱", ui->getName() + "，我一直想要住在這種雙人小套房。", 0, true, 2, false, true);
 
@@ -238,13 +244,18 @@ void Script::runScripts()
 		ui->showDialog("魯凱", "你覺得這個尺寸需要換嗎？", 0, true, 2, false, true);
 		ui->showDialog(ui->getName(), "...現在不是說這些的時候吧？", 0, true, 2, false, false);
 		ui->showDialog("魯凱", "...是沒錯啦，我只是看到有感而發而已。", "先走了。", 0, true, 2, false, true);
+		ui->aniBear(2, true);
 
 		/*III part*/
 
 		//黑暗女巫開門動畫
+		ui->showDialog(ui->getName(), "......", 10);
+		ui->showDialog(ui->getName(), "喔？", 12);
 
 		ui->showDialog("黑暗女巫", "......", 0, true, 3, false);
-		ui->showDialog(ui->getName(), "等等！", 0, true, 3, false);
+		ui->aniBear(3, true);
+		ui->showDialog(ui->getName(), "等等！", 0);
+		ui->aniBear(0, true);
 
 		//追出去
 		ui->showDialog("黑暗女巫", "我只是引誘你，你還真的跟過來了。", 0, true, 3, false);
