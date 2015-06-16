@@ -18,6 +18,7 @@
 #include <io.h>	    //for _setmode
 #include <fcntl.h>	//for _setmode
 #include <thread>   //for animations
+#include "SimpleArea.h" //for ED
 
 class UI
 {
@@ -99,6 +100,9 @@ public:
 	
 	//設定音效是否重複
 	void setWaveRepeat(bool in);
+
+	//ED
+	void runED();
 private:
 	//書出文字。
 	void print(std::string in);

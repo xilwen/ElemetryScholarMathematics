@@ -401,7 +401,7 @@ void UI::chooseNamae()
 #endif
 	}
 	clearScreen();
-	
+
 }
 
 void UI::print(std::string in)
@@ -824,7 +824,7 @@ void UI::dead()
 	waitEnter();
 	waitingEnter = false;
 	blink.join();
-	
+
 }
 
 void UI::dontB()
@@ -1208,7 +1208,7 @@ void UI::routineRunner()
 
 			Sleep(1100);
 			GetWindowRect(thisConsole, &currentSize);
-			SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom - currentSize.top +5), SWP_SHOWWINDOW);
+			SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom - currentSize.top + 5), SWP_SHOWWINDOW);
 			horizontal = horizontalt;
 			vertical = verticalt;
 		}
@@ -1452,5 +1452,83 @@ void UI::aniBear(int bear, bool direction)
 void UI::setWaveRepeat(bool in)
 {
 	repeatWave = in;
+}
+
+void UI::runED()
+{
+	repeatWave = true;
+	waveBuster = std::thread(&UI::playWave, this, "Musics\\BraveSong.wav");
+	printBear(0, true);
+	print("組長、Major Designer :", 45, 5);
+	print("老濮", 60, 6);
+	print("劇本 : ", 45, 8);
+	print("張棣棠", 60, 9);
+	print("美術設計 : ", 45, 11);
+	print("GODKING(張皓)", 60, 12);
+	print("介面 : ", 45, 14);
+	print("王建文", 60, 15);
+	print("測試及諮詢 : ", 45, 17);
+	print("林佑蕙、王揚", 60, 18);
+	Sleep(3000);
+	clearScreen();
+	printBear(1, true);
+	print("組長、Major Designer :", 45, 5);
+	print("老濮", 60, 6);
+	print("劇本 : ", 45, 8);
+	print("張棣棠", 60, 9);
+	print("美術設計 : ", 45, 11);
+	print("GODKING(張皓)", 60, 12);
+	print("介面 : ", 45, 14);
+	print("王建文", 60, 15);
+	print("測試及諮詢 : ", 45, 17);
+	print("林佑蕙、王揚", 60, 18);
+	Sleep(3000);
+	clearScreen();
+	printBear(3, false);
+	print("四則運算 :", 5, 5);
+	print("林佑蕙、王揚", 20, 6);
+	print("面積計算 :", 5, 8);
+	print("老濮", 20, 9);
+	print("BMP讀取　:", 5, 11);
+	print("王建文", 20, 12);
+	print("多邊形分析 :", 5, 14);
+	print("張棣棠、老濮", 20, 15);
+	print("多邊形面積計算 :", 5, 17);
+	print("GODKING(張皓)、老濮", 20, 18);
+	Sleep(3000);
+	clearScreen();
+	printBear(4, false);
+	print("四則運算 :", 5, 5);
+	print("林佑蕙、王揚", 20, 6);
+	print("面積計算 :", 5, 8);
+	print("老濮", 20, 9);
+	print("BMP讀取　:", 5, 11);
+	print("王建文", 20, 12);
+	print("多邊形分析 :", 5, 14);
+	print("張棣棠、老濮", 20, 15);
+	print("多邊形面積計算 :", 5, 17);
+	print("GODKING(張皓)、老濮", 20, 18);
+	Sleep(3000);
+	clearScreen();
+	SimpleArea* sa = new SimpleArea;
+	gotoxy(0, 5);
+	sa->ShowChristmasTree();
+	delete sa;
+	print("開頭音樂 :", 45, 5);
+	print("Final Fantasy VII 戰鬥音樂(8-bits)", 45, 6);
+	print("名字真好 : ", 45, 8);
+	print("南方四賤客台灣版片頭曲", 50, 9);
+	print("怪物進場 : ", 45, 11);
+	print("Godzilla Atom Breath", 50, 12);
+	print("片尾曲 : ", 45, 14);
+	print("Brave Song(8-bits)", 50, 15);
+	print("宣傳影片 : ", 45, 17);
+	print("Bilibili 2015拜年祭", 50, 18);
+	Sleep(6000);
+	clearScreen();
+	print("新細明體", 36, 11, 12);
+	Sleep(6000);
+	repeatWave = false;
+	waveBuster.join();
 }
 

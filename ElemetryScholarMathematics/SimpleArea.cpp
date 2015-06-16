@@ -167,8 +167,8 @@ void SimpleArea::ShowChristmasTree()
 	int count = 1;
 	int count2 = 9;
 
-	cin >> RowNum;
-	cin >> width;
+	RowNum = 6;
+	width = 2;
 
 
 	for (i = 0; i < RowNum; i++)

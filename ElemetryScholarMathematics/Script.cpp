@@ -312,7 +312,7 @@ void Script::runScripts()
 		ui->fullScreenDialog("Um!", "Un!");
 		ui->fullScreenDialog("UUm!", "OH!");
 		ui->playWave("Musics\\DJT.wav");
-		
+		ui->runED();
 	}
 }
 
