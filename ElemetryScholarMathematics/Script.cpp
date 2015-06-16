@@ -272,14 +272,14 @@ void Script::runScripts()
 	ui->showDialog(ui->getName(), "呼...解決掉他了", 0);
 
 	//石板出場
-	ui->showDialog(ui->getName(), "這是什麼怪東西？", 0, true, 5, false);
+	ui->showDialog(ui->getName(), "這是什麼怪東西？", 0, true, 14, false);
 
-	std::string fileLocation = ui->loadBMP("石板", "找出面積最大的凸多邊形", 5);
+	std::string fileLocation = ui->loadBMP("石板上寫著", "請開啟一個BMP單色圖檔", 14);
 	int rcode = bmpl->init(fileLocation);
 	while (rcode != 0)
 	{
-		ui->showDialog(ui->getName(), "好像是錯覺的樣子。可以不要亂撿地上的東西嗎?(請重開檔案)", 5);
-		std::string fileLocation = ui->loadBMP("石板", "找出面積最大的凸多邊形", 5);
+		ui->showDialog(ui->getName(), "好像是錯覺的樣子。可以不要亂撿地上的東西嗎?(請重開檔案)", 14);
+		std::string fileLocation = ui->loadBMP("石板上寫著", "請開啟一個BMP單色圖檔", 14);
 		rcode = bmpl->init(fileLocation);
 	}
 		
@@ -302,13 +302,14 @@ void Script::runScripts()
 
 	ui->showDialog(ui->getName(), "我好像心中有個東西突然不見的感覺...");
 	ui->showDialog(ui->getName(), "感覺好像...", "我的人生改變了..");
-	ui->showDialog("凌娜", "我也覺得我的人生，就在這裡", "寫下了汙點");
-	ui->showDialog("凌娜", "ㄍㄋㄇㄉ看醫生遊戲");
-
+	
+	ui->fullScreenDialog("我也覺得我的人生，就在這裡", "寫下了汙點");
+	ui->fullScreenDialog( "ㄍㄋㄇㄉ看醫生遊戲");
 	ui->fullScreenDialog("FIN 看醫生的遊戲");
 	ui->fullScreenDialog("Um!", "Un!");
 	ui->fullScreenDialog("UUm!", "OH!");
 	ui->playWave("Musics\\DJT.wav");
+	ui->fullScreenDialog("");
 }
 
 Script::~Script()
