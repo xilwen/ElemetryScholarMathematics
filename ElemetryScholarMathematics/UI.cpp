@@ -401,9 +401,7 @@ void UI::chooseNamae()
 #endif
 	}
 	clearScreen();
-	print("小學生伴唱 歡樂無限", 6, 10);
-	print("請欣賞音樂", 10, 12);
-	waveBuster.join();
+	
 }
 
 void UI::print(std::string in)
@@ -719,6 +717,17 @@ void UI::printBearbackend(int bear)
 		printlnb("   ＶＶ　    ＼　／　　　ＶＶ");
 		printlnb("           　　Ｖ");
 		break;
+	case 14:
+		printlnb(" ╭──────────╮");
+		printlnb(" │853c2ffeb37eb9d9423c│");
+		printlnb(" │120662f7e578!@#$%^^%│");
+		printlnb(" │2A5F1B6F4980A54BB984│");
+		printlnb(" │33AF9709F5E0#$&#*@^!│");
+		printlnb(" │2A5F1B6F4980A54BB984│");
+		printlnb(" │33AF9709F5E0!^@&#*$&│");
+		printlnb(" │2A5F1B6F4980A54BB984│");
+		printlnb(" │33AF9709F5E0$*%(*^&#│");
+		printlnb(" ╰──────────╯");
 	default:
 #if _DEBUG
 		print("[錯誤]超出可選擇的熊!", 0, 0);
@@ -1262,6 +1271,7 @@ void UI::blinkWaitEnter(int x, int y)
 
 bool UI::littleGame()
 {
+	waveBuster.join();
 	int playerHP(500);
 	int enemyHP(500);
 	std::string enemyName("鐘樓怪");
