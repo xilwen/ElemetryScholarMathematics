@@ -297,7 +297,7 @@ void Script::runScripts()
 	ui->fullScreenDialog("FIN 看醫生的遊戲");
 	ui->fullScreenDialog("Um!", "Un!");
 	ui->fullScreenDialog("UUm!", "OH!");
-
+	ui->playWave("Musics\\DJT.wav");
 }
 
 Script::~Script()

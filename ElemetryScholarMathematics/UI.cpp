@@ -109,7 +109,7 @@ void UI::showDialog(std::string name, std::string text)
 #if _DEBUG
 		print("[警告]字太多了。請用分行版本或者分成兩次對話。", 0, 0);
 #endif
-}
+	}
 	drawFrame(0, 15, 78, 7);
 	print(name, 3, 16);
 	print("：");
@@ -185,7 +185,7 @@ void UI::chooseNamae()
 	drawFrame(25, 4, 24, 4);
 	print("╴╴╴╴", 34, 6);
 	drawFrame(10, 10, 56, 11);
-
+	print(name, 34, 6);
 	print("　　龍　　中　　大　　比　　巫　　凌　　卡　　倒退", 12, 12);
 	print("　　天　　傲　　暗　　黑　　瘋　　娜　　皓　　清除", 12, 15);
 	print("　　葉　　覺　　張　　子　　渣　　利　　不　　好了", 12, 18);
@@ -308,10 +308,10 @@ void UI::chooseNamae()
 						gotoxy(nowx - 42, nowy - 6);
 
 					}
-					}
-				break;
 				}
+				break;
 			}
+		}
 		else
 		{
 #if _DEBUG
@@ -388,9 +388,9 @@ void UI::chooseNamae()
 					getxy();
 					print("╴", 34 + name.size(), 6);
 					undoxy();
-			}
+				}
 
-		}
+			}
 		}
 
 #if _DEBUG
@@ -402,7 +402,7 @@ void UI::chooseNamae()
 	}
 	clearScreen();
 	print("小學生伴唱 歡樂無限", 6, 10);
-	print("LOADING...", 6, 12);
+	print("請欣賞音樂", 10, 12);
 	waveBuster.join();
 }
 
@@ -810,7 +810,12 @@ void UI::dead()
 	println("　　　　　　　　　　　　　　太大意惹　　　");
 	println("　　　　　　　　　　　　　　　　　");
 	undoxy();
+	waitingEnter = true;
+	std::thread blink(&UI::blinkWaitEnter, this, 75, 18);
 	waitEnter();
+	waitingEnter = false;
+	blink.join();
+	
 }
 
 void UI::dontB()
@@ -1312,7 +1317,7 @@ bool UI::littleGame()
 			damage = playerNormalDamage - (rand() % 100 + 1);
 			enemyHP += damage;
 
-			showGameDialog(name + "空白鍵連打，對" + enemyName + "造成了" + std::to_string(damage) + "點傷害!");
+			showGameDialog(name + "空白鍵連打，對" + enemyName + "造成了" + std::to_string(-damage) + "點傷害!");
 			break;
 		case 1:
 			showGameDialog("背包籠罩著黑暗氣息。似乎打不開了。");
@@ -1325,7 +1330,7 @@ bool UI::littleGame()
 				showGameDialog("效果拔群!");
 			else
 				showGameDialog("效果一般!");
-			showGameDialog(name + "對" + enemyName + "造成了" + std::to_string(damage) + "點傷害。");
+			showGameDialog(name + "對" + enemyName + "造成了" + std::to_string(-damage) + "點傷害。");
 			break;
 		case 3:
 			showGameDialog("哼；就算" + name + "叫破喉嚨也不會有人來幫忙的。");
@@ -1348,7 +1353,7 @@ bool UI::littleGame()
 		case 0:
 			damage = enemyNormalDamage - (rand() % 100 + 1);
 			playerHP += damage;
-			showGameDialog(enemyName + "輕拍" + name + "，造成了" + std::to_string(damage) + "點傷害!");
+			showGameDialog(enemyName + "輕拍" + name + "，造成了" + std::to_string(-damage) + "點傷害!");
 			break;
 		case 1:
 		default:
@@ -1359,7 +1364,7 @@ bool UI::littleGame()
 				showGameDialog("效果拔群!");
 			else
 				showGameDialog("效果一般!");
-			showGameDialog(enemyName + "對" + name + "造成了" + std::to_string(damage) + "點傷害!");
+			showGameDialog(enemyName + "對" + name + "造成了" + std::to_string(-damage) + "點傷害!");
 			break;
 		}
 	}
@@ -1367,7 +1372,22 @@ bool UI::littleGame()
 	if (playerHP < 0)
 		return false;
 	else
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			Sleep(400);
+			clearScreen();
+			clearScreenSwitch = false;
+			Sleep(400);
+			bearx = 44;
+			beary = 5;
+			printBearbackend(13);
+			clearScreenSwitch = true;
+		}
+		clearScreen();
+		Sleep(1000);
 		return true;
+	}
 }
 
 void UI::showGameDialog(std::string in)
