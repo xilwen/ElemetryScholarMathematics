@@ -16,6 +16,8 @@ UI::UI()
 	aniEnd = false;
 	horizontal = 0;
 	vertical = 0;
+	clearScreenSwitch = true;
+	repeatWave = false;
 	//預產生亂數種子
 	srand(unsigned(time(NULL)));
 }
@@ -40,13 +42,13 @@ void UI::blinkStart()
 		print("　　　　　　　｜　　　　　　　　　　　　　　　／　　＼　　　　　     |", 0, 19);
 		print("　　　　　　　｜　　　　　　　　　　　　　　／　　　　＼\n", 0, 20);
 		print("　　　　　　　｜", 0, 21);
-		for (int i = 0; i < 10; i++)
+		for (int j = 0; j < 10; j++)
 		{
 			Sleep(50);
 			if (aniEnd == true) return;
 		}
 		print("                                ", 45, 12, 15);
-		for (int i = 0; i < 10; i++)
+		for (int j = 0; j < 10; j++)
 		{
 			Sleep(50);
 			if (aniEnd == true) return;
@@ -57,19 +59,21 @@ void UI::blinkStart()
 			break;
 	}
 	SetConsoleTextAttribute(hConsole, 15);
+
 }
 
 void UI::init()
 {
-	PlaySound(L"Ring01.wav", NULL, SND_FILENAME | SND_NODEFAULT);
-	
+	clearScreen();
+	repeatWave = true;
+	waveBuster = std::thread(&UI::playWave, this, "Musics\\FF7FIGHT.wav");
 	gotoxy(0, 0);
 	println("　　　 ∩＿＿＿＿＿∩　");
 	println("       ｜＿＿＿＿＿｜                                                           　");
 	println("        |ˊ ＼ ／ˋ ＼　　　　　 　|              __＼__|__／__          |        ");
 	println("       ∕  (Ｏ)(Ｏ) 科　　　　　　｜　　　　　　／    ____    ／    ／　　|       ");
 	println("      |  （ ＿０＿ ）＝          ｜                    ／        ／____|____     ");
-	print("＿＿＿＝　   ｜︿｜ \          ");
+	print("＿＿＿＝　   ｜︿｜ \\          ");
 	print("／｜＼", 14);
 	println("                  ｜       ／     | ");
 	print("    ＿＿＿    ＼ ˊ  ＼        ");
@@ -86,9 +90,11 @@ void UI::init()
 
 	std::thread blink(&UI::blinkStart, this);
 	waitEnter();
+	repeatWave = false;
 	aniEnd = true;
 	blink.join();
 	aniEnd = false;
+
 }
 
 void UI::showDialog(std::string name, std::string text)
@@ -103,7 +109,7 @@ void UI::showDialog(std::string name, std::string text)
 #if _DEBUG
 		print("[警告]字太多了。請用分行版本或者分成兩次對話。", 0, 0);
 #endif
-	}
+}
 	drawFrame(0, 15, 78, 7);
 	print(name, 3, 16);
 	print("：");
@@ -302,10 +308,10 @@ void UI::chooseNamae()
 						gotoxy(nowx - 42, nowy - 6);
 
 					}
-				}
+					}
 				break;
+				}
 			}
-		}
 		else
 		{
 #if _DEBUG
@@ -382,9 +388,9 @@ void UI::chooseNamae()
 					getxy();
 					print("╴", 34 + name.size(), 6);
 					undoxy();
-				}
-
 			}
+
+		}
 		}
 
 #if _DEBUG
@@ -394,6 +400,10 @@ void UI::chooseNamae()
 		undoxy();
 #endif
 	}
+	clearScreen();
+	print("小學生伴唱 歡樂無限", 6, 10);
+	print("LOADING...", 6, 12);
+	waveBuster.join();
 }
 
 void UI::print(std::string in)
@@ -441,26 +451,28 @@ void UI::gotoxy(int x, int y)
 void UI::clearScreen()
 {
 	//http://edisonx.pixnet.net/blog/post/37742661-%5Bw%5D-console-%E8%A6%96%E7%AA%97%E6%8E%A7%E5%88%B6
-	COORD coordScreen = { 0, 0 };
-	DWORD cCharsWritten;
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	DWORD dwConSize;
-	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	if (clearScreenSwitch == true)
+	{
+		COORD coordScreen = { 0, 0 };
+		DWORD cCharsWritten;
+		CONSOLE_SCREEN_BUFFER_INFO csbi;
+		DWORD dwConSize;
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	GetConsoleScreenBufferInfo(hConsole, &csbi);
-	dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
-	FillConsoleOutputCharacter(hConsole, TEXT(' '),
-		dwConSize,
-		coordScreen,
-		&cCharsWritten);
-	GetConsoleScreenBufferInfo(hConsole, &csbi);
-	FillConsoleOutputAttribute(hConsole,
-		csbi.wAttributes,
-		dwConSize,
-		coordScreen,
-		&cCharsWritten);
-	SetConsoleCursorPosition(hConsole, coordScreen);
-
+		GetConsoleScreenBufferInfo(hConsole, &csbi);
+		dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+		FillConsoleOutputCharacter(hConsole, TEXT(' '),
+			dwConSize,
+			coordScreen,
+			&cCharsWritten);
+		GetConsoleScreenBufferInfo(hConsole, &csbi);
+		FillConsoleOutputAttribute(hConsole,
+			csbi.wAttributes,
+			dwConSize,
+			coordScreen,
+			&cCharsWritten);
+		SetConsoleCursorPosition(hConsole, coordScreen);
+	}
 }
 
 void UI::getxy()
@@ -551,7 +563,7 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　／／  ／／");
 		printlnb("　　　Ｖ　  Ｖ");
 		break;
-		
+
 	case 3:
 		printlnb("　　　∩＿＿＿＿∩　");
 		printlnb("   　｜︿   　︿｜ ");
@@ -566,7 +578,7 @@ void UI::printBearbackend(int bear)
 		printlnb("　　　　｜　　　｜");
 		printlnb("　　　　Ｖ　　　Ｖ");
 		break;
-		
+
 	case 4:
 		printlnb("");
 		printlnb("");
@@ -684,13 +696,35 @@ void UI::printBearbackend(int bear)
 		printlnb("           ｜＿");
 		printlnb("           ｜＿｜");
 		break;
+	case 12:
+		printlnb("＿＿＿＿＿＿＿＿　＿＿＿＿＿＿　");
+		printlnb("＼　       　 ／｜　　　　　　｜");
+		printlnb("　＼　　　　／　｜　　　　　　｜");
+		printlnb("　　＼　　／　　｜　　　　　　｜");
+		printlnb("　　　＼／　　　｜　　　　　　｜");
+		printlnb("　　　／＼　　　｜　　　　　　｜");
+		printlnb("　　／　　＼　　｜　　　　　　｜");
+		printlnb("　／　　　　＼　｜　　　　　　｜");
+		printlnb("／＿＿＿＿＿＿＼｜＿＿＿＿＿＿｜");
+		break;
+	case 13:
+		printlnb("         　／＼__／＼");
+		printlnb("           ｜＼  ／｜");
+		printlnb("     ______｜　！　｜______");
+		printlnb("    |   　 ｜　０　｜　　　|");
+		printlnb("    |      ｜______｜　　　|");
+		printlnb("    |        ｜　｜　　　　|");
+		printlnb("    |        ｜　｜　　　　|");
+		printlnb("    |        ｜　｜　　　　|");
+		printlnb("   ＶＶ　    ＼　／　　　ＶＶ");
+		printlnb("           　　Ｖ");
+		break;
 	default:
 #if _DEBUG
 		print("[錯誤]超出可選擇的熊!", 0, 0);
 #endif
 		break;
 	}
-
 }
 
 
@@ -757,23 +791,23 @@ void UI::dead()
 	getxy();
 	println("　　　　　　　　　　　　　　　　　");
 	println("　　　　　　　　　　　　　＿＿　　　　　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　＿＿＿｜　　｜＿＿＿　　　　　　　　");
-	println("　　　　　　　　｜　　　　　　　　　　｜　　　　勝敗乃兵家常事也");
-	println("　　　　　　　　｜＿＿＿　　　　＿＿＿｜　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　大俠請重新來過吧");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　　　　");
-	println("　　　　　　　　　　　　｜　　｜　　　　　　　　　");
+	println("　　　　　　　　　　　　｜你死｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜了你｜　　　　　　　　");
+	println("　　　　　　　　　＿＿＿｜死了｜＿＿＿　　　　　　　　");
+	println("　　　　　　　　｜你死了你死了你死了你｜　");
+	println("　　　　　　　　｜＿＿＿你死了你＿＿＿｜　　　　");
+	println("　　　　　　　　　　　　｜你死｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜了你｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜死了｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜你死｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜了你｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜死了｜　　　　　　　　");
+	println("　　　　　　　　　　　　｜你死｜　　　　　　　　　　　");
+	println("　　　　　　　　　　　　｜了你｜　　　　　　　　　");
 	println("　　　　　　　　　　　　｜＿＿｜　　　　　　　　　");
 	println("　　　　　　　　　　　　　　　　　");
 	println("　　　　　　　　　　　　　　　　　");
-	println("　　　　　　　　　　　　　　　　　");
+	println("　　　　　　　　　　　　　　太大意惹　　　");
 	println("　　　　　　　　　　　　　　　　　");
 	undoxy();
 	waitEnter();
@@ -986,7 +1020,7 @@ void UI::showCOORD(std::string in, std::vector<short> x, std::vector<short> y)
 	int column, row;
 	int pages = x.size() / 17 / 5 + ((x.size() % 17 > 0 || (x.size() / 17) % 5 > 0) ? 1 : 0);
 	int nowPage = 1;
-	int i = 0;
+	unsigned int i = 0;
 	char arrKey = 0;
 	while (1)
 	{
@@ -1108,7 +1142,7 @@ void UI::scrollBar(unsigned int totalPages, unsigned int nowPages, bool showArro
 		print("↑", 76, 2);
 		print("↓", 76, 21);
 	}
-	int boxPlace = ceil((int)((double)nowPages/ ((double)totalPages / 17.0f)));
+	int boxPlace = ceil((int)((double)nowPages / ((double)totalPages / 17.0f)));
 
 	if (boxPlace > 1)
 		print(" ", 76, 3 + (int)boxPlace - 1);
@@ -1218,5 +1252,169 @@ void UI::blinkWaitEnter(int x, int y)
 			Sleep(2);
 			if (waitingEnter == false) return;
 		}
+	}
+}
+
+bool UI::littleGame()
+{
+	int playerHP(500);
+	int enemyHP(500);
+	std::string enemyName("鐘樓怪");
+	std::string enemySkill("原子吐息");
+	int enemySkillDamage(-200);
+	int enemyNormalDamage(-50);
+	std::string playerSkill("能量槍");
+	int playerNormalDamage(-100);
+	int playerSkillDamage(-150);
+	int damage;
+	clearScreen();
+	clearScreenSwitch = false;
+	//PlayStrangeMusic
+	waveBuster = std::thread(&UI::playWave, this, "Musics\\GodzillaRoar.wav");
+	//BearDraw
+	aniBear(13, true);
+	for (int i = 0; i < 3; i++)
+	{
+		Sleep(400);
+		clearScreenSwitch = true;
+		clearScreen();
+		clearScreenSwitch = false;
+		Sleep(400);
+		bearx = 44;
+		beary = 5;
+		printBearbackend(13);
+	}
+	Sleep(400);
+	bearx = 4;
+	beary = 5;
+	printBearbackend(0);
+	waveBuster.join();
+	showGameDialog(enemyName + "想要和" + name + "來場對戰!");
+	while (playerHP > 0 && enemyHP > 0)
+	{
+		print("HP : ?", 2, 2);
+		print("HP : ?", 72, 2);
+		print("              ", 2, 1);
+		gotoxy(2, 1);
+		//
+		for (int i = 0; i < (playerHP / 100); i++)
+			print("▉");
+		print("              ", 68, 1);
+		gotoxy(68, 1);
+		for (int i = 0; i < (enemyHP / 100); i++)
+			print("▉");
+
+
+		clearDialog();
+		switch (userChoice("想要" + name + "做什麼", "普通攻擊", "背包", "技能", "逃跑", 99))
+		{
+		case 0:
+			damage = playerNormalDamage - (rand() % 100 + 1);
+			enemyHP += damage;
+
+			showGameDialog(name + "空白鍵連打，對" + enemyName + "造成了" + std::to_string(damage) + "點傷害!");
+			break;
+		case 1:
+			showGameDialog("背包籠罩著黑暗氣息。似乎打不開了。");
+			break;
+		case 2:
+			damage = playerSkillDamage - (rand() % 200 + 1);
+			enemyHP += damage;
+			showGameDialog(name + "對" + enemyName + "使用了雷射槍!");
+			if (damage < -200)
+				showGameDialog("效果拔群!");
+			else
+				showGameDialog("效果一般!");
+			showGameDialog(name + "對" + enemyName + "造成了" + std::to_string(damage) + "點傷害。");
+			break;
+		case 3:
+			showGameDialog("哼；就算" + name + "叫破喉嚨也不會有人來幫忙的。");
+			break;
+		}
+
+		//
+		print("              ", 2, 1);
+		gotoxy(2, 1);
+		for (int i = 0; i < (playerHP / 100); i++)
+			print("▉");
+		print("              ", 68, 1);
+		gotoxy(68, 1);
+		for (int i = 0; i < (enemyHP / 100); i++)
+			print("▉");
+
+		if (enemyHP < 0) break;
+		switch (rand() % 2)
+		{
+		case 0:
+			damage = enemyNormalDamage - (rand() % 100 + 1);
+			playerHP += damage;
+			showGameDialog(enemyName + "輕拍" + name + "，造成了" + std::to_string(damage) + "點傷害!");
+			break;
+		case 1:
+		default:
+			damage = enemySkillDamage - (rand() % 300 + 1);
+			playerHP += damage;
+			showGameDialog(enemyName + "對" + name + "使用了原子吐息!");
+			if (damage < -250)
+				showGameDialog("效果拔群!");
+			else
+				showGameDialog("效果一般!");
+			showGameDialog(enemyName + "對" + name + "造成了" + std::to_string(damage) + "點傷害!");
+			break;
+		}
+	}
+	clearScreenSwitch = true;
+	if (playerHP < 0)
+		return false;
+	else
+		return true;
+}
+
+void UI::showGameDialog(std::string in)
+{
+	showBearsinDialog = true;
+	twoLinesInDialog = true;
+	clearDialog();
+	showDialog("", "");
+	print(in, 3, 16);
+	waitingEnter = true;
+	enterWaitBuster = std::thread(&UI::blinkWaitEnter, this, 75, 21);
+	waitEnter();
+	waitingEnter = false;
+	enterWaitBuster.join();
+	print("  ", 75, 21);
+	showBearsinDialog = false;
+	twoLinesInDialog = false;
+}
+
+void UI::clearDialog()
+{
+	gotoxy(0, 15);
+	for (int i = 0; i < 10; i++)
+		print("                                                            ");
+}
+
+void UI::playWave(std::string path)
+{
+	do
+	{
+		std::wstring stemp = std::wstring(path.begin(), path.end());
+		LPCWSTR sw = stemp.c_str();
+		PlaySound(sw, NULL, SND_FILENAME | SND_NODEFAULT);
+	} while (repeatWave == true);
+}
+
+void UI::aniBear(int bear, bool direction)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		clearScreen();
+		if (direction == true)
+			bearx = 0 + 4 * i;
+		else
+			bearx = 65 - 4 * i;
+		beary = 5;
+		printBearbackend(bear);
+		Sleep(50);
 	}
 }

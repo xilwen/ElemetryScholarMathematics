@@ -43,6 +43,7 @@ public:
 	void showDialog(std::string name, std::string text, int bear0);
 	//含熊的對話框。雙行單熊。不需要雙熊的話打超過可提供的熊數即可。
 	void showDialog(std::string name, std::string text, std::string text0, int bear0);
+	
 
 	//讓使用者選擇答案。
 	int userChoice(std::string name, std::string option0, std::string option1, std::string option2, std::string option3, int bear);
@@ -88,7 +89,13 @@ public:
 	std::string getName();
 
 	//小遊戲
-	void littleGame();
+	bool littleGame();
+
+	//熊動畫(T=左)
+	void aniBear(int bear, bool direction);
+
+	//播放音效(危險!限定使用)
+	void playWave(std::string path);
 private:
 	//書出文字。
 	void print(std::string in);
@@ -150,7 +157,17 @@ private:
 	bool waitingEnter;
 	//blinkWaitEnterThread
 	std::thread enterWaitBuster;
-
+	//小遊戲對話框
+	void showGameDialog(std::string in);
+	//決定clearScreen是否被執行(用於method多重用途)
+	bool clearScreenSwitch;
+	//只清除對話框部分(小遊戲用)
+	void clearDialog();
+	
+	//音效thread
+	std::thread waveBuster;
+	//音樂重複
+	bool repeatWave;
 };
 
 #endif
