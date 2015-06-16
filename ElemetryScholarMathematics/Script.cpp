@@ -12,7 +12,7 @@ void Script::runScripts()
 {
 	/*debug*/
 	bool win = false;
-	while (win == false)
+	while (1)
 	{
 		ui->init();
 
@@ -267,49 +267,51 @@ void Script::runScripts()
 		if (win == false)
 		{
 			ui->dead();
+			continue;
 		}
-	}
-	ui->showDialog(ui->getName(), "呼...解決掉他了", 0);
 
-	//石板出場
-	ui->showDialog(ui->getName(), "這是什麼怪東西？", 0, true, 14, false);
+		ui->showDialog(ui->getName(), "呼...解決掉他了", 0);
 
-	std::string fileLocation = ui->loadBMP("石板上寫著", "請開啟一個BMP單色圖檔", 14);
-	int rcode = bmpl->init(fileLocation);
-	while (rcode != 0)
-	{
-		ui->showDialog(ui->getName(), "好像是錯覺的樣子。可以不要亂撿地上的東西嗎?(請重開檔案)", 14);
+		//石板出場
+		ui->showDialog(ui->getName(), "這是什麼怪東西？", 0, true, 14, false);
+
 		std::string fileLocation = ui->loadBMP("石板上寫著", "請開啟一個BMP單色圖檔", 14);
-		rcode = bmpl->init(fileLocation);
-	}
+		int rcode = bmpl->init(fileLocation);
+		while (rcode != 0)
+		{
+			ui->showDialog(ui->getName(), "好像是錯覺的樣子。可以不要亂撿地上的東西嗎?(請重開檔案)", 14);
+			std::string fileLocation = ui->loadBMP("石板上寫著", "請開啟一個BMP單色圖檔", 14);
+			rcode = bmpl->init(fileLocation);
+		}
+
+
+		x = bmpl->getX();
+		y = bmpl->getY();
+		ui->showCOORD("石板上的點", x, y);
+
+
+		ConvexHull ch(x, y);
+		ch.Andrew_monotone_chain();
+		x = ch.getX();
+		y = ch.getY();
+		ui->showCOORD("好像從圖上看到了疑似凸多邊形的頂點", x, y);
+		double parea(pa->PolygonAreaCalculating(x, y));
+		ui->showDialog("謎之音", "把奇怪的頂點連起來後得到了面積" + std::to_string(parea));
+
+		ui->fullScreenDialog("所以這究竟代表了什麼呢...");
+		ui->fullScreenDialog("答案已經觸手可及，", "但彷彿遠在天邊。");
+
+		ui->showDialog(ui->getName(), "我好像心中有個東西突然不見的感覺...");
+		ui->showDialog(ui->getName(), "感覺好像...", "我的人生改變了..");
+
+		ui->fullScreenDialog("我也覺得我的人生，就在這裡", "寫下了汙點");
+		ui->fullScreenDialog("ㄍㄋㄇㄉ看醫生遊戲");
+		ui->fullScreenDialog("FIN 看醫生的遊戲");
+		ui->fullScreenDialog("Um!", "Un!");
+		ui->fullScreenDialog("UUm!", "OH!");
+		ui->playWave("Musics\\DJT.wav");
 		
-
-	x = bmpl->getX();
-	y = bmpl->getY();
-	ui->showCOORD("石板上的點", x, y);
-
-
-	ConvexHull ch(x, y);
-	ch.Andrew_monotone_chain();
-	x = ch.getX();
-	y = ch.getY();
-	ui->showCOORD("好像從圖上看到了疑似凸多邊形的頂點", x, y);
-	double parea(pa->PolygonAreaCalculating(x, y));
-	ui->showDialog("謎之音", "把奇怪的頂點連起來後得到了面積" + std::to_string(parea));
-	
-	ui->fullScreenDialog("所以這究竟代表了什麼呢...");
-	ui->fullScreenDialog("答案已經觸手可及，","但彷彿遠在天邊。");
-
-	ui->showDialog(ui->getName(), "我好像心中有個東西突然不見的感覺...");
-	ui->showDialog(ui->getName(), "感覺好像...", "我的人生改變了..");
-	
-	ui->fullScreenDialog("我也覺得我的人生，就在這裡", "寫下了汙點");
-	ui->fullScreenDialog( "ㄍㄋㄇㄉ看醫生遊戲");
-	ui->fullScreenDialog("FIN 看醫生的遊戲");
-	ui->fullScreenDialog("Um!", "Un!");
-	ui->fullScreenDialog("UUm!", "OH!");
-	ui->playWave("Musics\\DJT.wav");
-	ui->fullScreenDialog("");
+	}
 }
 
 Script::~Script()

@@ -1192,7 +1192,7 @@ void UI::routineRunner()
 			else if (horizontalt >= 1000 && verticalt >= 900)
 				cfi.dwFontSize = { 26, 26 };
 			else if (horizontalt >= 1000 && verticalt >= 700)
-				cfi.dwFontSize = { 22, 22 };
+				cfi.dwFontSize = { 20, 20 };
 			else
 				cfi.dwFontSize = { 16, 16 };
 			cfi.FontFamily = FF_DONTCARE;
@@ -1206,9 +1206,9 @@ void UI::routineRunner()
 
 			SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), FALSE, &cfi);
 
-			Sleep(500);
+			Sleep(1100);
 			GetWindowRect(thisConsole, &currentSize);
-			SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom - currentSize.top), SWP_SHOWWINDOW);
+			SetWindowPos(thisConsole, HWND_TOP, 10, 10, 1920, (currentSize.bottom - currentSize.top +5), SWP_SHOWWINDOW);
 			horizontal = horizontalt;
 			vertical = verticalt;
 		}
